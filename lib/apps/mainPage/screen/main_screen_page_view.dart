@@ -13,7 +13,7 @@ class MainScreenPageView extends GetView<MainScreenController> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome to our App et'),
+        title: const Text('Welcome to our App et, to ki hoise'),
       ),
       body: Column(
         children: [
