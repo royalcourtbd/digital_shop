@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       initialBinding: AllControllerBinding(),
-      home: MainScreenPageView(),
+      home: const MainScreenPageView(),
     );
   }
 }
