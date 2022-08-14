@@ -36,10 +36,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Digital Shop',
       theme: ThemeData(
+        fontFamily: 'Bitter',
         primarySwatch: Colors.green,
       ),
       initialBinding: AllControllerBinding(),
-      home: MainScreenPageView(),
+      home: const MainScreenPageView(),
     );
   }
 }
