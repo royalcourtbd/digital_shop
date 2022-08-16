@@ -10,6 +10,7 @@ class CategoryPageView extends GetView<CategoryPageController> {
     // TODO: implement build
     Config().init(context);
     return Scaffold(
+      backgroundColor: Colors.lightBlue,
       appBar: AppBar(
         title: Text('hello'),
       ),

@@ -12,6 +12,7 @@ class AccountPageView extends GetView<AccountPageController> {
     Config().init(context);
 
     return Scaffold(
+      backgroundColor: Colors.amber,
       body: Center(
         child: Text('Account'),
       ),

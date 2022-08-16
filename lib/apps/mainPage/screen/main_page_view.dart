@@ -26,29 +26,45 @@ class MainPageView extends GetView<MainPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
-      //backgroundColor: Colors.transparent,
-
+      appBar: AppBar(
+        title: Obx(() => Text(controller.currentIndex == 2
+            ? 'Home'
+            : controller.currentIndex == 3
+                ? 'Cart'
+                : 'Account')),
+      ),
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
+      backgroundColor: Colors.transparent,
       body: Obx(
         () => pages[controller.currentIndex.value],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: SvgPicture.asset(
-          'assets/svg_icon/home.svg',
-          height: 35,
-          width: 35,
-          alignment: Alignment.center,
-          theme: const SvgTheme(),
-          color: Colors.white,
-        ),
-        onPressed: () {
-          controller.currentIndex.value = 2;
-        },
-      ),
+      floatingActionButton: Obx(() => FloatingActionButton(
+            child: SvgPicture.asset(
+              'assets/svg_icon/home.svg',
+              height: 32,
+              width: 32,
+              alignment: Alignment.center,
+              theme: const SvgTheme(),
+              color: controller.currentIndex.value == 2
+                  ? Colors.white
+                  : Colors.black,
+              allowDrawingOutsideViewBox: true,
+            ),
+            onPressed: () {
+              controller.currentIndex.value = 2;
+            },
+          )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //extendBody: true,
       bottomNavigationBar: BottomAppBar(
+        //color: Colors.accent,
+        clipBehavior: Clip.antiAlias,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
+        //color: ColorResources.COLOR_BLACK,
         child: Container(
+          // color: Theme.of(context).scaffoldBackgroundColor,
           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,37 +72,47 @@ class MainPageView extends GetView<MainPageController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
-                      // currentPage = HomePageView();
-                      controller.currentIndex.value = 0;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/exchange.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
+                  Obx(
+                    () => MaterialButton(
+                      minWidth: 40.0,
+                      onPressed: () {
+                        // currentPage = HomePageView();
+                        controller.currentIndex.value = 0;
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svg_icon/exchange.svg',
+                            height: 32,
+                            width: 32,
+                            color: controller.currentIndex.value == 0
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
-                      controller.currentIndex.value = 1;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/category.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
+                  Obx(
+                    () => MaterialButton(
+                      minWidth: 40.0,
+                      onPressed: () {
+                        controller.currentIndex.value = 1;
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svg_icon/category.svg',
+                            height: 32,
+                            width: 32,
+                            color: controller.currentIndex.value == 1
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -94,38 +120,44 @@ class MainPageView extends GetView<MainPageController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
-                      controller.currentIndex.value = 3;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/cart.svg',
-                          height: 35,
-                          width: 35,
+                  Obx(() => MaterialButton(
+                        minWidth: 40.0,
+                        onPressed: () {
+                          controller.currentIndex.value = 3;
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svg_icon/cart.svg',
+                              height: 32,
+                              width: 32,
+                              color: controller.currentIndex.value == 3
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
-                      controller.currentIndex.value = 4;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/account.svg',
-                          height: 35,
-                          width: 35,
+                      )),
+                  Obx(() => MaterialButton(
+                        minWidth: 40.0,
+                        onPressed: () {
+                          controller.currentIndex.value = 4;
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svg_icon/account.svg',
+                              height: 32,
+                              width: 32,
+                              color: controller.currentIndex.value == 4
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ],

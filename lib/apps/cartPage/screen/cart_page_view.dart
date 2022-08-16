@@ -11,6 +11,7 @@ class CartPageView extends GetView<CartPageController> {
     // TODO: implement build
     Config().init(context);
     return Scaffold(
+      backgroundColor: Colors.cyanAccent,
       body: Center(
         child: Text('Cart Page'),
       ),

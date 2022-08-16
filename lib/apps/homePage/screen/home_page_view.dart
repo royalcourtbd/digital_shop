@@ -7,6 +7,7 @@ class HomePageView extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.blueAccent,
       body: Center(
         child: Text('Home Page'),
       ),
