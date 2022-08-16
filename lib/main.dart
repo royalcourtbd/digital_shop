@@ -1,5 +1,5 @@
-import 'package:digital_shop/apps/mainPage/screen/main_screen_page_view.dart';
 import 'package:digital_shop/bindings/all_controller_binding.dart';
+import 'package:digital_shop/general/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,8 +40,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Bitter',
         primarySwatch: Colors.green,
       ),
+      initialRoute: RoutesClass.getMainRoute(),
+      getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),
-      home: const MainScreenPageView(),
     );
   }
 }
