@@ -5,6 +5,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'bindings/all_controller_binding.dart';
+
 import 'firebase_options.dart';
 import 'general/routes/routes.dart';
 
