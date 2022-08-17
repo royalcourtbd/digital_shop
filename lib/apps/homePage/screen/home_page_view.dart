@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePageView extends GetView<HomePageController> {
+  const HomePageView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return const Scaffold(
+      backgroundColor: Colors.blueAccent,
       body: Center(
         child: Text('Home Page'),
       ),

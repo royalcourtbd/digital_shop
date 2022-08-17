@@ -5,6 +5,5 @@ class MainPageController extends GetxController {
 
   void changeCurrentIndex(int index) {
     currentIndex.value = index;
-    print(index);
   }
 }

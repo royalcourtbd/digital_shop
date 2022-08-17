@@ -9,14 +9,15 @@ import 'package:get/get.dart';
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
 import '../controller/main_page_controller.dart';
+import '../widgets/bottom_menu_item_widget.dart';
 
 class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
   final List<Widget> pages = [
-    ExchangePageView(),
-    CategoryPageView(),
-    HomePageView(),
+    const ExchangePageView(),
+    const CategoryPageView(),
+    const HomePageView(),
     const CartPageView(),
     const AccountPageView(),
   ];
@@ -26,105 +27,96 @@ class MainPageView extends GetView<MainPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
-      //backgroundColor: Colors.transparent,
-
+      appBar: AppBar(
+        title: Obx(
+          () => Text(
+            controller.currentIndex == 0
+                ? 'Convert Your Money '
+                : controller.currentIndex == 1
+                    ? 'Category'
+                    : controller.currentIndex == 2
+                        ? 'Home'
+                        : controller.currentIndex == 3
+                            ? 'Cart'
+                            : 'Account',
+          ),
+        ),
+        centerTitle: true,
+      ),
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
       body: Obx(
         () => pages[controller.currentIndex.value],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: SvgPicture.asset(
-          'assets/svg_icon/home.svg',
-          height: 35,
-          width: 35,
-          alignment: Alignment.center,
-          theme: const SvgTheme(),
-          color: Colors.white,
+      floatingActionButton: Obx(
+        () => FloatingActionButton(
+          child: SvgPicture.asset(
+            'assets/svg_icon/home.svg',
+            height: 32,
+            width: 32,
+            alignment: Alignment.center,
+            theme: const SvgTheme(),
+            color: controller.currentIndex.value == 2
+                ? const Color(0xffc67752)
+                : Colors.black,
+            allowDrawingOutsideViewBox: true,
+          ),
+          onPressed: () {
+            controller.currentIndex.value = 2;
+          },
         ),
-        onPressed: () {
-          controller.currentIndex.value = 2;
-        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAlias,
         shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        child: Container(
-          height: 60,
+        notchMargin: 6,
+        child: SizedBox(
+          height: Config.screenHeight! * 0.07,
+          //Bottom Left Side Button
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
-                      // currentPage = HomePageView();
+                  BottomMenuItemWidget(
+                    svgIcon: 'exchange.svg',
+                    onPressed: (() {
                       controller.currentIndex.value = 0;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/exchange.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
-                    ),
+                    }),
+                    buttonName: 'Exchange',
+                    color: 0,
                   ),
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
+                  BottomMenuItemWidget(
+                    svgIcon: 'category.svg',
+                    onPressed: (() {
                       controller.currentIndex.value = 1;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/category.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
-                    ),
+                    }),
+                    buttonName: 'Category',
+                    color: 1,
                   ),
                 ],
               ),
+              //Bottom Right Side Button
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
+                  BottomMenuItemWidget(
+                    svgIcon: 'cart.svg',
+                    onPressed: (() {
                       controller.currentIndex.value = 3;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/cart.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
-                    ),
+                    }),
+                    buttonName: 'Cart',
+                    color: 3,
                   ),
-                  MaterialButton(
-                    minWidth: 40.0,
-                    onPressed: () {
+                  BottomMenuItemWidget(
+                    svgIcon: 'account.svg',
+                    onPressed: (() {
                       controller.currentIndex.value = 4;
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg_icon/account.svg',
-                          height: 35,
-                          width: 35,
-                        ),
-                      ],
-                    ),
+                    }),
+                    buttonName: 'Account',
+                    color: 4,
                   ),
                 ],
               ),
