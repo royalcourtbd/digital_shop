@@ -11,7 +11,7 @@ class AccountPageView extends GetView<AccountPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
 
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.amber,
       body: Center(
         child: Text('Account'),

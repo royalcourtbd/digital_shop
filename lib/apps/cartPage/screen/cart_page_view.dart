@@ -10,7 +10,7 @@ class CartPageView extends GetView<CartPageController> {
   Widget build(BuildContext context) {
     // TODO: implement build
     Config().init(context);
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.cyanAccent,
       body: Center(
         child: Text('Cart Page'),

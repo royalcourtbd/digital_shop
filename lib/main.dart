@@ -36,10 +36,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Digital Shop',
-      theme: ThemeData(
-        fontFamily: 'Bitter',
-        primarySwatch: Colors.green,
-      ),
+      theme: ThemeData(fontFamily: 'Bitter', primarySwatch: Colors.green
+          //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
+          ),
       // home: TestPage(),
       initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,
