@@ -15,11 +15,11 @@ class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
   final List<Widget> pages = [
-    const ExchangePageView(),
-    const CategoryPageView(),
-    const HomePageView(),
-    const CartPageView(),
-    const AccountPageView(),
+    ExchangePageView(),
+    CategoryPageView(),
+    HomePageView(),
+    CartPageView(),
+    AccountPageView(),
   ];
 
   // Widget currentPage = HomePageView();
