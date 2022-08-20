@@ -1,4 +1,5 @@
 import 'package:digital_shop/apps/exchangePage/controller/exchange_page_controller.dart';
+import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +21,6 @@ class ExchangePageView extends GetView<ExchangePageController> {
         physics: const BouncingScrollPhysics(),
         controller: controller.scrollController,
         child: Column(
-          // shrinkWrap: true,
-          // controller: controller.scrollController,
-          // physics: BouncingScrollPhysics(),
-          //mainAxisAlignment: MainAxisAlignment,
           children: [
             ExchangePageHeadingWidget(
               headingText: 'Welcome to Digital Shop Virtual Dollar Center!',
@@ -34,7 +31,8 @@ class ExchangePageView extends GetView<ExchangePageController> {
             ExchangeItemWidget(
               itemName: 'Buy Dollar',
               onTap: () {
-                print('Buy Dollar From here');
+                Get.toNamed(RoutesClass.getBuyPageRoute());
+                //print('Buy Dollar From here');
               },
               color: const Color(0XFFF7ECDE),
               svgIcon: 'buy_icon.svg',
@@ -61,15 +59,6 @@ class ExchangePageView extends GetView<ExchangePageController> {
               },
               svgIcon: 'exchange_icon.svg',
             ),
-            // const SizedBox(
-            //   height: 15,
-            // ),
-            // ExchangeItemWidget(
-            //   onTap: () {
-            //     print('Exchange Dollar From here');
-            //   },
-            //   svgIcon: 'exchange_icon.svg',
-            // ),
           ],
         ),
       ),

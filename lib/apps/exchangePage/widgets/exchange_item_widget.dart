@@ -57,9 +57,9 @@ class ExchangeItemWidget extends GetView<ExchangePageController> {
           children: [
             AutoSizeText(
               itemName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
                 letterSpacing: 3,
               ),
             ),

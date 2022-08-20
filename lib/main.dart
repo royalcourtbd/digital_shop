@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
           ),
       // home: TestPage(),
-      initialRoute: RoutesClass.getMainRoute(),
+      initialRoute: RoutesClass.getBuyPageRoute(),
       getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),
     );
