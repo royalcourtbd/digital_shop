@@ -1,19 +1,11 @@
-class SelectAmountModel {
-  String icon;
+class SelectDollarMethodModel {
+  String dollarIcon;
   String dollarName;
-  double amount;
+  double currentPrice;
 
-  SelectAmountModel({
-    required this.icon,
-    required this.amount,
+  SelectDollarMethodModel({
+    required this.dollarIcon,
     required this.dollarName,
+    required this.currentPrice,
   });
-
-  // SelectAmountModel({
-  //   required String icon,
-  //   required String dollarName,
-  //   required double amount,
-  // })  : _icon = icon,
-  //       _dollarName = dollarName,
-  //       _amount = amount;
 }

@@ -13,13 +13,38 @@ class AllControllerBinding implements Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.lazyPut<AccountPageController>(() => AccountPageController());
-    Get.lazyPut<CartPageController>(() => CartPageController());
-    Get.lazyPut<CategoryPageController>(() => CategoryPageController());
-    Get.lazyPut<ExchangePageController>(() => ExchangePageController());
-    Get.lazyPut<HomePageController>(() => HomePageController());
-    Get.lazyPut<MainPageController>(() => MainPageController());
-    Get.lazyPut<ProfilePageController>(() => ProfilePageController());
-    Get.lazyPut<BuyPageController>(() => BuyPageController());
+    Get.lazyPut<AccountPageController>(
+      () => AccountPageController(),
+    );
+    Get.lazyPut<CartPageController>(
+      () => CartPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<CategoryPageController>(
+      () => CategoryPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<ExchangePageController>(
+      () => ExchangePageController(),
+      fenix: true,
+    );
+    Get.lazyPut<HomePageController>(
+      () => HomePageController(),
+      fenix: true,
+    );
+    Get.lazyPut<MainPageController>(
+      () => MainPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<ProfilePageController>(
+      () => ProfilePageController(),
+      fenix: true,
+    );
+    Get.lazyPut<BuyPageController>(
+      () => BuyPageController(),
+      fenix: true,
+    );
+
+    // Get.lazyPut(() =>Controller())
   }
 }

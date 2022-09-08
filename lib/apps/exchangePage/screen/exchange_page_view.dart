@@ -55,7 +55,12 @@ class ExchangePageView extends GetView<ExchangePageController> {
               itemName: 'Exchange Dollar',
               color: const Color(0xffFCE2DB),
               onTap: () {
-                print('Exchange Dollar From here');
+                Get.snackbar(
+                  'Exchange Dollar',
+                  'This feature is not availabe now',
+                  //duration: const Duration(seconds: 1),
+                  snackPosition: SnackPosition.BOTTOM,
+                );
               },
               svgIcon: 'exchange_icon.svg',
             ),

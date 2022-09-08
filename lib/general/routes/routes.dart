@@ -5,7 +5,6 @@ import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../../apps/cartPage/screen/cart_page_view.dart';
 import '../../apps/categoryPage/screen/category_page_view.dart';
@@ -43,11 +42,11 @@ class RoutesClass {
       name: cartPage,
     ),
     GetPage(
-      page: () => CategoryPageView(),
+      page: () => const CategoryPageView(),
       name: categoryPage,
     ),
     GetPage(
-      page: () => ExchangePageView(),
+      page: () => const ExchangePageView(),
       name: exchangePage,
     ),
     GetPage(
@@ -59,10 +58,10 @@ class RoutesClass {
       name: profilePage,
     ),
     GetPage(
-      page: () => BuyPageView(),
+      page: () => const BuyPageView(),
       name: buyPage,
-      transition: Transition.fade,
-      transitionDuration: const Duration(seconds: 1),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
     ),
   ];
 }
