@@ -32,20 +32,6 @@ class BuyPageView extends GetView<BuyPageController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ListView.builder(
-              //   shrinkWrap: true,
-              //   itemCount: controller.itemList.length,
-              //   itemBuilder: (context, index) {
-              //     return ListTile(
-              //       leading:
-              //           Image.network(controller.itemList[index].dollarIcon),
-              //       title: Text(controller.itemList[index].dollarName),
-              //       subtitle: Text(controller.itemList[index].dollarIcon),
-              //       //trailing: Text(controller.itemList[index].currentPrice),
-              //     );
-              //   },
-              // ),
-
               InfoTitle(
                 title: 'Send Method',
               ),
@@ -94,23 +80,6 @@ class BuyPageView extends GetView<BuyPageController> {
                               value == 'bkash'
                                   ? controller.isBkash.value = false
                                   : controller.isBkash.value = true;
-
-                              print(controller.isBkash.value);
-                              print(value);
-
-                              //
-
-                              // controller.calculatAmount.value = controller
-                              //     .itemList[
-                              //         controller.indexUsd.value]
-                              //     .currentPrice;
-                              // if (controller.titleUsd.value !=
-                              //     'please select a item') {
-                              //   controller.add(
-                              //       controller.valueTest.value,
-                              //       double.parse(controller.calculatAmount.value
-                              //           .toString()));
-                              // }
                             },
                           ),
                         ),
@@ -186,9 +155,6 @@ class BuyPageView extends GetView<BuyPageController> {
                 textEditingController: controller.sendAmountController,
                 textInputType: TextInputType.number,
                 focusNode: controller.myFocusNode,
-                // inputFormatters: [
-                //   FilteringTextInputFormatter.digitsOnly,
-                // ],
                 hintText: '0',
                 maxLength: 6,
                 onChanged: (String value) {

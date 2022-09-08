@@ -34,6 +34,7 @@ class BuyPageController extends GetxController {
             id: e.id,
             bdBankName: e['bdBankName'],
             bdBankIcon: e['bdBankIcon'],
+            baBankAccountNumber: e['baBankAccountNumber'],
           ),
         )
         .toList();
