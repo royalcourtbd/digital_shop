@@ -1,9 +1,10 @@
 import 'package:digital_shop/apps/accountPage/screen/account_page_view.dart';
+import 'package:digital_shop/apps/exchangePage/screen/buy_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 import '../../apps/cartPage/screen/cart_page_view.dart';
 import '../../apps/categoryPage/screen/category_page_view.dart';
@@ -16,6 +17,7 @@ class RoutesClass {
   static String exchangePage = '/exchangePage';
   static String homePage = '/homepage';
   static String profilePage = '/profilePage';
+  static String buyPage = '/buyPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -24,6 +26,7 @@ class RoutesClass {
   static String getExchangePageRoute() => exchangePage;
   static String getHomePageRoute() => homePage;
   static String getProfilePageRoute() => profilePage;
+  static String getBuyPageRoute() => buyPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -39,11 +42,11 @@ class RoutesClass {
       name: cartPage,
     ),
     GetPage(
-      page: () => CategoryPageView(),
+      page: () => const CategoryPageView(),
       name: categoryPage,
     ),
     GetPage(
-      page: () => ExchangePageView(),
+      page: () => const ExchangePageView(),
       name: exchangePage,
     ),
     GetPage(
@@ -53,6 +56,12 @@ class RoutesClass {
     GetPage(
       page: () => ProfilePageView(),
       name: profilePage,
+    ),
+    GetPage(
+      page: () => const BuyPageView(),
+      name: buyPage,
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
     ),
   ];
 }

@@ -8,12 +8,22 @@ import '../controller/exchange_page_controller.dart';
 
 class ExchangeItemWidget extends GetView<ExchangePageController> {
   String svgIcon;
+  String itemName;
   VoidCallback onTap;
+  Color color;
   ExchangeItemWidget({
     Key? key,
     required this.svgIcon,
+    required this.itemName,
     required this.onTap,
+    this.color = Colors.white30,
   }) : super(key: key);
+
+  // List<Color> colors = [
+  //   Color(0xffFCE2DB),
+  //   Color(0xffFCE2DB),
+  //   Color(0xffFCE2DB),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,7 @@ class ExchangeItemWidget extends GetView<ExchangePageController> {
         height: Config.screenHeight! * .17,
         width: Config.screenWidth! * .9,
         decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: color,
           boxShadow: [
             const BoxShadow(
               color: Colors.white,
@@ -45,11 +55,11 @@ class ExchangeItemWidget extends GetView<ExchangePageController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const AutoSizeText(
-              'Buy Dollar',
-              style: TextStyle(
+            AutoSizeText(
+              itemName,
+              style: const TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
                 letterSpacing: 3,
               ),
             ),

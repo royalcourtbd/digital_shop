@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
-
 import 'bindings/all_controller_binding.dart';
 import 'firebase_options.dart';
 import 'general/routes/routes.dart';
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Bitter', primarySwatch: Colors.green
           //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
           ),
-      // home: TestPage(),
+      //home: const TestScreen(),
       initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),
