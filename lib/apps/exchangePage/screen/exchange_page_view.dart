@@ -32,7 +32,6 @@ class ExchangePageView extends GetView<ExchangePageController> {
               itemName: 'Buy Dollar',
               onTap: () {
                 Get.toNamed(RoutesClass.getBuyPageRoute());
-                //print('Buy Dollar From here');
               },
               color: const Color(0XFFF7ECDE),
               svgIcon: 'buy_icon.svg',
@@ -44,6 +43,7 @@ class ExchangePageView extends GetView<ExchangePageController> {
               itemName: 'Sell Dollar',
               color: const Color(0xffE9DAC1),
               onTap: () {
+                Get.toNamed(RoutesClass.getSellPageRoute());
                 print('Sell Dollar From here');
               },
               svgIcon: 'sell_icon.svg',

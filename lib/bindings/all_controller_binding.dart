@@ -2,6 +2,7 @@ import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart'
 import 'package:digital_shop/apps/categoryPage/controller/category_page_controller.dart';
 import 'package:digital_shop/apps/exchangePage/controller/buy_page_controller.dart';
 import 'package:digital_shop/apps/exchangePage/controller/exchange_page_controller.dart';
+import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.dart';
 import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:digital_shop/apps/profilePage/controller/profile_page_controller.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,9 @@ class AllControllerBinding implements Bindings {
       fenix: true,
     );
 
-    // Get.lazyPut(() =>Controller())
+    Get.lazyPut<SellPageController>(
+      () => SellPageController(),
+      fenix: true,
+    );
   }
 }

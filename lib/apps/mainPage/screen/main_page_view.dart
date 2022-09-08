@@ -15,11 +15,11 @@ class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
   final List<Widget> pages = [
-    ExchangePageView(),
-    CategoryPageView(),
+    const ExchangePageView(),
+    const CategoryPageView(),
     HomePageView(),
-    CartPageView(),
-    AccountPageView(),
+    const CartPageView(),
+    const AccountPageView(),
   ];
 
   // Widget currentPage = HomePageView();
@@ -50,6 +50,7 @@ class MainPageView extends GetView<MainPageController> {
       ),
       floatingActionButton: Obx(
         () => FloatingActionButton(
+          backgroundColor: Colors.white,
           child: SvgPicture.asset(
             'assets/svg_icon/home.svg',
             height: 32,

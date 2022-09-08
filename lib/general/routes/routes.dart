@@ -1,6 +1,7 @@
 import 'package:digital_shop/apps/accountPage/screen/account_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/buy_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
+import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
@@ -18,6 +19,7 @@ class RoutesClass {
   static String homePage = '/homepage';
   static String profilePage = '/profilePage';
   static String buyPage = '/buyPage';
+  static String sellPage = '/sellPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -27,6 +29,7 @@ class RoutesClass {
   static String getHomePageRoute() => homePage;
   static String getProfilePageRoute() => profilePage;
   static String getBuyPageRoute() => buyPage;
+  static String getSellPageRoute() => sellPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -63,5 +66,11 @@ class RoutesClass {
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
+    GetPage(
+      name: sellPage,
+      page: () => SellPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    )
   ];
 }
