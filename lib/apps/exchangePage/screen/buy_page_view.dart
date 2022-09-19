@@ -7,7 +7,6 @@ import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../model/bdt_product_model.dart';
 import '../model/received_usd_model.dart';
@@ -23,11 +22,15 @@ class BuyPageView extends GetView<BuyPageController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buy Dollar'),
+        //automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
+      //drawer: const DrawerForExchangePage(),
       body: SingleChildScrollView(
         controller: controller.scrollController,
         physics: const BouncingScrollPhysics(),
         child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: controller.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +53,7 @@ class BuyPageView extends GetView<BuyPageController> {
                   height: 50,
                   child: Row(
                     children: [
-                      BDTMethodIcon(),
+                      BuyMethodBDTIcon(),
                       Obx(
                         () => Container(
                           width: Config.screenWidth! - 82,
@@ -107,7 +110,7 @@ class BuyPageView extends GetView<BuyPageController> {
                   height: 50,
                   child: Row(
                     children: [
-                      DollarMethodIcon(),
+                      const BuyMethodUSDIcon(),
                       Obx(
                         () => Container(
                           width: Config.screenWidth! - 82,
@@ -117,8 +120,8 @@ class BuyPageView extends GetView<BuyPageController> {
                             underline: const SizedBox(),
                             isExpanded: true,
                             hint: Text(controller.titleUsd.value.toString()),
-                            items:
-                                controller.itemList.map((ReceivedUsdModel e) {
+                            items: controller.buyItemUSDList
+                                .map((ReceivedUsdModel e) {
                               return DropdownMenuItem(
                                 value: e.dollarName,
                                 child: Text(e.dollarName),
@@ -127,15 +130,16 @@ class BuyPageView extends GetView<BuyPageController> {
                             onChanged: (value) {
                               controller.titleUsd.value = value.toString();
                               controller.indexUsd.value =
-                                  controller.itemList.indexWhere(
+                                  controller.buyItemUSDList.indexWhere(
                                 (element) => element.dollarName == value,
                               );
                               controller.imageUsd.value = controller
-                                  .itemList[controller.indexUsd.value]
+                                  .buyItemUSDList[controller.indexUsd.value]
                                   .dollarIcon;
 
                               controller.calculatAmount.value = double.parse(
-                                controller.itemList[controller.indexUsd.value]
+                                controller
+                                    .buyItemUSDList[controller.indexUsd.value]
                                     .currentPrice,
                               );
                             },
@@ -156,7 +160,8 @@ class BuyPageView extends GetView<BuyPageController> {
                 textInputType: TextInputType.number,
                 focusNode: controller.myFocusNode,
                 hintText: '0',
-                maxLength: 6,
+                maxLength:
+                    controller.titleUsd.value == 'Please select a item' ? 1 : 6,
                 onChanged: (String value) {
                   controller.valueTest.value = double.parse(value);
                   controller.add(
@@ -166,9 +171,9 @@ class BuyPageView extends GetView<BuyPageController> {
                     ),
                   );
                 },
-                validator: ((value) {
-                  return null;
-                }),
+                validator: (value) {
+                  return controller.validateAmount(value!);
+                },
                 onSaved: (value) {},
               ),
 
@@ -230,6 +235,9 @@ class BuyPageView extends GetView<BuyPageController> {
                                 : controller.titleBdt.value == 'Rocket'
                                     ? 12
                                     : 11,
+                        validator: (value) {
+                          return controller.validateSendAmountNumber(value!);
+                        },
                       ),
                       InfoTitle(
                         title:
@@ -243,6 +251,9 @@ class BuyPageView extends GetView<BuyPageController> {
                         hintText: '0',
                         textEditingController: controller.sendTrxIdController,
                         maxLength: 22,
+                        validator: (value) {
+                          return controller.validateTrxID(value!);
+                        },
                       ),
                     ],
                   ),
@@ -258,9 +269,13 @@ class BuyPageView extends GetView<BuyPageController> {
               ),
               //Email Text Field
               TextFieldWidget(
-                textEditingController: controller.sendAmountController,
+                textEditingController: controller.sendEmailController,
                 hintText: '@',
                 textInputType: TextInputType.emailAddress,
+                validator: (value) {
+                  return controller.validateEmail(value!);
+                },
+
                 //maxLines: 5,
               ),
               InfoTitle(
@@ -329,7 +344,9 @@ class BuyPageView extends GetView<BuyPageController> {
                   children: [
                     Obx(
                       () => MaterialButtonWidget(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.buySubmit();
+                        },
                         minWidth: 120,
                         text: controller.titleBdt.value == 'bkash'
                             ? 'Pay Now'
@@ -340,7 +357,9 @@ class BuyPageView extends GetView<BuyPageController> {
                       width: 20,
                     ),
                     MaterialButtonWidget(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.cancelButton();
+                      },
                       text: 'Cancel',
                       backgroundColor: Colors.red.shade300,
                     ),

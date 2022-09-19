@@ -1,29 +1,36 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
+import 'package:digital_shop/apps/productPage/widgets/product_view_widget.dart';
+import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePageView extends GetView<HomePageController> {
-  HomePageView({Key? key}) : super(key: key);
+import '../widgets/carousel_widget.dart';
 
-  CollectionReference reference =
-      FirebaseFirestore.instance.collection('received_USD');
+class HomePageView extends GetView<HomePageController> {
+  const HomePageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    Config().init(context);
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        //mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('data'),
-          ),
-        ],
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              height: Config.screenHeight! * .25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: const CarouselWidget(),
+            ),
+            Container(
+              //height: Config.screenHeight! * .31,
+              color: Colors.amber,
+              child: const ProductViewWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }
