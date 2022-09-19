@@ -9,25 +9,102 @@ class BuyPageController extends GetxController {
   static const receivedUsdCollection = 'received_USD';
   static const bdtCollection = 'send_BDT';
 
-  List<ReceivedUsdModel> itemList = [];
+  List<ReceivedUsdModel> buyItemUSDList = [];
   List<BdtProductsModel> bdProductsList = [];
+
+  final formKey = GlobalKey<FormState>();
+  TextEditingController sendAmountController = TextEditingController();
+  TextEditingController sendNumberController = TextEditingController();
+  TextEditingController sendTrxIdController = TextEditingController();
+  TextEditingController sendEmailController = TextEditingController();
+  TextEditingController sendNoteController = TextEditingController();
+  //TextEditingController receiveAmountController = TextEditingController();
 
   @override
   void onInit() {
     // TODO: implement onInit
+    sendAmountController = TextEditingController();
+    sendNumberController = TextEditingController();
+    sendTrxIdController = TextEditingController();
+    sendEmailController = TextEditingController();
+    sendNoteController = TextEditingController();
+
     getUsdPriceList();
     getBDTProductsList();
+    dataSnapshotsForUSD();
+    dataSnapshotsForBDT();
     myFocusNode = FocusNode();
     super.onInit();
   }
 
-  getBDTProductsList() async {
-    var response =
-        await FirebaseFirestore.instance.collection(bdtCollection).get();
-    dataRecordsForBDT(response);
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    sendAmountController.dispose();
+    sendNumberController.dispose();
+    sendTrxIdController.dispose();
+    sendEmailController.dispose();
+    sendNoteController.dispose();
+    myFocusNode.dispose();
+    super.dispose();
   }
 
-  dataRecordsForBDT(QuerySnapshot<Map<String, dynamic>> response) {
+  validateAmount(String value) {
+    if (value.isEmpty) {
+      return 'Input a Amount';
+    }
+    return null;
+  }
+
+  validateSendAmountNumber(String value) {
+    if (value.isEmpty) {
+      return 'This field can\'t be empty';
+    }
+    if (value.length < 11) {
+      return 'number at least 11 digits';
+    }
+    return null;
+  }
+
+  validateTrxID(String value) {
+    if (value.isEmpty) {
+      return 'This field can\'t be empty';
+    }
+
+    return null;
+  }
+
+  validateEmail(String value) {
+    if (!GetUtils.isEmail(value)) {
+      return 'Input a Valid Email';
+    }
+    return null;
+  }
+
+  void buySubmit() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    formKey.currentState!.save();
+  }
+
+  void cancelButton() {
+    sendAmountController.clear();
+    sendEmailController.clear();
+    sendNoteController.clear();
+    sendTrxIdController.clear();
+    sendNumberController.clear();
+  }
+
+  Future getBDTProductsList() async {
+    var response =
+        await FirebaseFirestore.instance.collection(bdtCollection).get();
+    dataRecordsMapForBDT(response);
+  }
+
+  dataRecordsMapForBDT(QuerySnapshot<Map<String, dynamic>> response) {
     var bdtList = response.docs
         .map(
           (e) => BdtProductsModel(
@@ -41,14 +118,23 @@ class BuyPageController extends GetxController {
     bdProductsList = bdtList.obs;
   }
 
+  dataSnapshotsForBDT() {
+    FirebaseFirestore.instance
+        .collection(bdtCollection)
+        .snapshots()
+        .listen((response) {
+      dataRecordsMapForBDT(response);
+    });
+  }
+
   getUsdPriceList() async {
     var response = await FirebaseFirestore.instance
         .collection(receivedUsdCollection)
         .get();
-    dataRecords(response);
+    dataRecordsMapForUSD(response);
   }
 
-  dataRecords(QuerySnapshot<Map<String, dynamic>> response) {
+  dataRecordsMapForUSD(QuerySnapshot<Map<String, dynamic>> response) {
     var list = response.docs
         .map(
           (e) => ReceivedUsdModel(
@@ -60,8 +146,17 @@ class BuyPageController extends GetxController {
         )
         .toList();
 
-    itemList = list.obs;
-    print(itemList);
+    buyItemUSDList = list.obs;
+    print(buyItemUSDList);
+  }
+
+  dataSnapshotsForUSD() {
+    FirebaseFirestore.instance
+        .collection(receivedUsdCollection)
+        .snapshots()
+        .listen((response) {
+      dataRecordsMapForUSD(response);
+    });
   }
 
   //
@@ -88,21 +183,6 @@ class BuyPageController extends GetxController {
   }
 
   late FocusNode myFocusNode;
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    myFocusNode.dispose();
-    super.dispose();
-  }
-
-  final formKey = GlobalKey<FormState>();
-  TextEditingController sendAmountController = TextEditingController();
-  TextEditingController sendNumberController = TextEditingController();
-  TextEditingController sendTrxIdController = TextEditingController();
-  TextEditingController sendEmailController = TextEditingController();
-  TextEditingController sendNoteController = TextEditingController();
-  //TextEditingController receiveAmountController = TextEditingController();
 
   RxBool isBkash = true.obs;
 

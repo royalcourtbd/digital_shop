@@ -1,9 +1,13 @@
 import 'package:digital_shop/apps/accountPage/screen/account_page_view.dart';
+import 'package:digital_shop/apps/authPage/screen/login_page_view.dart';
+import 'package:digital_shop/apps/authPage/screen/signup_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/buy_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
+import 'package:digital_shop/apps/exchangePage/screen/sell_history_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
+import 'package:digital_shop/apps/productPage/screen/products_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -20,6 +24,10 @@ class RoutesClass {
   static String profilePage = '/profilePage';
   static String buyPage = '/buyPage';
   static String sellPage = '/sellPage';
+  static String sellHistory = '/sellHistory';
+  static String loginPage = '/loginPage';
+  static String signUpPage = '/signUpPage';
+  static String productPage = '/productPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -30,6 +38,10 @@ class RoutesClass {
   static String getProfilePageRoute() => profilePage;
   static String getBuyPageRoute() => buyPage;
   static String getSellPageRoute() => sellPage;
+  static String getSellHistoryPageRoute() => sellHistory;
+  static String getLoginPageRoute() => loginPage;
+  static String getSignUpPagePageRoute() => signUpPage;
+  static String getProductPageRoute() => productPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -37,7 +49,7 @@ class RoutesClass {
       name: mainPage,
     ),
     GetPage(
-      page: () => const AccountPageView(),
+      page: () => AccountPageView(),
       name: accountPage,
     ),
     GetPage(
@@ -49,11 +61,11 @@ class RoutesClass {
       name: categoryPage,
     ),
     GetPage(
-      page: () => const ExchangePageView(),
+      page: () => ExchangePageView(),
       name: exchangePage,
     ),
     GetPage(
-      page: () => HomePageView(),
+      page: () => const HomePageView(),
       name: homePage,
     ),
     GetPage(
@@ -71,6 +83,30 @@ class RoutesClass {
       page: () => SellPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
-    )
+    ),
+    GetPage(
+      name: sellHistory,
+      page: () => const SellHistoryPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
+    GetPage(
+      name: loginPage,
+      page: () => LoginPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
+    GetPage(
+      name: signUpPage,
+      page: () => SignUpPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
+    GetPage(
+      name: productPage,
+      page: () => const ProductsPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
   ];
 }

@@ -1,16 +1,17 @@
-import 'package:digital_shop/apps/exchangePage/controller/buy_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class TextFieldWidget extends GetView<BuyPageController> {
+import '../controller/sell_page_controller.dart';
+
+class TextFieldForSell extends GetView<SellPageController> {
   TextInputType textInputType;
 
   Function(String)? onChanged;
   Function()? onTap;
   Function(String?)? onSaved;
   String? Function(String?)? validator;
-  AutovalidateMode? autovalidateMode;
+
   int maxLines;
   String hintText;
   bool autofocus;
@@ -18,11 +19,10 @@ class TextFieldWidget extends GetView<BuyPageController> {
   FocusNode? focusNode;
   List<TextInputFormatter> inputFormatters;
   TextEditingController textEditingController;
-  TextFieldWidget({
+  TextFieldForSell({
     Key? key,
     required this.textInputType,
     required this.hintText,
-    this.autovalidateMode,
     this.maxLines = 1,
     this.inputFormatters = const [],
     this.maxLength = 32,
@@ -49,7 +49,6 @@ class TextFieldWidget extends GetView<BuyPageController> {
         ),
         height: 50,
         child: TextFormField(
-          autovalidateMode: autovalidateMode,
           onTap: onTap,
           onChanged: onChanged,
           onSaved: onSaved,

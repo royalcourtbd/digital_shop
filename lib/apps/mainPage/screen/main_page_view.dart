@@ -1,25 +1,32 @@
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
+import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
+import 'package:digital_shop/apps/productPage/controller/product_controller.dart';
+import 'package:digital_shop/apps/widgets/drawer_for_exchange_page.dart';
+import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
+import '../../authPage/controller/auth_controller.dart';
 import '../controller/main_page_controller.dart';
 import '../widgets/bottom_menu_item_widget.dart';
 
 class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
+  final AuthController authController = Get.put(AuthController());
+  final ProductController productController = Get.put(ProductController());
+  final HomePageController homePageController = Get.put(HomePageController());
 
   final List<Widget> pages = [
-    const ExchangePageView(),
+    ExchangePageView(),
     const CategoryPageView(),
-    HomePageView(),
+    const HomePageView(),
     const CartPageView(),
-    const AccountPageView(),
+    AccountPageView(),
   ];
 
   // Widget currentPage = HomePageView();
@@ -41,31 +48,50 @@ class MainPageView extends GetView<MainPageController> {
                             : 'Account',
           ),
         ),
+        elevation: 0.0,
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              authController.signOut();
+            },
+            icon: const Icon(Icons.login),
+          ),
+          IconButton(
+            onPressed: () {
+              productController.addProducts();
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              homePageController.addProducts();
+            },
+            icon: const Icon(Icons.card_travel),
+          ),
+        ],
+      ),
+      drawer: Obx(
+        // ignore: unrelated_type_equality_checks
+        () => controller.currentIndex == 0 && authController.user.value != null
+            ? const DrawerForExchangePage()
+            : const DrawerForOtherPage(),
       ),
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body: Obx(
         () => pages[controller.currentIndex.value],
       ),
-      floatingActionButton: Obx(
-        () => FloatingActionButton(
-          backgroundColor: Colors.white,
-          child: SvgPicture.asset(
-            'assets/svg_icon/home.svg',
-            height: 32,
-            width: 32,
-            alignment: Alignment.center,
-            theme: const SvgTheme(),
-            color: controller.currentIndex.value == 2
-                ? const Color(0xffc67752)
-                : Colors.black,
-            allowDrawingOutsideViewBox: true,
-          ),
-          onPressed: () {
-            controller.currentIndex.value = 2;
-          },
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        child: Image.asset(
+          'assets/images/logo.png',
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
         ),
+        onPressed: () {
+          controller.currentIndex.value = 2;
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
