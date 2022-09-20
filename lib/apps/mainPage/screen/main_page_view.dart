@@ -24,7 +24,7 @@ class MainPageView extends GetView<MainPageController> {
   final List<Widget> pages = [
     ExchangePageView(),
     const CategoryPageView(),
-    const HomePageView(),
+    HomePageView(),
     const CartPageView(),
     AccountPageView(),
   ];
@@ -37,12 +37,16 @@ class MainPageView extends GetView<MainPageController> {
       appBar: AppBar(
         title: Obx(
           () => Text(
+            // ignore: unrelated_type_equality_checks
             controller.currentIndex == 0
                 ? 'Convert Your Money '
+                // ignore: unrelated_type_equality_checks
                 : controller.currentIndex == 1
                     ? 'Category'
+                    // ignore: unrelated_type_equality_checks
                     : controller.currentIndex == 2
                         ? 'Home'
+                        // ignore: unrelated_type_equality_checks
                         : controller.currentIndex == 3
                             ? 'Cart'
                             : 'Account',

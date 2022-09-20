@@ -22,7 +22,6 @@ class BuyPageController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     sendAmountController = TextEditingController();
     sendNumberController = TextEditingController();
     sendTrxIdController = TextEditingController();
@@ -39,8 +38,6 @@ class BuyPageController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-
     sendAmountController.dispose();
     sendNumberController.dispose();
     sendTrxIdController.dispose();
@@ -147,7 +144,6 @@ class BuyPageController extends GetxController {
         .toList();
 
     buyItemUSDList = list.obs;
-    print(buyItemUSDList);
   }
 
   dataSnapshotsForUSD() {

@@ -30,11 +30,11 @@ class LoginPageView extends GetView<LoginPageController> {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: const AutoSizeText(
-                'LOGIN',
+                'Login',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 39, 168, 56),
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -76,37 +76,6 @@ class LoginPageView extends GetView<LoginPageController> {
                     child: InkWell(
                       onTap: () {
                         Get.to(() => const PasswordResetPage());
-
-                        // Get.bottomSheet(
-                        //   Container(
-                        //     height: 200,
-                        //     width: double.infinity,
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.green.shade100,
-                        //     ),
-                        //     child: Form(
-                        //       key: controller.passwordForgotFormKey,
-                        //       child: Column(
-                        //         children: [
-                        //           TextFieldForInUp(
-                        //             controller:
-                        //                 controller.resetPasswordController,
-                        //             keyboardType: TextInputType.emailAddress,
-                        //             labelText: 'Type Your Email',
-                        //             validator: ((value) {
-                        //               return controller
-                        //                   .resetEmailValidation(value!);
-                        //             }),
-                        //           ),
-                        //           ElevatedButton(
-                        //               onPressed: () {},
-                        //               child:
-                        //                   const AutoSizeText('Reset Password'))
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
                       },
                       child: const AutoSizeText(
                         'Forgot Your Password?',
@@ -126,8 +95,15 @@ class LoginPageView extends GetView<LoginPageController> {
                         horizontal: 40, vertical: 10),
                     child: ElevatedButton(
                       onPressed: () {
+                        Get.dialog(
+                          const AlertDialog(
+                            title: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        );
                         controller.logInButton();
-                        const CircularProgressIndicator();
+                        //const CircularProgressIndicator();
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -162,6 +138,14 @@ class LoginPageView extends GetView<LoginPageController> {
                           color: Colors.red,
                         ),
                       ),
+                      // child: RichText(
+                      //   text: const TextSpan(
+                      //     text: 'Don\'t have an Account?',
+                      //     style: TextStyle(
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   )
                 ],

@@ -1,10 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/homePage/model/carousel_model.dart';
 import 'package:digital_shop/general/constants/url.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePageController extends GetxController {
   RxList carouselSliderList = [].obs;
+
+  List icon = [
+    Icons.announcement_outlined,
+    Icons.favorite_outlined,
+    Icons.dashboard_outlined,
+    Icons.assignment_outlined,
+  ];
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
@@ -48,8 +56,6 @@ class HomePageController extends GetxController {
       id,
       imagePath,
     );
-
-    //Get.toNamed(RoutesClass.getSellHistoryPageRoute());
   }
 
   addItem(

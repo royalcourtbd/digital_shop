@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../general/utils/config.dart';
-import '../controller/category_page_controller.dart';
+import '../../productPage/model/products_model.dart';
+import '../controller/product_details_page_controller.dart';
 
-class CategoryPageView extends GetView<CategoryPageController> {
-  const CategoryPageView({Key? key}) : super(key: key);
+class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
+  ProductModel? productValue;
+  ProductDetailsPageView({Key? key, this.productValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

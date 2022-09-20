@@ -7,6 +7,8 @@ import '../../authPage/controller/auth_controller.dart';
 class AccountPageView extends GetView<AccountPageController> {
   final AuthController authController = Get.put(AuthController());
 
+  AccountPageView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

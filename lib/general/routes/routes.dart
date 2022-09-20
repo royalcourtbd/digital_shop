@@ -7,6 +7,7 @@ import 'package:digital_shop/apps/exchangePage/screen/sell_history_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
+import 'package:digital_shop/apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'package:digital_shop/apps/productPage/screen/products_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -28,6 +29,7 @@ class RoutesClass {
   static String loginPage = '/loginPage';
   static String signUpPage = '/signUpPage';
   static String productPage = '/productPage';
+  static String productDetailPage = '/productDetailPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -42,6 +44,7 @@ class RoutesClass {
   static String getLoginPageRoute() => loginPage;
   static String getSignUpPagePageRoute() => signUpPage;
   static String getProductPageRoute() => productPage;
+  static String getProductDetailPageRoute() => productDetailPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -108,5 +111,11 @@ class RoutesClass {
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
+    // GetPage(
+    //   name: productDetailPage,
+    //   page: () => ProductDetailsPageView(),
+    //   // transition: Transition.leftToRight,
+    //   // transitionDuration: const Duration(milliseconds: 1000),
+    // ),
   ];
 }

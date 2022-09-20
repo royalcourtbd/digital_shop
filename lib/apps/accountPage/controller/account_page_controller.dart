@@ -19,8 +19,6 @@ class AccountPageController extends GetxController {
         .collection(receivedUsdCollection)
         .get();
     dataRecordsMapForUSD(response);
-    refresh();
-    print(response.docs);
   }
 
   dataRecordsMapForUSD(QuerySnapshot<Map<String, dynamic>> response) {
@@ -37,7 +35,6 @@ class AccountPageController extends GetxController {
 
     buyItemUSDList.value = list;
     buyItemUSDList.refresh();
-    print(buyItemUSDList[0]);
   }
 
   dataSnapshotsForUSD() {

@@ -1,10 +1,11 @@
-import 'package:digital_shop/apps/productPage/widgets/product_view_widget.dart';
 import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../homePage/widgets/carousel_widget.dart';
 import '../controller/product_controller.dart';
+import '../widgets/product_view_widget.dart';
 
 class ProductsPageView extends GetView<ProductController> {
   const ProductsPageView({Key? key}) : super(key: key);
@@ -25,9 +26,14 @@ class ProductsPageView extends GetView<ProductController> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
-          children: const [
-            ProductViewWidget(),
-            ProductViewWidget(),
+          children: [
+            Container(
+              height: Config.screenHeight! * .25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: const CarouselWidget(),
+            ),
             ProductViewWidget(),
           ],
         ),

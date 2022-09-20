@@ -30,11 +30,11 @@ class SignUpPageView extends GetView<SignUpPageController> {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: const AutoSizeText(
-                'SIGN UP',
+                'Sign Up',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 66, 192, 61),
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -104,6 +104,13 @@ class SignUpPageView extends GetView<SignUpPageController> {
                     ),
                     child: ElevatedButton(
                       onPressed: () {
+                        Get.dialog(
+                          const AlertDialog(
+                            title: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                        );
                         controller.signUpButton();
                       },
                       child: Container(

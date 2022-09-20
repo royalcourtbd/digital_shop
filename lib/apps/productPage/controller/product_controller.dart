@@ -41,26 +41,33 @@ class ProductController extends GetxController {
   }
 
   productsSnapshot() {
-    firestore
-        .collection(Urls.PRODUCTS_COLLECTION)
-        .snapshots()
-        .listen((response) {
-      productsMap(response);
-    });
+    firestore.collection(Urls.PRODUCTS_COLLECTION).snapshots().listen(
+      (response) {
+        productsMap(response);
+      },
+    );
+  }
+
+  RxDouble productPercentage = 0.0.obs;
+  RxDouble one = 0.0.obs;
+  calculatePercentage(double discountPrice, double currentPrice) {
+    productPercentage.value = 100 - ((discountPrice / currentPrice) * 100);
+    return productPercentage.value;
   }
 
   void addProducts() {
     var id = 'ffg';
-    var productName = 'fhsjk';
+    var productName = 'Coriander Leaves (Dhonia Pata) ± 10 gm bhjg';
     var category = 'gjr';
-    var price = '12.56';
+    var price = '9500';
     var quantity = 'erg';
-    var discountPrice = '653.56';
+    var discountPrice = '8500';
     var discription = 'erg';
-    var image = 'https://cdn.somahar.xyz/product/0OCYaBb5Lwv5H5dEaWgM4035.jpg';
-    var totalSell = 'gre';
+    var image =
+        'https://chaldn.com/_mpimage/coriander-leaves-dhonia-pata-10-gm-100-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28562&q=low&v=1&m=400&webp=1';
+    var totalSell = '18';
 
-    addItem(
+    addProduct(
       id,
       productName,
       category,
@@ -71,11 +78,9 @@ class ProductController extends GetxController {
       image,
       totalSell,
     );
-
-    //Get.toNamed(RoutesClass.getSellHistoryPageRoute());
   }
 
-  addItem(String id, productName, category, price, quantity, discountPrice,
+  addProduct(String id, productName, category, price, quantity, discountPrice,
       discription, image, totalSell) {
     var item = ProductModel(
       id: id,

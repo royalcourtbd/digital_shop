@@ -50,6 +50,8 @@ class AuthController extends GetxController {
               )
             },
           );
+
+      Get.back();
       Get.snackbar(
         'Account Creation Success',
         'Please Login To Your Account',
@@ -74,6 +76,7 @@ class AuthController extends GetxController {
       Get.offAll(() => MainPageView());
       storage.write('uid', auth.currentUser!.uid);
     } catch (e) {
+      Get.back();
       Get.snackbar(
         'Login Failed',
         e.toString(),

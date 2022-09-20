@@ -4,4 +4,5 @@ class Urls {
   static const BDTCOLLECTION = 'send_BDT';
   static const ORDER_COLLECTION = 'order';
   static const PRODUCTS_COLLECTION = 'products';
+  static const FAVOURITEDEALS_COLLECTION = 'favouriteDeals';
 }
