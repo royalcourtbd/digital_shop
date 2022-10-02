@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/productPage/model/products_model.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,8 @@ class ProductController extends GetxController {
   RxList productsList = [].obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  AuthController authController = Get.put(AuthController());
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
 
   @override
@@ -26,15 +29,16 @@ class ProductController extends GetxController {
     var list = response.docs
         .map(
           (e) => ProductModel(
-              id: e.id,
-              productName: e['productName'],
-              category: e['category'],
-              price: e['price'],
-              quantity: e['quantity'],
-              discountPrice: e['discountPrice'],
-              discription: e['discription'],
-              image: e['image'],
-              totalSell: e['totalSell']),
+            id: e.id,
+            productName: e['productName'],
+            category: e['category'],
+            price: e['price'],
+            quantity: e['quantity'],
+            discountPrice: e['discountPrice'],
+            discription: e['discription'],
+            image: e['image'],
+            totalSell: e['totalSell'],
+          ),
         )
         .toList();
     productsList.value = list;
@@ -49,18 +53,18 @@ class ProductController extends GetxController {
   }
 
   RxDouble productPercentage = 0.0.obs;
-  RxDouble one = 0.0.obs;
+  //RxDouble one = 0.0.obs;
   calculatePercentage(double discountPrice, double currentPrice) {
     productPercentage.value = 100 - ((discountPrice / currentPrice) * 100);
     return productPercentage.value;
   }
 
   void addProducts() {
-    var id = 'ffg';
+    var id = authController.auth.currentUser!.uid;
     var productName = 'Coriander Leaves (Dhonia Pata) ± 10 gm bhjg';
     var category = 'gjr';
     var price = '9500';
-    var quantity = 'erg';
+    var quantity = '65';
     var discountPrice = '8500';
     var discription = 'erg';
     var image =

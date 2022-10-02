@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'bindings/all_controller_binding.dart';
 import 'firebase_options.dart';
 import 'general/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthController()));
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       title: 'Digital Shop',
-      theme: ThemeData(fontFamily: 'Bitter', primarySwatch: Colors.green
+      theme: ThemeData(fontFamily: 'Raleway', primarySwatch: Colors.green
           //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
           ),
       //home: const PasswordResetPage(),

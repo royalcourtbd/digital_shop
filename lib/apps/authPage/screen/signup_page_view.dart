@@ -84,15 +84,26 @@ class SignUpPageView extends GetView<SignUpPageController> {
                   SizedBox(
                     height: Config.screenHeight! * 0.02,
                   ),
-                  TextFieldForInUp(
-                    controller: controller.passwordController,
-                    keyboardType: TextInputType.text,
-                    labelText: 'Password',
-                    obscureText: true,
-                    validator: (value) {
-                      return controller.passwordValidation(value!);
-                    },
-                  ),
+                  Obx(() => TextFieldForInUp(
+                        controller: controller.passwordController,
+                        keyboardType: TextInputType.text,
+                        labelText: 'Password',
+                        obscureText: controller.passwordVisibility.value,
+                        suffixIcon: InkWell(
+                          child: Icon(
+                            controller.passwordVisibility.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility,
+                          ),
+                          onTap: () {
+                            controller.passwordVisibility.value =
+                                !controller.passwordVisibility.value;
+                          },
+                        ),
+                        validator: (value) {
+                          return controller.passwordValidation(value!);
+                        },
+                      )),
                   SizedBox(
                     height: Config.screenHeight! * 0.02,
                   ),
@@ -104,51 +115,46 @@ class SignUpPageView extends GetView<SignUpPageController> {
                     ),
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.dialog(
-                          const AlertDialog(
-                            title: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        );
                         controller.signUpButton();
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: 50,
-                        width: Config.screenWidth! * 0.5,
+                        height: 45,
+                        width: Config.screenWidth! * 0.4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(80.0),
                           gradient: const LinearGradient(
                             colors: [
-                              Color.fromARGB(0, 20, 194, 43),
+                              Color.fromARGB(0, 131, 175, 137),
                               Color.fromARGB(0, 123, 13, 145)
                             ],
                           ),
                         ),
-                        child: const Text('Sign UP'),
+                        child: const Text(
+                          'Sign UP',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     alignment: Alignment.centerRight,
                     margin: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
+                      horizontal: 40,
+                      vertical: 10,
+                    ),
                     child: InkWell(
                       onTap: () {
                         Get.offNamed(RoutesClass.getLoginPageRoute());
                       },
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed(RoutesClass.getLoginPageRoute());
-                        },
-                        child: const AutoSizeText(
-                          'Already have an Account? Login',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
+                      child: const AutoSizeText(
+                        'Already have an Account? Login',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          //color: Colors.red,
                         ),
                       ),
                     ),

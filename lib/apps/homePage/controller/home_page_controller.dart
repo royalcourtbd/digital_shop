@@ -9,7 +9,7 @@ class HomePageController extends GetxController {
 
   List icon = [
     Icons.announcement_outlined,
-    Icons.favorite_outlined,
+    Icons.favorite_border,
     Icons.dashboard_outlined,
     Icons.assignment_outlined,
   ];

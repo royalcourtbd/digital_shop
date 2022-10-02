@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpPageController extends GetxController {
-  final registerFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> registerFormKey =
+      GlobalKey<FormState>(debugLabel: '_signinFormKey');
+  var passwordVisibility = true.obs;
   final AuthController authController = Get.put(AuthController());
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -74,6 +76,13 @@ class SignUpPageController extends GetxController {
     authController.createUser(
       emailController.text.trim(),
       passwordController.text.trim(),
+    );
+    Get.dialog(
+      const AlertDialog(
+        title: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

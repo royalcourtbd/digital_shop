@@ -24,7 +24,7 @@ class MainPageView extends GetView<MainPageController> {
   final List<Widget> pages = [
     ExchangePageView(),
     const CategoryPageView(),
-    HomePageView(),
+    const HomePageView(),
     const CartPageView(),
     AccountPageView(),
   ];

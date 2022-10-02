@@ -105,6 +105,13 @@ class SellPageController extends GetxController {
       return;
     }
     formKey.currentState!.save();
+    Get.dialog(
+      const AlertDialog(
+        title: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
     var contactNumber = sendContactNumberController.text.trim();
     var email = sendEmailController.text.trim();
     var note = sendNoteController.text.trim();
@@ -128,7 +135,12 @@ class SellPageController extends GetxController {
       sendAmount,
       time,
     );
-
+    Get.back();
+    Get.snackbar(
+      'Succes',
+      'please wite for verification and delivery',
+      snackPosition: SnackPosition.BOTTOM,
+    );
     Get.toNamed(RoutesClass.getSellHistoryPageRoute());
     sendAmountController.clear();
     sendNumberController.clear();

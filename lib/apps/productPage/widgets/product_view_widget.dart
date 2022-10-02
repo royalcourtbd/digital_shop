@@ -1,3 +1,4 @@
+import 'package:digital_shop/apps/mainPage/controller/main_page_controller.dart';
 import 'package:digital_shop/apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import '../model/products_model.dart';
 
 class ProductViewWidget extends GetView<ProductController> {
   ProductController productController = Get.put(ProductController());
+  MainPageController mainPageController = Get.put(MainPageController());
   ProductModel? productModel;
 
   ProductViewWidget({
@@ -36,9 +38,8 @@ class ProductViewWidget extends GetView<ProductController> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Get.to(
-                  ProductDetailsPageView(),
-                );
+                Get.to(ProductDetailsPageView(
+                    productValue: controller.productsList.value[index]));
               },
               onLongPress: () {
                 controller.deleteItem(
@@ -58,34 +59,23 @@ class ProductViewWidget extends GetView<ProductController> {
                         ),
                       ),
                       width: double.infinity,
-                      height: Config.screenHeight! * .17,
+                      height: Config.screenHeight! * .16,
                       child: ClipRRect(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(4),
                           topRight: Radius.circular(4),
                           //bottomRight: Radius.circular(4),
                         ),
-                        child: Image.network(
-                          controller.productsList.value[index].image,
-                          fit: BoxFit.cover,
+                        child: Hero(
+                          transitionOnUserGestures: true,
+                          tag: UniqueKey(),
+                          child: Image.network(
+                            controller.productsList.value[index].image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                    // AutoSizeText(
-                    //   '${productController.calculatePercentage(
-                    //         double.parse(
-                    //           controller
-                    //               .productsList.value[index].discountPrice,
-                    //         ),
-                    //         double.parse(
-                    //           controller.productsList.value[index].price,
-                    //         ),
-                    //       ).round()} %',
-                    //   style: const TextStyle(
-                    //     fontSize: 16,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 5, left: 8),
                       child: Row(
@@ -104,6 +94,7 @@ class ProductViewWidget extends GetView<ProductController> {
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
                                       overflow: TextOverflow.ellipsis,
+                                      fontFamily: 'Poppins',
                                     ),
                                   ),
                           ),
@@ -195,7 +186,8 @@ class ProductViewWidget extends GetView<ProductController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SizedBox(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
                         width: double.infinity,
                         height: 40,
                         // color: Colors.red,
@@ -204,7 +196,7 @@ class ProductViewWidget extends GetView<ProductController> {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 14,
                           ),
                         ),
                       ),
@@ -216,35 +208,11 @@ class ProductViewWidget extends GetView<ProductController> {
                         '${controller.productsList.value[index].totalSell} Sold',
                         style: const TextStyle(
                           fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Poppins',
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 8, vertical: 6),
-                    //   child: InkWell(
-                    //     onTap: () {
-                    //       controller.deleteItem(
-                    //         controller.productsList.value[index].id,
-                    //       );
-                    //     },
-                    //     child: Obx(
-                    //       () => Text(
-                    //         controller
-                    //             .productPercentage(
-                    //                 double.parse(controller.productsList
-                    //                         .value[index].discountPrice)
-                    //                     .toString(),
-                    //                 double.parse(
-                    //                   controller
-                    //                       .productsList.value[index].price,
-                    //                 ).toString())
-                    //             .toString(),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

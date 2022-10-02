@@ -40,20 +40,25 @@ class HomePageView extends GetView<HomePageController> {
                 child: const AutoSizeText(
                   'Your Favourite Deals',
                   style: TextStyle(
-                    fontSize: 20,
-                    //fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black54,
                   ),
                 ),
               ),
             ),
             ProductViewWidget(),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: AutoSizeText(
-                'Just For You',
-                style: TextStyle(
-                  fontSize: 20,
-                  //fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: const AutoSizeText(
+                  'Just For You',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black54,
+                  ),
                 ),
               ),
             ),

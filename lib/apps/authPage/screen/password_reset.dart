@@ -32,14 +32,14 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: controller.text.trim());
       Get.back();
-      // showDialog(
-      //   context: context,
-      //   builder: (context) {
-      //     return const AlertDialog(
-      //       content: Text('email sent'),
-      //     );
-      //   },
-      // );
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('email sent'),
+          );
+        },
+      );
     } on FirebaseAuthException catch (e) {
       showDialog(
         context: context,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/general/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,7 @@ class AuthController extends GetxController {
             },
           );
 
-      Get.back();
+      //Get.back();
       Get.snackbar(
         'Account Creation Success',
         'Please Login To Your Account',
@@ -59,7 +60,7 @@ class AuthController extends GetxController {
       );
       //GetStorage().write('uid', auth.currentUser!.uid);
 
-      Get.offAll(() => LoginPageView());
+      Get.offAllNamed(RoutesClass.getLoginPageRoute());
     } catch (e) {
       Get.snackbar(
         'Account Creation Failed',
@@ -73,7 +74,9 @@ class AuthController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
 
-      Get.offAll(() => MainPageView());
+      Get.offAllNamed(
+        RoutesClass.getMainRoute(),
+      );
       storage.write('uid', auth.currentUser!.uid);
     } catch (e) {
       Get.back();
@@ -97,7 +100,7 @@ class AuthController extends GetxController {
       );
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
-        'Login Failed',
+        'Can\'t reset',
         e.message.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );

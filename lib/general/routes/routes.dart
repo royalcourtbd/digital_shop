@@ -7,7 +7,6 @@ import 'package:digital_shop/apps/exchangePage/screen/sell_history_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
-import 'package:digital_shop/apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'package:digital_shop/apps/productPage/screen/products_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';

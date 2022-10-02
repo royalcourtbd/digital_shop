@@ -9,10 +9,10 @@ class HomeUpperRowWidget extends StatelessWidget {
   }) : super(key: key);
 
   List color = [
-    const Color.fromARGB(255, 0, 112, 4),
-    Colors.red,
-    const Color.fromARGB(255, 156, 142, 13),
-    const Color.fromARGB(255, 19, 64, 131),
+    const Color.fromARGB(255, 102, 158, 104),
+    const Color.fromARGB(255, 197, 138, 134),
+    const Color.fromARGB(255, 161, 156, 107),
+    const Color.fromARGB(255, 90, 110, 139),
   ];
 
   final List icon;
@@ -21,7 +21,7 @@ class HomeUpperRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Config().init(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Expanded(
           child: Container(
@@ -37,14 +37,15 @@ class HomeUpperRowWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: Config.screenWidth! * .04),
+                    horizontal: Config.screenWidth! * .05,
+                  ),
                   child: Container(
                     alignment: Alignment.center,
                     //padding: const EdgeInsets.all(8),
                     width: Config.screenHeight! * 0.07,
                     height: Config.screenHeight! * 0.07,
                     decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.13),
                         borderRadius: BorderRadius.circular(50)),
                     child: Icon(
                       icon[index],

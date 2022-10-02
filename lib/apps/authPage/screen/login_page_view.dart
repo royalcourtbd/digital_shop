@@ -59,15 +59,26 @@ class LoginPageView extends GetView<LoginPageController> {
                     height: Config.screenHeight! * 0.02,
                   ),
 
-                  TextFieldForInUp(
-                    controller: controller.passwordController,
-                    keyboardType: TextInputType.text,
-                    labelText: 'Password',
-                    obscureText: true,
-                    validator: ((value) {
-                      return controller.passwordValidation(value);
-                    }),
-                  ),
+                  Obx(() => TextFieldForInUp(
+                        controller: controller.passwordController,
+                        keyboardType: TextInputType.text,
+                        labelText: 'Password',
+                        obscureText: controller.passwordVisibility.value,
+                        suffixIcon: InkWell(
+                          child: Icon(
+                            controller.passwordVisibility.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility,
+                          ),
+                          onTap: () {
+                            controller.passwordVisibility.value =
+                                !controller.passwordVisibility.value;
+                          },
+                        ),
+                        validator: ((value) {
+                          return controller.passwordValidation(value);
+                        }),
+                      )),
 
                   Container(
                     alignment: Alignment.centerRight,
@@ -81,7 +92,7 @@ class LoginPageView extends GetView<LoginPageController> {
                         'Forgot Your Password?',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.red,
+                          //color: Colors.red,
                         ),
                       ),
                     ),
@@ -95,20 +106,13 @@ class LoginPageView extends GetView<LoginPageController> {
                         horizontal: 40, vertical: 10),
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.dialog(
-                          const AlertDialog(
-                            title: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                        );
                         controller.logInButton();
                         //const CircularProgressIndicator();
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: 50,
-                        width: Config.screenWidth! * 0.5,
+                        height: 45,
+                        width: Config.screenWidth! * 0.4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(80.0),
                           gradient: const LinearGradient(
@@ -118,7 +122,12 @@ class LoginPageView extends GetView<LoginPageController> {
                             ],
                           ),
                         ),
-                        child: const Text('Login'),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -128,24 +137,16 @@ class LoginPageView extends GetView<LoginPageController> {
                         horizontal: 40, vertical: 10),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(RoutesClass.getSignUpPagePageRoute());
+                        Get.toNamed(RoutesClass.getSignUpPagePageRoute());
                       },
                       child: const AutoSizeText(
                         'Don\'t have an Account? Sign Up',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          //color: Colors.red,
                         ),
                       ),
-                      // child: RichText(
-                      //   text: const TextSpan(
-                      //     text: 'Don\'t have an Account?',
-                      //     style: TextStyle(
-                      //       color: Colors.black,
-                      //     ),
-                      //   ),
-                      // ),
                     ),
                   )
                 ],

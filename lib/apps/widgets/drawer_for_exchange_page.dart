@@ -32,17 +32,6 @@ class DrawerForExchangePage extends StatelessWidget {
       child: Column(
         children: [
           DrawerListItem(
-            icon: Icons.dashboard_outlined,
-            onPressed: () => navigate(0),
-            color: Get.currentRoute == RoutesClass.exchangePage
-                ? Colors.black
-                : Colors.black,
-            materialColor: Get.currentRoute == RoutesClass.exchangePage
-                ? Colors.grey.shade300
-                : const Color(0xfffafafa),
-            title: 'Dashboard',
-          ),
-          DrawerListItem(
             icon: Icons.shopping_cart_checkout,
             onPressed: () => navigate(1),
             color: Get.currentRoute == RoutesClass.buyPage
@@ -81,10 +70,7 @@ class DrawerForExchangePage extends StatelessWidget {
   }
 
   navigate(int index) {
-    if (index == 0) {
-      Get.back();
-      Get.offNamed(RoutesClass.getMainRoute());
-    } else if (index == 1) {
+    if (index == 1) {
       Get.back();
       Get.toNamed(RoutesClass.getBuyPageRoute());
     } else if (index == 2) {

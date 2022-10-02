@@ -7,6 +7,7 @@ class TextFieldForInUp extends StatelessWidget {
   Function(String?)? onSaved;
   bool obscureText;
   int? maxLength;
+  Widget? suffixIcon;
   String? Function(String?)? validator;
   List<TextInputFormatter> inputFormatters;
   TextInputType keyboardType;
@@ -22,6 +23,7 @@ class TextFieldForInUp extends StatelessWidget {
     this.onTap,
     this.onSaved,
     this.obscureText = false,
+    this.suffixIcon,
     this.validator,
     required this.controller,
   }) : super(key: key);
@@ -45,6 +47,7 @@ class TextFieldForInUp extends StatelessWidget {
           labelText: labelText,
           counterText: '',
           focusColor: Colors.white,
+          suffixIcon: suffixIcon,
           //border: InputBorder.none,
         ),
       ),

@@ -37,7 +37,7 @@ class BottomMenuItemWidget extends GetView<MainPageController> {
               width: Config.screenWidth! * .03,
               color: controller.currentIndex.value == color
                   ? const Color(0xffc67752)
-                  : Colors.black,
+                  : Colors.black54,
             ),
             AutoSizeText(
               buttonName,
@@ -45,7 +45,7 @@ class BottomMenuItemWidget extends GetView<MainPageController> {
                 fontSize: fontSize,
                 color: controller.currentIndex.value == color
                     ? const Color(0xffc67752)
-                    : Colors.black,
+                    : Colors.black87,
               ),
             ),
           ],

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPageController extends GetxController {
-  final loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey =
+      GlobalKey<FormState>(debugLabel: '_loginFormKey');
+  var passwordVisibility = true.obs;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -52,6 +54,12 @@ class LoginPageController extends GetxController {
       emailController.text.trim(),
       passwordController.text.trim(),
     );
-    const CircularNotchedRectangle();
+    Get.dialog(
+      const AlertDialog(
+        title: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }
