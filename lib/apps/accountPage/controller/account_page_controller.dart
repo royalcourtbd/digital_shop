@@ -1,48 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/general/constants/url.dart';
 import 'package:get/get.dart';
 
 import '../../exchangePage/model/received_usd_model.dart';
 
 class AccountPageController extends GetxController {
-  static const receivedUsdCollection = 'received_USD';
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
+
   RxList buyItemUSDList = [].obs;
 
   @override
-  onInit() {
-    getUsdPriceList();
-    dataSnapshotsForUSD();
-    super.onInit();
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    buyItemUSDList.bindStream(getUsdPriceList());
   }
 
-  getUsdPriceList() async {
-    var response = await FirebaseFirestore.instance
-        .collection(receivedUsdCollection)
-        .get();
-    dataRecordsMapForUSD(response);
-  }
-
-  dataRecordsMapForUSD(QuerySnapshot<Map<String, dynamic>> response) {
-    var list = response.docs
-        .map(
-          (e) => ReceivedUsdModel(
-            id: e.id,
-            dollarName: e['dollarName'],
-            dollarIcon: e['dollarIcon'],
-            currentPrice: e['currentPrice'],
-          ),
-        )
-        .toList();
-
-    buyItemUSDList.value = list;
-    buyItemUSDList.refresh();
-  }
-
-  dataSnapshotsForUSD() {
-    FirebaseFirestore.instance
-        .collection(receivedUsdCollection)
-        .snapshots()
-        .listen((response) {
-      dataRecordsMapForUSD(response);
-    });
-  }
+  Stream<List<ReceivedUsdModel>> getUsdPriceList() =>
+      fireStore.collection(Urls.receivedUsdCollection).snapshots().map(
+            (query) => query.docs
+                .map(
+                  (item) => ReceivedUsdModel.fromJson(
+                    item.data(),
+                  ),
+                )
+                .toList(),
+          );
 }

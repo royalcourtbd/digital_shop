@@ -28,18 +28,24 @@ class CarouselWidget extends GetView<HomePageController> {
               slideBuilder: (index) {
                 return controller.carouselSliderList.value[index].imagePath !=
                         null
-                    ? Container(
-                        decoration: BoxDecoration(
-                          //color: Colors.red,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              controller
-                                  // ignore: invalid_use_of_protected_member
-                                  .carouselSliderList
-                                  .value[index]
-                                  .imagePath,
+                    ? InkWell(
+                        onTap: () {
+                          controller.deleteItem(
+                              controller.carouselSliderList.value[index].id);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            //color: Colors.red,
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                controller
+                                    // ignore: invalid_use_of_protected_member
+                                    .carouselSliderList
+                                    .value[index]
+                                    .imagePath,
+                              ),
+                              fit: BoxFit.fill,
                             ),
-                            fit: BoxFit.fill,
                           ),
                         ),
                       )

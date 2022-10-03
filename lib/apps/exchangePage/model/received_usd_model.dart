@@ -1,24 +1,12 @@
-// To parse this JSON data, do
-//
-//     final receivedUsdModel = receivedUsdModelFromJson(jsonString);
-
-import 'dart:convert';
-
-ReceivedUsdModel receivedUsdModelFromJson(String str) =>
-    ReceivedUsdModel.fromJson(json.decode(str));
-
-String receivedUsdModelToJson(ReceivedUsdModel data) =>
-    json.encode(data.toJson());
-
 class ReceivedUsdModel {
   ReceivedUsdModel({
-    required this.id,
+    this.id,
     required this.dollarName,
     required this.dollarIcon,
     required this.currentPrice,
   });
 
-  String id;
+  String? id;
   String dollarName;
   String dollarIcon;
   String currentPrice;

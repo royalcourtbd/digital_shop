@@ -8,6 +8,8 @@ import '../../../general/constants/url.dart';
 class ProductController extends GetxController {
   RxList productsList = [].obs;
 
+  RxList<ProductModel> favoritProduct = RxList<ProductModel>([]);
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   AuthController authController = Get.put(AuthController());
@@ -19,6 +21,24 @@ class ProductController extends GetxController {
     productsSnapshot();
     super.onInit();
   }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    favoritProduct.bindStream(getFavoritProducts());
+  }
+
+  Stream<List<ProductModel>> getFavoritProducts() =>
+      firestore.collection(Urls.FAVOURITEDEALS_COLLECTION).snapshots().map(
+            (query) => query.docs
+                .map(
+                  (item) => ProductModel.fromJson(
+                    item.data(),
+                  ),
+                )
+                .toList(),
+          );
 
   getProducts() async {
     var response = await firestore.collection(Urls.PRODUCTS_COLLECTION).get();
@@ -36,6 +56,7 @@ class ProductController extends GetxController {
             quantity: e['quantity'],
             discountPrice: e['discountPrice'],
             discription: e['discription'],
+            highlights: e['highlights'],
             image: e['image'],
             totalSell: e['totalSell'],
           ),
@@ -67,6 +88,7 @@ class ProductController extends GetxController {
     var quantity = '65';
     var discountPrice = '8500';
     var discription = 'erg';
+    var highlights = '1y u uit ';
     var image =
         'https://chaldn.com/_mpimage/coriander-leaves-dhonia-pata-10-gm-100-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28562&q=low&v=1&m=400&webp=1';
     var totalSell = '18';
@@ -79,13 +101,14 @@ class ProductController extends GetxController {
       quantity,
       discountPrice,
       discription,
+      highlights,
       image,
       totalSell,
     );
   }
 
   addProduct(String id, productName, category, price, quantity, discountPrice,
-      discription, image, totalSell) {
+      discription, highlights, image, totalSell) {
     var item = ProductModel(
       id: id,
       productName: productName,
@@ -94,6 +117,7 @@ class ProductController extends GetxController {
       quantity: quantity,
       discountPrice: discountPrice,
       discription: discription,
+      highlights: highlights,
       image: image,
       totalSell: totalSell,
     );

@@ -51,11 +51,11 @@ class RoutesClass {
       name: mainPage,
     ),
     GetPage(
-      page: () => AccountPageView(),
+      page: () => const AccountPageView(),
       name: accountPage,
     ),
     GetPage(
-      page: () => const CartPageView(),
+      page: () => CartPageView(),
       name: cartPage,
     ),
     GetPage(

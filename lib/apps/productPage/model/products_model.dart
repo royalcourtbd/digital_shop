@@ -7,6 +7,7 @@ class ProductModel {
     required this.quantity,
     required this.discountPrice,
     required this.discription,
+    this.highlights,
     required this.image,
     this.totalSell,
   });
@@ -18,6 +19,7 @@ class ProductModel {
   String quantity;
   String discountPrice;
   String discription;
+  String? highlights;
   String image;
   String? totalSell;
 
@@ -29,8 +31,9 @@ class ProductModel {
         quantity: json["quantity"],
         discountPrice: json["discountPrice"],
         discription: json["discription"],
+        highlights: json["highlights"],
         image: json["image"],
-        totalSell: json["total_sell"],
+        totalSell: json["totalSell"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,6 +44,7 @@ class ProductModel {
         "quantity": quantity,
         "discountPrice": discountPrice,
         "discription": discription,
+        "highlights": highlights,
         "image": image,
         "totalSell": totalSell,
       };

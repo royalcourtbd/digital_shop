@@ -36,15 +36,18 @@ class BottomMenuItemWidget extends GetView<MainPageController> {
               height: Config.screenHeight! * .03,
               width: Config.screenWidth! * .03,
               color: controller.currentIndex.value == color
-                  ? const Color(0xffc67752)
+                  ? Colors.green
                   : Colors.black54,
+            ),
+            const SizedBox(
+              height: 2,
             ),
             AutoSizeText(
               buttonName,
               style: TextStyle(
                 fontSize: fontSize,
                 color: controller.currentIndex.value == color
-                    ? const Color(0xffc67752)
+                    ? Colors.green
                     : Colors.black87,
               ),
             ),

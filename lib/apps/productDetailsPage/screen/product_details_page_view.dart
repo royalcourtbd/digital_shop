@@ -1,13 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
+import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
+import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../general/utils/config.dart';
 import '../../productPage/controller/product_controller.dart';
 import '../../productPage/model/products_model.dart';
 import '../controller/product_details_page_controller.dart';
+import '../widgets/cart_button.dart';
 
 class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
+  CartPageController cartPageController = Get.put(CartPageController());
   ProductController productController = Get.put(ProductController());
   ProductModel productValue;
   ScrollController? scrollController = ScrollController();
@@ -57,15 +61,32 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     color: Colors.grey.shade300,
                   ),
                   child: IconButton(
-                    icon: Badge(
-                      position: BadgePosition.topStart(),
-                      badgeContent: const Text('0'),
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {},
+                    icon: Obx(() => Badge(
+                          toAnimate: false,
+                          ignorePointer: true,
+                          alignment: Alignment.center,
+                          badgeColor: Colors.green,
+                          padding: const EdgeInsets.all(3),
+                          position: BadgePosition.topEnd(top: -8, end: -5),
+                          showBadge:
+                              cartPageController.cartLength > 0 ? true : false,
+                          badgeContent: Text(
+                            cartPageController.cartItemList.value.length
+                                .toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.black87,
+                          ),
+                        )),
+                    onPressed: () {
+                      Get.toNamed(RoutesClass.getCartPageRoute());
+                    },
                   ),
                 ),
               ],
@@ -75,12 +96,9 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Hero(
-                tag: UniqueKey(),
-                child: Image.network(
-                  productValue.image,
-                  fit: BoxFit.cover,
-                ),
+              background: Image.network(
+                productValue.image,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -220,7 +238,10 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                   Text(
                     productValue.productName,
                     style: const TextStyle(
-                        height: 1.1, fontSize: 18, color: Colors.black87),
+                      height: 1.1,
+                      fontSize: 17,
+                      color: Colors.black87,
+                    ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
@@ -248,68 +269,48 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     ],
                   ),
                   const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription, textAlign: TextAlign.justify),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Descriptionf uiep uu eu7put u'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Description'),
-                  Text(productValue.discription),
-                  const Divider(),
-                  const Text('Higlights'),
-                  const Text('Descriptionf uiep uu eu7put u'),
+                  AutoSizeText(
+                    'Highlights',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                  Text(
+                    productValue.highlights!.replaceAll('•', '\n\u2022 '),
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(
+                      height: 1.3,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 9,
+                  ),
+                  AutoSizeText(
+                    'Description',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    productValue.discription.replaceAll('', ''),
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 70,
+                  ),
                 ],
               ),
             ),
@@ -317,22 +318,66 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
+        child: Container(
+          alignment: Alignment.center,
           height: Config.screenHeight! * 0.07,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: Config.screenHeight! * 0.07,
-                color: Colors.black,
-              ),
-              Container(
-                width: Config.screenHeight! * 0.07,
-                color: Colors.grey,
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: Config.screenHeight! * 0.06,
+                  width: Config.screenHeight! * 0.06,
+                  //color: Colors.grey,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.share,
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 //flex: 3,
                 child: Container(
-                  color: Colors.amber,
+                  alignment: Alignment.center,
+                  //color: Colors.amber,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          cartPageController.addToCart(productValue);
+                          Get.snackbar(
+                            '',
+                            'Successfully added to cart',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.black.withOpacity(0.2),
+                          );
+                        },
+                        child: CartButton(
+                          color: Colors.green,
+                          title: 'Add to Cart',
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            bottomLeft: Radius.circular(15),
+                          ),
+                        ),
+                      ),
+                      CartButton(
+                        color: Colors.red,
+                        title: 'Buy Now',
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

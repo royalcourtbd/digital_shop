@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../general/utils/config.dart';
+import '../../../test.dart';
 import '../controller/home_page_controller.dart';
 import '../widgets/carousel_widget.dart';
 
@@ -34,7 +35,12 @@ class HomePageView extends GetView<HomePageController> {
             ),
             HomeUpperRowWidget(icon: controller.icon),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 15,
+                bottom: 15,
+              ),
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: const AutoSizeText(
@@ -49,7 +55,12 @@ class HomePageView extends GetView<HomePageController> {
             ),
             ProductViewWidget(),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 15,
+                bottom: 15,
+              ),
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: const AutoSizeText(
@@ -62,7 +73,7 @@ class HomePageView extends GetView<HomePageController> {
                 ),
               ),
             ),
-            ProductViewWidget(),
+            TestWidget(),
           ],
         ),
       ),

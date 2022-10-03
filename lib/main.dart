@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Raleway', primarySwatch: Colors.green
           //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
           ),
-      //home: const PasswordResetPage(),
+      // home: TestWidget(),
       initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),

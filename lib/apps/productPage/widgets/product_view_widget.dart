@@ -38,8 +38,11 @@ class ProductViewWidget extends GetView<ProductController> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Get.to(ProductDetailsPageView(
-                    productValue: controller.productsList.value[index]));
+                Get.to(
+                  ProductDetailsPageView(
+                    productValue: controller.productsList.value[index],
+                  ),
+                );
               },
               onLongPress: () {
                 controller.deleteItem(
@@ -66,13 +69,9 @@ class ProductViewWidget extends GetView<ProductController> {
                           topRight: Radius.circular(4),
                           //bottomRight: Radius.circular(4),
                         ),
-                        child: Hero(
-                          transitionOnUserGestures: true,
-                          tag: UniqueKey(),
-                          child: Image.network(
-                            controller.productsList.value[index].image,
-                            fit: BoxFit.cover,
-                          ),
+                        child: Image.network(
+                          controller.productsList.value[index].image,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
