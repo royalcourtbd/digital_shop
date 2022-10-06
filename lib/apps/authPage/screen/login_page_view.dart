@@ -11,8 +11,7 @@ import '../../../general/utils/config.dart';
 import '../widgets/text_field_for_in_up.dart';
 
 class LoginPageView extends GetView<LoginPageController> {
-  LoginPageView({Key? key}) : super(key: key);
-  final AuthController authController = Get.put(AuthController());
+  const LoginPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +29,11 @@ class LoginPageView extends GetView<LoginPageController> {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: const AutoSizeText(
-                'LOGIN',
+                'Login',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 39, 168, 56),
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -59,15 +58,26 @@ class LoginPageView extends GetView<LoginPageController> {
                     height: Config.screenHeight! * 0.02,
                   ),
 
-                  TextFieldForInUp(
-                    controller: controller.passwordController,
-                    keyboardType: TextInputType.text,
-                    labelText: 'Password',
-                    obscureText: true,
-                    validator: ((value) {
-                      return controller.passwordValidation(value);
-                    }),
-                  ),
+                  Obx(() => TextFieldForInUp(
+                        controller: controller.passwordController,
+                        keyboardType: TextInputType.text,
+                        labelText: 'Password',
+                        obscureText: controller.passwordVisibility.value,
+                        suffixIcon: InkWell(
+                          child: Icon(
+                            controller.passwordVisibility.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility,
+                          ),
+                          onTap: () {
+                            controller.passwordVisibility.value =
+                                !controller.passwordVisibility.value;
+                          },
+                        ),
+                        validator: ((value) {
+                          return controller.passwordValidation(value);
+                        }),
+                      )),
 
                   Container(
                     alignment: Alignment.centerRight,
@@ -76,43 +86,12 @@ class LoginPageView extends GetView<LoginPageController> {
                     child: InkWell(
                       onTap: () {
                         Get.to(() => const PasswordResetPage());
-
-                        // Get.bottomSheet(
-                        //   Container(
-                        //     height: 200,
-                        //     width: double.infinity,
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.green.shade100,
-                        //     ),
-                        //     child: Form(
-                        //       key: controller.passwordForgotFormKey,
-                        //       child: Column(
-                        //         children: [
-                        //           TextFieldForInUp(
-                        //             controller:
-                        //                 controller.resetPasswordController,
-                        //             keyboardType: TextInputType.emailAddress,
-                        //             labelText: 'Type Your Email',
-                        //             validator: ((value) {
-                        //               return controller
-                        //                   .resetEmailValidation(value!);
-                        //             }),
-                        //           ),
-                        //           ElevatedButton(
-                        //               onPressed: () {},
-                        //               child:
-                        //                   const AutoSizeText('Reset Password'))
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
                       },
                       child: const AutoSizeText(
                         'Forgot Your Password?',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.red,
+                          //color: Colors.red,
                         ),
                       ),
                     ),
@@ -127,12 +106,12 @@ class LoginPageView extends GetView<LoginPageController> {
                     child: ElevatedButton(
                       onPressed: () {
                         controller.logInButton();
-                        const CircularProgressIndicator();
+                        //const CircularProgressIndicator();
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: 50,
-                        width: Config.screenWidth! * 0.5,
+                        height: 45,
+                        width: Config.screenWidth! * 0.4,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(80.0),
                           gradient: const LinearGradient(
@@ -142,7 +121,12 @@ class LoginPageView extends GetView<LoginPageController> {
                             ],
                           ),
                         ),
-                        child: const Text('Login'),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -152,14 +136,14 @@ class LoginPageView extends GetView<LoginPageController> {
                         horizontal: 40, vertical: 10),
                     child: InkWell(
                       onTap: () {
-                        Get.offNamed(RoutesClass.getSignUpPagePageRoute());
+                        Get.toNamed(RoutesClass.getSignUpPagePageRoute());
                       },
                       child: const AutoSizeText(
                         'Don\'t have an Account? Sign Up',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          //color: Colors.red,
                         ),
                       ),
                     ),

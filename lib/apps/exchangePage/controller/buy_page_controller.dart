@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/exchangePage/model/received_usd_model.dart';
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/bdt_product_model.dart';
 
 class BuyPageController extends GetxController {
+  static BuyPageController instance = Get.find();
   static const receivedUsdCollection = 'received_USD';
   static const bdtCollection = 'send_BDT';
 
@@ -22,7 +24,6 @@ class BuyPageController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     sendAmountController = TextEditingController();
     sendNumberController = TextEditingController();
     sendTrxIdController = TextEditingController();
@@ -39,8 +40,6 @@ class BuyPageController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-
     sendAmountController.dispose();
     sendNumberController.dispose();
     sendTrxIdController.dispose();
@@ -99,8 +98,7 @@ class BuyPageController extends GetxController {
   }
 
   Future getBDTProductsList() async {
-    var response =
-        await FirebaseFirestore.instance.collection(bdtCollection).get();
+    var response = await firestore.collection(bdtCollection).get();
     dataRecordsMapForBDT(response);
   }
 
@@ -119,18 +117,13 @@ class BuyPageController extends GetxController {
   }
 
   dataSnapshotsForBDT() {
-    FirebaseFirestore.instance
-        .collection(bdtCollection)
-        .snapshots()
-        .listen((response) {
+    firestore.collection(bdtCollection).snapshots().listen((response) {
       dataRecordsMapForBDT(response);
     });
   }
 
   getUsdPriceList() async {
-    var response = await FirebaseFirestore.instance
-        .collection(receivedUsdCollection)
-        .get();
+    var response = await firestore.collection(receivedUsdCollection).get();
     dataRecordsMapForUSD(response);
   }
 
@@ -147,14 +140,10 @@ class BuyPageController extends GetxController {
         .toList();
 
     buyItemUSDList = list.obs;
-    print(buyItemUSDList);
   }
 
   dataSnapshotsForUSD() {
-    FirebaseFirestore.instance
-        .collection(receivedUsdCollection)
-        .snapshots()
-        .listen((response) {
+    firestore.collection(receivedUsdCollection).snapshots().listen((response) {
       dataRecordsMapForUSD(response);
     });
   }

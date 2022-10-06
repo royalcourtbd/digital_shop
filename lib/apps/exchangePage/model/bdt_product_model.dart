@@ -1,15 +1,3 @@
-// To parse this JSON data, do
-//
-//     final bdtProductsModel = bdtProductsModelFromJson(jsonString);
-
-import 'dart:convert';
-
-BdtProductsModel bdtProductsModelFromJson(String str) =>
-    BdtProductsModel.fromJson(json.decode(str));
-
-String bdtProductsModelToJson(BdtProductsModel data) =>
-    json.encode(data.toJson());
-
 class BdtProductsModel {
   BdtProductsModel({
     required this.id,

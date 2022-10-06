@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/productPage/model/products_model.dart';
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:get/get.dart';
+
+import '../../../general/constants/constants.dart';
 
 import '../../../general/constants/url.dart';
 
 class ProductController extends GetxController {
+  static ProductController instance = Get.find();
   RxList productsList = [].obs;
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  RxList<ProductModel> favoritProduct = RxList<ProductModel>([]);
+
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
 
   @override
@@ -16,6 +21,24 @@ class ProductController extends GetxController {
     productsSnapshot();
     super.onInit();
   }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    favoritProduct.bindStream(getFavoritProducts());
+  }
+
+  Stream<List<ProductModel>> getFavoritProducts() =>
+      firestore.collection(Urls.FAVOURITEDEALS_COLLECTION).snapshots().map(
+            (query) => query.docs
+                .map(
+                  (item) => ProductModel.fromJson(
+                    item.data(),
+                  ),
+                )
+                .toList(),
+          );
 
   getProducts() async {
     var response = await firestore.collection(Urls.PRODUCTS_COLLECTION).get();
@@ -26,41 +49,51 @@ class ProductController extends GetxController {
     var list = response.docs
         .map(
           (e) => ProductModel(
-              id: e.id,
-              productName: e['productName'],
-              category: e['category'],
-              price: e['price'],
-              quantity: e['quantity'],
-              discountPrice: e['discountPrice'],
-              discription: e['discription'],
-              image: e['image'],
-              totalSell: e['totalSell']),
+            id: e.id,
+            productName: e['productName'],
+            category: e['category'],
+            price: e['price'],
+            quantity: e['quantity'],
+            discountPrice: e['discountPrice'],
+            discription: e['discription'],
+            highlights: e['highlights'],
+            image: e['image'],
+            totalSell: e['totalSell'],
+          ),
         )
         .toList();
     productsList.value = list;
   }
 
   productsSnapshot() {
-    firestore
-        .collection(Urls.PRODUCTS_COLLECTION)
-        .snapshots()
-        .listen((response) {
-      productsMap(response);
-    });
+    firestore.collection(Urls.PRODUCTS_COLLECTION).snapshots().listen(
+      (response) {
+        productsMap(response);
+      },
+    );
+  }
+
+  RxDouble productPercentage = 0.0.obs;
+  //RxDouble one = 0.0.obs;
+  calculatePercentage(double discountPrice, double currentPrice) {
+    productPercentage.value = 100 - ((discountPrice / currentPrice) * 100);
+    return productPercentage.value;
   }
 
   void addProducts() {
-    var id = 'ffg';
-    var productName = 'fhsjk';
+    var id = 'id';
+    var productName = 'Coriander Leaves (Dhonia Pata) ± 10 gm bhjg';
     var category = 'gjr';
-    var price = '12.56';
-    var quantity = 'erg';
-    var discountPrice = '653.56';
+    var price = '9500';
+    var quantity = '65';
+    var discountPrice = '8500';
     var discription = 'erg';
-    var image = 'https://cdn.somahar.xyz/product/0OCYaBb5Lwv5H5dEaWgM4035.jpg';
-    var totalSell = 'gre';
+    var highlights = '1y u uit ';
+    var image =
+        'https://chaldn.com/_mpimage/coriander-leaves-dhonia-pata-10-gm-100-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28562&q=low&v=1&m=400&webp=1';
+    var totalSell = '18';
 
-    addItem(
+    addProduct(
       id,
       productName,
       category,
@@ -68,15 +101,14 @@ class ProductController extends GetxController {
       quantity,
       discountPrice,
       discription,
+      highlights,
       image,
       totalSell,
     );
-
-    //Get.toNamed(RoutesClass.getSellHistoryPageRoute());
   }
 
-  addItem(String id, productName, category, price, quantity, discountPrice,
-      discription, image, totalSell) {
+  addProduct(String id, productName, category, price, quantity, discountPrice,
+      discription, highlights, image, totalSell) {
     var item = ProductModel(
       id: id,
       productName: productName,
@@ -85,6 +117,7 @@ class ProductController extends GetxController {
       quantity: quantity,
       discountPrice: discountPrice,
       discription: discription,
+      highlights: highlights,
       image: image,
       totalSell: totalSell,
     );

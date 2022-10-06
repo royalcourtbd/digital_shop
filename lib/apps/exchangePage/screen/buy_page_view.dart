@@ -196,10 +196,9 @@ class BuyPageView extends GetView<BuyPageController> {
                   width: Config.screenWidth! - 30,
                   child: Obx(
                     () => AutoSizeText(
-                        double.parse(controller.receiveAmount.value
-                                .round()
-                                .toString())
-                            .toString(),
+                        double.parse(
+                          controller.receiveAmount.value.round().toString(),
+                        ).toString(),
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,

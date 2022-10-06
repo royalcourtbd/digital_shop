@@ -6,7 +6,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Profile Page View'),
       ),

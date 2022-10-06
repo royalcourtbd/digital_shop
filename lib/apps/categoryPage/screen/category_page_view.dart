@@ -8,10 +8,8 @@ class CategoryPageView extends GetView<CategoryPageController> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     Config().init(context);
     return const Scaffold(
-      backgroundColor: Colors.lightBlue,
       body: Center(
         child: Text('Category page'),
       ),

@@ -28,6 +28,7 @@ class RoutesClass {
   static String loginPage = '/loginPage';
   static String signUpPage = '/signUpPage';
   static String productPage = '/productPage';
+  static String productDetailPage = '/productDetailPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -42,6 +43,7 @@ class RoutesClass {
   static String getLoginPageRoute() => loginPage;
   static String getSignUpPagePageRoute() => signUpPage;
   static String getProductPageRoute() => productPage;
+  static String getProductDetailPageRoute() => productDetailPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -49,11 +51,11 @@ class RoutesClass {
       name: mainPage,
     ),
     GetPage(
-      page: () => AccountPageView(),
+      page: () => const AccountPageView(),
       name: accountPage,
     ),
     GetPage(
-      page: () => const CartPageView(),
+      page: () => CartPageView(),
       name: cartPage,
     ),
     GetPage(
@@ -108,5 +110,11 @@ class RoutesClass {
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
+    // GetPage(
+    //   name: productDetailPage,
+    //   page: () => ProductDetailsPageView(),
+    //   // transition: Transition.leftToRight,
+    //   // transitionDuration: const Duration(milliseconds: 1000),
+    // ),
   ];
 }

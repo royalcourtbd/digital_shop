@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/exchangePage/model/bdt_product_model.dart';
 import 'package:digital_shop/apps/exchangePage/model/send_usd_model.dart';
-import 'package:digital_shop/apps/mainPage/controller/main_page_controller.dart';
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,14 +10,11 @@ import 'package:intl/intl.dart';
 import '../model/sell_order_model.dart';
 
 class SellPageController extends GetxController {
+  static SellPageController instance = Get.find();
   static const sendUsdCollection = 'send_USD';
   static const bdtCollection = 'send_BDT';
   static const ORDER_COLLECTION = 'order';
   final count = 0.obs;
-
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
-  final mainPageController = Get.put(MainPageController());
 
   List<SendUsdModel> sellUsdItem = [];
   List<BdtProductsModel> sellBDTItem = [];
@@ -105,6 +102,13 @@ class SellPageController extends GetxController {
       return;
     }
     formKey.currentState!.save();
+    Get.dialog(
+      const AlertDialog(
+        title: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
     var contactNumber = sendContactNumberController.text.trim();
     var email = sendEmailController.text.trim();
     var note = sendNoteController.text.trim();
@@ -128,7 +132,12 @@ class SellPageController extends GetxController {
       sendAmount,
       time,
     );
-
+    Get.back();
+    Get.snackbar(
+      'Succes',
+      'please wite for verification and delivery',
+      snackPosition: SnackPosition.BOTTOM,
+    );
     Get.toNamed(RoutesClass.getSellHistoryPageRoute());
     sendAmountController.clear();
     sendNumberController.clear();
@@ -146,7 +155,7 @@ class SellPageController extends GetxController {
   }
 
   getSellOrder() async {
-    var response = await firebaseFirestore.collection(ORDER_COLLECTION).get();
+    var response = await firestore.collection(ORDER_COLLECTION).get();
     dataRecordMapForSellOrder(response);
   }
 
@@ -172,16 +181,13 @@ class SellPageController extends GetxController {
   }
 
   dataSnapshotsForSellOrder() {
-    FirebaseFirestore.instance
-        .collection(ORDER_COLLECTION)
-        .snapshots()
-        .listen((response) {
+    firestore.collection(ORDER_COLLECTION).snapshots().listen((response) {
       dataRecordMapForSellOrder(response);
     });
   }
 
   getUsdSellPriceList() async {
-    var response = await firebaseFirestore.collection(sendUsdCollection).get();
+    var response = await firestore.collection(sendUsdCollection).get();
 
     dataRecordsMapForUSD(response);
   }
@@ -201,16 +207,13 @@ class SellPageController extends GetxController {
   }
 
   dataSnapshotsForUSD() {
-    firebaseFirestore
-        .collection(sendUsdCollection)
-        .snapshots()
-        .listen((response) {
+    firestore.collection(sendUsdCollection).snapshots().listen((response) {
       dataRecordsMapForUSD(response);
     });
   }
 
   getBDTSellPriceList() async {
-    var response = await firebaseFirestore.collection(bdtCollection).get();
+    var response = await firestore.collection(bdtCollection).get();
 
     dataRecordsMapForBDT(response);
   }
@@ -231,7 +234,7 @@ class SellPageController extends GetxController {
   }
 
   dataSnapshotsForBDT() {
-    firebaseFirestore.collection(bdtCollection).snapshots().listen((response) {
+    firestore.collection(bdtCollection).snapshots().listen((response) {
       dataRecordsMapForBDT(response);
     });
   }
@@ -277,6 +280,6 @@ class SellPageController extends GetxController {
       sendAmount: sendAmount,
       dateTime: dateTime,
     );
-    firebaseFirestore.collection(ORDER_COLLECTION).add(item.toJson());
+    firestore.collection(ORDER_COLLECTION).add(item.toJson());
   }
 }

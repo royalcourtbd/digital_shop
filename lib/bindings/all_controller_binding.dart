@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 
 import '../apps/accountPage/controller/account_page_controller.dart';
 import '../apps/mainPage/controller/main_page_controller.dart';
+import '../apps/productDetailsPage/controller/product_details_page_controller.dart';
 
 class AllControllerBinding implements Bindings {
   @override
@@ -73,6 +74,10 @@ class AllControllerBinding implements Bindings {
     );
     Get.lazyPut<ProductController>(
       () => ProductController(),
+      fenix: true,
+    );
+    Get.lazyPut<ProductDetailsPageController>(
+      () => ProductDetailsPageController(),
       fenix: true,
     );
   }

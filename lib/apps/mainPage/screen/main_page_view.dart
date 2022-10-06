@@ -1,3 +1,5 @@
+import 'package:badges/badges.dart';
+import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
@@ -9,6 +11,7 @@ import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
 import '../../authPage/controller/auth_controller.dart';
@@ -17,16 +20,13 @@ import '../widgets/bottom_menu_item_widget.dart';
 
 class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
-  final AuthController authController = Get.put(AuthController());
-  final ProductController productController = Get.put(ProductController());
-  final HomePageController homePageController = Get.put(HomePageController());
 
   final List<Widget> pages = [
     ExchangePageView(),
     const CategoryPageView(),
     const HomePageView(),
-    const CartPageView(),
-    AccountPageView(),
+    CartPageView(),
+    const AccountPageView(),
   ];
 
   // Widget currentPage = HomePageView();
@@ -37,12 +37,16 @@ class MainPageView extends GetView<MainPageController> {
       appBar: AppBar(
         title: Obx(
           () => Text(
+            // ignore: unrelated_type_equality_checks
             controller.currentIndex == 0
                 ? 'Convert Your Money '
+                // ignore: unrelated_type_equality_checks
                 : controller.currentIndex == 1
                     ? 'Category'
+                    // ignore: unrelated_type_equality_checks
                     : controller.currentIndex == 2
                         ? 'Home'
+                        // ignore: unrelated_type_equality_checks
                         : controller.currentIndex == 3
                             ? 'Cart'
                             : 'Account',
@@ -113,6 +117,7 @@ class MainPageView extends GetView<MainPageController> {
                       controller.currentIndex.value = 0;
                     }),
                     buttonName: 'Exchange',
+                    fontSize: 10,
                     color: 0,
                   ),
                   BottomMenuItemWidget(
@@ -121,6 +126,7 @@ class MainPageView extends GetView<MainPageController> {
                       controller.currentIndex.value = 1;
                     }),
                     buttonName: 'Category',
+                    fontSize: 10,
                     color: 1,
                   ),
                 ],
@@ -129,20 +135,45 @@ class MainPageView extends GetView<MainPageController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BottomMenuItemWidget(
-                    svgIcon: 'cart.svg',
-                    onPressed: (() {
-                      controller.currentIndex.value = 3;
-                    }),
-                    buttonName: 'Cart',
-                    color: 3,
-                  ),
+                  Obx(() => Badge(
+                        toAnimate: false,
+                        ignorePointer: true,
+                        alignment: Alignment.center,
+                        badgeColor: Colors.green,
+                        padding: const EdgeInsets.all(3),
+                        showBadge:
+                            cartPageController.cartLength > 0 ? true : false,
+                        position: BadgePosition.topEnd(
+                          top: 5,
+                          end: 5,
+                        ),
+                        badgeContent: Text(
+                          cartPageController.cartItemList.value.length
+                              .toString(),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        child: BottomMenuItemWidget(
+                          svgIcon: 'cart.svg',
+                          onPressed: (() {
+                            controller.currentIndex.value = 3;
+                          }),
+                          buttonName: 'Cart',
+                          fontSize: 10,
+                          color: 3,
+                        ),
+                      )),
                   BottomMenuItemWidget(
                     svgIcon: 'account.svg',
                     onPressed: (() {
                       controller.currentIndex.value = 4;
                     }),
                     buttonName: 'Account',
+                    fontSize: 10,
                     color: 4,
                   ),
                 ],

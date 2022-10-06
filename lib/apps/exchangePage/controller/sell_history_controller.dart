@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/general/constants/constants.dart';
+import 'package:digital_shop/general/constants/url.dart';
 import 'package:get/get.dart';
 
 import '../model/sell_order_model.dart';
 
 class SellHistoryController extends GetxController {
-  static const ORDER_COLLECTION = 'order';
+  static SellHistoryController instance = Get.find();
+  //static const ORDER_COLLECTION = 'order';
   RxList sellOrderHistoryList = [].obs;
 
   @override
@@ -15,11 +18,8 @@ class SellHistoryController extends GetxController {
   }
 
   getSellOrderHistory() async {
-    var response =
-        await FirebaseFirestore.instance.collection(ORDER_COLLECTION).get();
+    var response = await firestore.collection(Urls.ORDER_COLLECTION).get();
     dataRecordMapForSellOrderHistory(response);
-    refresh();
-    print(response.docs);
   }
 
   dataRecordMapForSellOrderHistory(
@@ -45,10 +45,7 @@ class SellHistoryController extends GetxController {
   }
 
   dataSnapshotForSellOrderHistory() {
-    FirebaseFirestore.instance
-        .collection(ORDER_COLLECTION)
-        .snapshots()
-        .listen((response) {
+    firestore.collection(Urls.ORDER_COLLECTION).snapshots().listen((response) {
       dataRecordMapForSellOrderHistory(response);
     });
   }

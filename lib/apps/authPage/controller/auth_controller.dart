@@ -1,16 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/general/constants/url.dart';
+import 'package:digital_shop/general/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../general/constants/constants.dart';
 import '../../mainPage/screen/main_page_view.dart';
 import '../screen/login_page_view.dart';
 
 class AuthController extends GetxController {
+  static AuthController instance = Get.find();
   late Rx<User?> user;
-  FirebaseFirestore firebase = FirebaseFirestore.instance;
-  FirebaseAuth auth = FirebaseAuth.instance;
+
   GetStorage storage = GetStorage();
 
   @override
@@ -24,7 +26,7 @@ class AuthController extends GetxController {
 
   initialScreen(User? user) {
     if (user == null) {
-      Get.offAll(() => LoginPageView());
+      Get.offAll(() => const LoginPageView());
       print('this function calld');
     } else {
       Get.offAll(() => MainPageView());
@@ -34,22 +36,25 @@ class AuthController extends GetxController {
 
   void createUser(String email, password) async {
     try {
+      Get.dialog(
+        const AlertDialog(
+          title: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
       await auth
           .createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          )
+        email: email,
+        password: password,
+      )
           .then(
-            (value) => {
-              firebase.collection('user').doc(value.user!.uid).set(
-                {
-                  "email": value.user!.email,
-                  "id": value.user!.uid,
-                  "password": password,
-                },
-              )
-            },
-          );
+        (result) {
+          String userId = result.user!.uid;
+          addUserToFirestore(userId);
+        },
+      );
+
       Get.snackbar(
         'Account Creation Success',
         'Please Login To Your Account',
@@ -57,8 +62,9 @@ class AuthController extends GetxController {
       );
       //GetStorage().write('uid', auth.currentUser!.uid);
 
-      Get.offAll(() => LoginPageView());
+      Get.offAllNamed(RoutesClass.getLoginPageRoute());
     } catch (e) {
+      Get.back();
       Get.snackbar(
         'Account Creation Failed',
         e.toString(),
@@ -69,11 +75,21 @@ class AuthController extends GetxController {
 
   void signIn(String email, password) async {
     try {
+      Get.dialog(
+        const AlertDialog(
+          title: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
       await auth.signInWithEmailAndPassword(email: email, password: password);
 
-      Get.offAll(() => MainPageView());
+      Get.offAllNamed(
+        RoutesClass.getMainRoute(),
+      );
       storage.write('uid', auth.currentUser!.uid);
     } catch (e) {
+      Get.back();
       Get.snackbar(
         'Login Failed',
         e.toString(),
@@ -94,7 +110,7 @@ class AuthController extends GetxController {
       );
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
-        'Login Failed',
+        'Can\'t reset',
         e.message.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
@@ -103,7 +119,20 @@ class AuthController extends GetxController {
 
   void signOut() async {
     await auth.signOut();
-    Get.offAll(() => LoginPageView());
+    Get.offAllNamed(RoutesClass.getLoginPageRoute());
     storage.remove('uid');
+  }
+
+  addUserToFirestore(String userId) {
+    firestore.collection(Urls.USERCOLLECTION).doc(userId).set(
+      {
+        "accountBalance": 0,
+        "name": signUpPageController.nameController.text.trim(),
+        "email": signUpPageController.emailController.text.trim(),
+        "number": signUpPageController.numberController.text.trim(),
+        "userId": userId,
+        "password": signUpPageController.passwordController.text.trim(),
+      },
+    );
   }
 }

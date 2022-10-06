@@ -1,10 +1,16 @@
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/constants.dart';
+
 class SignUpPageController extends GetxController {
-  final registerFormKey = GlobalKey<FormState>();
-  final AuthController authController = Get.put(AuthController());
+  static SignUpPageController instance = Get.find();
+
+  GlobalKey<FormState> registerFormKey =
+      GlobalKey<FormState>(debugLabel: '_signinFormKey');
+
+  var passwordVisibility = true.obs;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -21,7 +27,7 @@ class SignUpPageController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    //
     super.dispose();
     nameController.dispose();
     numberController.dispose();
@@ -75,5 +81,12 @@ class SignUpPageController extends GetxController {
       emailController.text.trim(),
       passwordController.text.trim(),
     );
+    // Get.dialog(
+    //   const AlertDialog(
+    //     title: Center(
+    //       child: CircularProgressIndicator(),
+    //     ),
+    //   ),
+    // );
   }
 }
