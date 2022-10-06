@@ -9,10 +9,10 @@ class HomeUpperRowWidget extends StatelessWidget {
   }) : super(key: key);
 
   List color = [
-    const Color.fromARGB(255, 102, 158, 104),
-    const Color.fromARGB(255, 197, 138, 134),
-    const Color.fromARGB(255, 161, 156, 107),
-    const Color.fromARGB(255, 90, 110, 139),
+    const Color.fromARGB(255, 122, 175, 124),
+    const Color.fromARGB(255, 204, 160, 157),
+    const Color.fromARGB(255, 170, 166, 129),
+    const Color.fromARGB(255, 110, 124, 146),
   ];
 
   final List icon;
@@ -45,7 +45,7 @@ class HomeUpperRowWidget extends StatelessWidget {
                     width: Config.screenHeight! * 0.07,
                     height: Config.screenHeight! * 0.07,
                     decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.13),
+                        color: Colors.grey.withOpacity(0.08),
                         borderRadius: BorderRadius.circular(50)),
                     child: Icon(
                       icon[index],

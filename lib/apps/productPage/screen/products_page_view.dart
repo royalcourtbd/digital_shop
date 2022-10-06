@@ -11,7 +11,7 @@ class ProductsPageView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    Config().init(context); // TODO: implement build
+    Config().init(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

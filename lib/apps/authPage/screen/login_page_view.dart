@@ -11,8 +11,7 @@ import '../../../general/utils/config.dart';
 import '../widgets/text_field_for_in_up.dart';
 
 class LoginPageView extends GetView<LoginPageController> {
-  LoginPageView({Key? key}) : super(key: key);
-  final AuthController authController = Get.put(AuthController());
+  const LoginPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

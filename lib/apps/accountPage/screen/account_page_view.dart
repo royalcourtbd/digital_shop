@@ -25,11 +25,17 @@ class AccountPageView extends GetView<AccountPageController> {
                   //color: Colors.redAccent,
                   ),
               child: Image.network(
+                // ignore: invalid_use_of_protected_member
                 controller.buyItemUSDList.value[index].dollarIcon,
               ),
             ),
-            trailing: Text(
-              controller.buyItemUSDList.value[index].currentPrice,
+            trailing: InkWell(
+              onTap: () {
+                controller.plaorder();
+              },
+              child: Text(
+                controller.buyItemUSDList.value[index].currentPrice,
+              ),
             ),
           );
         },

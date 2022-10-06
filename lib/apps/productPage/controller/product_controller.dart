@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/productPage/model/products_model.dart';
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:get/get.dart';
+
+import '../../../general/constants/constants.dart';
 
 import '../../../general/constants/url.dart';
 
 class ProductController extends GetxController {
+  static ProductController instance = Get.find();
   RxList productsList = [].obs;
 
   RxList<ProductModel> favoritProduct = RxList<ProductModel>([]);
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  AuthController authController = Get.put(AuthController());
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
 
   @override
@@ -81,7 +81,7 @@ class ProductController extends GetxController {
   }
 
   void addProducts() {
-    var id = authController.auth.currentUser!.uid;
+    var id = 'id';
     var productName = 'Coriander Leaves (Dhonia Pata) ± 10 gm bhjg';
     var category = 'gjr';
     var price = '9500';

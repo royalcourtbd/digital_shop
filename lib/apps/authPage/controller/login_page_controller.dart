@@ -1,16 +1,16 @@
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/constants.dart';
+
 class LoginPageController extends GetxController {
+  static LoginPageController instance = Get.find();
   GlobalKey<FormState> loginFormKey =
       GlobalKey<FormState>(debugLabel: '_loginFormKey');
   var passwordVisibility = true.obs;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  final AuthController authController = Get.put(AuthController());
 
   @override
   void onInit() {
@@ -54,12 +54,12 @@ class LoginPageController extends GetxController {
       emailController.text.trim(),
       passwordController.text.trim(),
     );
-    Get.dialog(
-      const AlertDialog(
-        title: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
+    // Get.dialog(
+    //   const AlertDialog(
+    //     title: Center(
+    //       child: CircularProgressIndicator(),
+    //     ),
+    //   ),
+    // );
   }
 }

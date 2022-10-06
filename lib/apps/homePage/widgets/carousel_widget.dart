@@ -31,7 +31,8 @@ class CarouselWidget extends GetView<HomePageController> {
                     ? InkWell(
                         onTap: () {
                           controller.deleteItem(
-                              controller.carouselSliderList.value[index].id);
+                            controller.carouselSliderList.value[index].id,
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -47,6 +48,8 @@ class CarouselWidget extends GetView<HomePageController> {
                               fit: BoxFit.fill,
                             ),
                           ),
+                          child: Text(
+                              controller.carouselSliderList.value[index].id),
                         ),
                       )
                     : Image.asset('assets/images/loading.jpg');

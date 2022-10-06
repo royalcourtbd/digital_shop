@@ -10,14 +10,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
 import '../model/bdt_product_model.dart';
 import '../model/send_usd_model.dart';
 import '../widgets/material_button_widget.dart';
 
 class SellPageView extends GetView<SellPageController> {
-  final homeController = Get.put(HomePageController());
-  MainPageController mainPageController = Get.put(MainPageController());
   @override
   Widget build(BuildContext context) {
     Config().init(context);

@@ -4,7 +4,10 @@ import 'package:digital_shop/general/constants/url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/constants.dart';
+
 class HomePageController extends GetxController {
+  static HomePageController instance = Get.find();
   RxList carouselSliderList = [].obs;
 
   List icon = [
@@ -14,7 +17,6 @@ class HomePageController extends GetxController {
     Icons.assignment_outlined,
   ];
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
 
   @override
@@ -34,7 +36,7 @@ class HomePageController extends GetxController {
         .map(
           (e) => CarouselModel(
             imagePath: e['imagePath'],
-            id: e['id'],
+            id: e.id,
           ),
         )
         .toList();

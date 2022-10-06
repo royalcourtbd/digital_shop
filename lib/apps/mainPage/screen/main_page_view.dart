@@ -11,6 +11,7 @@ import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
 import '../../authPage/controller/auth_controller.dart';
@@ -19,10 +20,6 @@ import '../widgets/bottom_menu_item_widget.dart';
 
 class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
-  final AuthController authController = Get.put(AuthController());
-  CartPageController cartPageController = Get.put(CartPageController());
-  final ProductController productController = Get.put(ProductController());
-  final HomePageController homePageController = Get.put(HomePageController());
 
   final List<Widget> pages = [
     ExchangePageView(),

@@ -1,4 +1,3 @@
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,19 +10,21 @@ import 'general/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AuthController()));
+  ).then((value) => Get.put(AllControllerBinding()));
 
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
     ],
   );
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: Colors.green,
     ),
   );
   await GetStorage.init();
@@ -39,9 +40,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       title: 'Digital Shop',
-      theme: ThemeData(fontFamily: 'Raleway', primarySwatch: Colors.green
-          //primarySwatch:MaterialStateProperty.all(Color(0xff81c784)) ,
-          ),
+      theme: ThemeData(
+        fontFamily: 'Raleway',
+        primarySwatch: Colors.green,
+      ),
       // home: TestWidget(),
       initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,

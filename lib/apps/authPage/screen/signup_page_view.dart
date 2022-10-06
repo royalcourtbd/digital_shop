@@ -11,8 +11,7 @@ import '../widgets/background.dart';
 import '../widgets/text_field_for_in_up.dart';
 
 class SignUpPageView extends GetView<SignUpPageController> {
-  SignUpPageView({Key? key}) : super(key: key);
-  final AuthController authController = Get.put(AuthController());
+  const SignUpPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:digital_shop/apps/mainPage/controller/main_page_controller.dart';
 import 'package:digital_shop/apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +7,6 @@ import '../controller/product_controller.dart';
 import '../model/products_model.dart';
 
 class ProductViewWidget extends GetView<ProductController> {
-  ProductController productController = Get.put(ProductController());
-  MainPageController mainPageController = Get.put(MainPageController());
   ProductModel? productModel;
 
   ProductViewWidget({
@@ -37,9 +34,14 @@ class ProductViewWidget extends GetView<ProductController> {
           ),
           itemBuilder: (context, index) {
             return InkWell(
+              onDoubleTap: () {
+                print(controller.deleteItem(
+                  controller.productsList.value[index].id,
+                ));
+              },
               onTap: () {
                 Get.to(
-                  ProductDetailsPageView(
+                  () => ProductDetailsPageView(
                     productValue: controller.productsList.value[index],
                   ),
                 );
@@ -204,7 +206,7 @@ class ProductViewWidget extends GetView<ProductController> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 6),
                       child: Text(
-                        '${controller.productsList.value[index].totalSell} Sold',
+                        '${controller.productsList.value[index].totalSell} sold',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,

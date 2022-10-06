@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class MainPageController extends GetxController {
+  static MainPageController instance = Get.find();
   var currentIndex = 2.obs;
   var currentPage = 1.obs;
 
