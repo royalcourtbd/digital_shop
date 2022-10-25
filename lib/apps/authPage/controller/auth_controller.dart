@@ -21,7 +21,14 @@ class AuthController extends GetxController {
 
     user = Rx<User?>(auth.currentUser);
     user.bindStream(auth.userChanges());
-    // ever(user, initialScreen);
+    //ever(user, initialScreen);
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    user = Rx<User?>(auth.currentUser);
+    user.bindStream(auth.userChanges());
   }
 
   initialScreen(User? user) {
@@ -124,7 +131,7 @@ class AuthController extends GetxController {
   }
 
   addUserToFirestore(String userId) {
-    firestore.collection(Urls.USERCOLLECTION).doc(userId).set(
+    firestore.collection(Urls.USER_COLLECTION).doc(userId).set(
       {
         "accountBalance": 0,
         "name": signUpPageController.nameController.text.trim(),

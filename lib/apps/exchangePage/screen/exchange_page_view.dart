@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 
 import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
-import '../../authPage/controller/auth_controller.dart';
 import '../widgets/exchange_item_widget.dart';
 import '../widgets/exchange_page_heading_widget.dart';
 
 class ExchangePageView extends GetView<ExchangePageController> {
-  ExchangePageView({Key? key}) : super(key: key);
+  const ExchangePageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

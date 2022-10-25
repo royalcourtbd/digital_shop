@@ -1,3 +1,4 @@
+import 'package:digital_shop/apps/addressPage/controller/address_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/login_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/signup_page_controller.dart';
@@ -78,6 +79,10 @@ class AllControllerBinding implements Bindings {
     );
     Get.lazyPut<ProductDetailsPageController>(
       () => ProductDetailsPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<AddressPageController>(
+      () => AddressPageController(),
       fenix: true,
     );
   }

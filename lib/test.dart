@@ -59,7 +59,7 @@ class TestWidget extends GetView<ProductController> {
                         //bottomRight: Radius.circular(4),
                       ),
                       child: Image.network(
-                        controller.favoritProduct.value[index].image,
+                        controller.favoritProduct.value[index].image.toString(),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -71,7 +71,8 @@ class TestWidget extends GetView<ProductController> {
                         Container(
                           child: double.parse(
                                     controller.favoritProduct.value[index]
-                                        .discountPrice,
+                                        .discountPrice
+                                        .toString(),
                                   ) ==
                                   0
                               ? null
@@ -89,15 +90,18 @@ class TestWidget extends GetView<ProductController> {
                         SizedBox(
                           width: double.parse(
                                         controller
-                                            .favoritProduct.value[index].price,
+                                            .favoritProduct.value[index].price
+                                            .toString(),
                                       ) >
                                       double.parse(
                                         controller.favoritProduct.value[index]
-                                            .discountPrice,
+                                            .discountPrice
+                                            .toString(),
                                       ) &&
                                   double.parse(
                                         controller.favoritProduct.value[index]
-                                            .discountPrice,
+                                            .discountPrice
+                                            .toString(),
                                       ) !=
                                       0
                               ? 15
@@ -107,62 +111,74 @@ class TestWidget extends GetView<ProductController> {
                           '${controller.favoritProduct.value[index].price}৳',
                           style: TextStyle(
                             fontSize: double.parse(
-                                          controller.favoritProduct.value[index]
-                                              .price,
+                                          controller
+                                              .favoritProduct.value[index].price
+                                              .toString(),
                                         ) >
                                         double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) &&
                                     double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) !=
                                         0
                                 ? 14
                                 : 16,
                             color: double.parse(
-                                          controller.favoritProduct.value[index]
-                                              .price,
+                                          controller
+                                              .favoritProduct.value[index].price
+                                              .toString(),
                                         ) >
                                         double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) &&
                                     double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) !=
                                         0
                                 ? null
                                 : Colors.red,
                             fontWeight: double.parse(
-                                          controller.favoritProduct.value[index]
-                                              .price,
+                                          controller
+                                              .favoritProduct.value[index].price
+                                              .toString(),
                                         ) >
                                         double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) &&
                                     double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) !=
                                         0
                                 ? null
                                 : FontWeight.bold,
                             overflow: TextOverflow.ellipsis,
                             decoration: double.parse(
-                                          controller.favoritProduct.value[index]
-                                              .price,
+                                          controller
+                                              .favoritProduct.value[index].price
+                                              .toString(),
                                         ) >
                                         double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) &&
                                     double.parse(
                                           controller.favoritProduct.value[index]
-                                              .discountPrice,
+                                              .discountPrice
+                                              .toString(),
                                         ) !=
                                         0
                                 ? TextDecoration.lineThrough
@@ -180,7 +196,8 @@ class TestWidget extends GetView<ProductController> {
                       height: 40,
                       // color: Colors.red,
                       child: Text(
-                        controller.favoritProduct.value[index].productName,
+                        controller.favoritProduct.value[index].productName
+                            .toString(),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: const TextStyle(

@@ -31,7 +31,7 @@ class HomePageView extends GetView<HomePageController> {
               child: const CarouselWidget(),
             ),
             SizedBox(
-              height: Config.screenHeight! * .01,
+              height: Config.screenHeight! * .03,
             ),
             HomeUpperRowWidget(icon: controller.icon),
             Padding(
@@ -47,7 +47,7 @@ class HomePageView extends GetView<HomePageController> {
                   'Your Favourite Deals',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black54,
                   ),
                 ),
@@ -67,7 +67,7 @@ class HomePageView extends GetView<HomePageController> {
                   'Just For You',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black54,
                   ),
                 ),

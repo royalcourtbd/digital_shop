@@ -8,23 +8,21 @@ class BodyView extends GetView<CartPageController> {
   @override
   Widget build(BuildContext context) {
     Config().init(context);
-    //TODO: implement build
-    return Obx(
-      () => ListView.builder(
-        itemCount: controller.cartItemList.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              print(controller.cartItemList[index].docId.toString());
-            },
-            onLongPress: () {
-              controller.deleteItem(controller.cartItemList[index].docId);
-            },
-            child: Dismissible(
+
+    return GetX(
+      init: CartPageController(),
+      builder: <CartPageController>(controller) {
+        return ListView.builder(
+          padding: const EdgeInsets.only(bottom: 1),
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.cartItemList.length,
+          itemBuilder: (context, index) {
+            return Dismissible(
               key: UniqueKey(),
               onDismissed: (direction) async {
-                await controller
-                    .deleteItem(controller.cartItemList[index].docId);
+                await controller.deleteItem(
+                    controller.cartItemList[index].docId.toString());
                 controller.cartItemList.removeAt(index);
               },
               background: Container(
@@ -50,10 +48,11 @@ class BodyView extends GetView<CartPageController> {
                   child: Row(
                     children: [
                       Container(
+                        padding: const EdgeInsets.all(5),
                         alignment: Alignment.center,
                         width: Config.screenWidth! * 0.23,
                         child: Image.network(
-                          controller.cartItemList[index].image,
+                          controller.cartItemList[index].image.toString(),
                         ),
                       ),
                       const SizedBox(
@@ -72,7 +71,8 @@ class BodyView extends GetView<CartPageController> {
                                   //color: Colors.red,
                                   width: Config.screenWidth! * 0.7,
                                   child: Text(
-                                    controller.cartItemList[index].productName,
+                                    controller.cartItemList[index].productName
+                                        .toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontFamily: '',
@@ -94,9 +94,7 @@ class BodyView extends GetView<CartPageController> {
                                         child: Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            controller.cartItemList[index]
-                                                    .discountPrice +
-                                                ' ৳',
+                                            '${controller.cartItemList[index].productTotalPrice} ৳',
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                               fontFamily: 'Poppins',
@@ -118,30 +116,40 @@ class BodyView extends GetView<CartPageController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
+                                              //decrement method
                                               IconButton(
-                                                onPressed: () {
-                                                  controller.decrement();
+                                                onPressed: () async {
+                                                  controller
+                                                      .decreaseQuantity(index);
                                                 },
                                                 icon: const Icon(
                                                   Icons.remove_circle_outline,
                                                   color: Colors.black54,
                                                 ),
                                               ),
-                                              Obx(() => Text(
-                                                    controller.quantity
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      color: Colors.black54,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )),
+
+                                              // show Quantity
+                                              Obx(
+                                                () => Text(
+                                                  // controller.cartItemList[index]
+                                                  //     .quantity
+                                                  //     .toString(),
+                                                  controller.cartItemList[index]
+                                                      .quantity
+                                                      .toString(),
+                                                  style: const TextStyle(
+                                                    color: Colors.black54,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //increment method
                                               IconButton(
                                                 onPressed: () {
                                                   controller
-                                                      .cartItemList[index];
-                                                  controller.increment();
+                                                      .incrementQuantity(index);
                                                 },
                                                 icon: const Icon(
                                                   Icons.add_circle_outline,
@@ -167,10 +175,10 @@ class BodyView extends GetView<CartPageController> {
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }

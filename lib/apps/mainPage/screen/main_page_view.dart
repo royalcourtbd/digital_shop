@@ -1,11 +1,8 @@
 import 'package:badges/badges.dart';
-import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
-import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
-import 'package:digital_shop/apps/productPage/controller/product_controller.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_exchange_page.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +11,6 @@ import 'package:get/get.dart';
 import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
-import '../../authPage/controller/auth_controller.dart';
 import '../controller/main_page_controller.dart';
 import '../widgets/bottom_menu_item_widget.dart';
 
@@ -22,11 +18,11 @@ class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
   final List<Widget> pages = [
-    ExchangePageView(),
+    const ExchangePageView(),
     const CategoryPageView(),
     const HomePageView(),
     CartPageView(),
-    const AccountPageView(),
+    AccountPageView(),
   ];
 
   // Widget currentPage = HomePageView();
@@ -60,12 +56,6 @@ class MainPageView extends GetView<MainPageController> {
               authController.signOut();
             },
             icon: const Icon(Icons.login),
-          ),
-          IconButton(
-            onPressed: () {
-              productController.addProducts();
-            },
-            icon: const Icon(Icons.add),
           ),
           IconButton(
             onPressed: () {
@@ -135,38 +125,50 @@ class MainPageView extends GetView<MainPageController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Obx(() => Badge(
-                        toAnimate: false,
-                        ignorePointer: true,
-                        alignment: Alignment.center,
-                        badgeColor: Colors.green,
-                        padding: const EdgeInsets.all(3),
-                        showBadge:
-                            cartPageController.cartLength > 0 ? true : false,
-                        position: BadgePosition.topEnd(
-                          top: 5,
-                          end: 5,
-                        ),
-                        badgeContent: Text(
-                          cartPageController.cartItemList.value.length
-                              .toString(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 8,
-                            fontWeight: FontWeight.w500,
+                  Obx(
+                    () => authController.user.value != null
+                        ? Badge(
+                            toAnimate: false,
+                            ignorePointer: true,
+                            alignment: Alignment.center,
+                            badgeColor: Colors.green,
+                            padding: const EdgeInsets.all(3),
+                            showBadge: cartPageController.cartLength > 0
+                                ? true
+                                : false,
+                            position: BadgePosition.topEnd(
+                              top: 5,
+                              end: 5,
+                            ),
+                            badgeContent: Text(
+                              cartPageController.cartLength.toString(),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            child: BottomMenuItemWidget(
+                              svgIcon: 'cart.svg',
+                              onPressed: (() {
+                                controller.currentIndex.value = 3;
+                              }),
+                              buttonName: 'Cart',
+                              fontSize: 10,
+                              color: 3,
+                            ),
+                          )
+                        : BottomMenuItemWidget(
+                            svgIcon: 'cart.svg',
+                            onPressed: (() {
+                              controller.currentIndex.value = 3;
+                            }),
+                            buttonName: 'Cart',
+                            fontSize: 10,
+                            color: 3,
                           ),
-                        ),
-                        child: BottomMenuItemWidget(
-                          svgIcon: 'cart.svg',
-                          onPressed: (() {
-                            controller.currentIndex.value = 3;
-                          }),
-                          buttonName: 'Cart',
-                          fontSize: 10,
-                          color: 3,
-                        ),
-                      )),
+                  ),
                   BottomMenuItemWidget(
                     svgIcon: 'account.svg',
                     onPressed: (() {

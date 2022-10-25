@@ -19,7 +19,7 @@ class CarouselWidget extends GetView<HomePageController> {
               slideIndicator: CircularSlideIndicator(
                 padding: const EdgeInsets.only(bottom: 15),
               ),
-              slideTransform: const CubeTransform(),
+              slideTransform: const DefaultTransform(),
               unlimitedMode: true,
               //autoSliderDelay: const Duration(seconds: 3),
               autoSliderTransitionTime: const Duration(seconds: 3),
@@ -28,28 +28,19 @@ class CarouselWidget extends GetView<HomePageController> {
               slideBuilder: (index) {
                 return controller.carouselSliderList.value[index].imagePath !=
                         null
-                    ? InkWell(
-                        onTap: () {
-                          controller.deleteItem(
-                            controller.carouselSliderList.value[index].id,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            //color: Colors.red,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                controller
-                                    // ignore: invalid_use_of_protected_member
-                                    .carouselSliderList
-                                    .value[index]
-                                    .imagePath,
-                              ),
-                              fit: BoxFit.fill,
+                    ? Container(
+                        decoration: BoxDecoration(
+                          //color: Colors.red,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              controller
+                                  // ignore: invalid_use_of_protected_member
+                                  .carouselSliderList
+                                  .value[index]
+                                  .imagePath,
                             ),
+                            fit: BoxFit.fill,
                           ),
-                          child: Text(
-                              controller.carouselSliderList.value[index].id),
                         ),
                       )
                     : Image.asset('assets/images/loading.jpg');

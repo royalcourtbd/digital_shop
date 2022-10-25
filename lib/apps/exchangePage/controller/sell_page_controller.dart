@@ -160,7 +160,8 @@ class SellPageController extends GetxController {
   }
 
   dataRecordMapForSellOrder(
-      QuerySnapshot<Map<String, dynamic>> response) async {
+    QuerySnapshot<Map<String, dynamic>> response,
+  ) async {
     var sellList = response.docs
         .map(
           (e) => SellOrderModel(

@@ -14,7 +14,7 @@ void main() async {
   MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((value) => Get.put(AllControllerBinding()));
+  );
 
   SystemChrome.setPreferredOrientations(
     [
@@ -41,8 +41,9 @@ class MyApp extends StatelessWidget {
 
       title: 'Digital Shop',
       theme: ThemeData(
-        fontFamily: 'Raleway',
+        // fontFamily: 'Raleway',
         primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.white,
       ),
       // home: TestWidget(),
       initialRoute: RoutesClass.getMainRoute(),

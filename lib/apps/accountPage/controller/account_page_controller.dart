@@ -35,7 +35,7 @@ class AccountPageController extends GetxController {
       userId: auth.currentUser!.uid,
     );
     firestore
-        .collection(Urls.USERCOLLECTION)
+        .collection(Urls.USER_COLLECTION)
         .doc(auth.currentUser!.uid)
         .collection('order')
         .add(order.toJson());
