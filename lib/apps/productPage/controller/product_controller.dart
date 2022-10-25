@@ -48,18 +48,7 @@ class ProductController extends GetxController {
   productsMap(QuerySnapshot<Map<String, dynamic>> response) async {
     var list = response.docs
         .map(
-          (e) => ProductModel(
-            id: e.id,
-            productName: e['productName'],
-            category: e['category'],
-            price: e['price'],
-            quantity: e['quantity'],
-            discountPrice: e['discountPrice'],
-            discription: e['discription'],
-            highlights: e['highlights'],
-            image: e['image'],
-            totalSell: e['totalSell'],
-          ),
+          (e) => ProductModel.fromJson(e.data()),
         )
         .toList();
     productsList.value = list;
@@ -78,53 +67,5 @@ class ProductController extends GetxController {
   calculatePercentage(double discountPrice, double currentPrice) {
     productPercentage.value = 100 - ((discountPrice / currentPrice) * 100);
     return productPercentage.value;
-  }
-
-  void addProducts() {
-    var id = 'id';
-    var productName = 'Coriander Leaves (Dhonia Pata) ± 10 gm bhjg';
-    var category = 'gjr';
-    var price = '9500';
-    var quantity = '65';
-    var discountPrice = '8500';
-    var discription = 'erg';
-    var highlights = '1y u uit ';
-    var image =
-        'https://chaldn.com/_mpimage/coriander-leaves-dhonia-pata-10-gm-100-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D28562&q=low&v=1&m=400&webp=1';
-    var totalSell = '18';
-
-    addProduct(
-      id,
-      productName,
-      category,
-      price,
-      quantity,
-      discountPrice,
-      discription,
-      highlights,
-      image,
-      totalSell,
-    );
-  }
-
-  addProduct(String id, productName, category, price, quantity, discountPrice,
-      discription, highlights, image, totalSell) {
-    var item = ProductModel(
-      id: id,
-      productName: productName,
-      category: category,
-      price: price,
-      quantity: quantity,
-      discountPrice: discountPrice,
-      discription: discription,
-      highlights: highlights,
-      image: image,
-      totalSell: totalSell,
-    );
-    firestore.collection(Urls.PRODUCTS_COLLECTION).add(item.toJson());
-  }
-
-  deleteItem(String id) {
-    firestore.collection(Urls.PRODUCTS_COLLECTION).doc(id).delete();
   }
 }

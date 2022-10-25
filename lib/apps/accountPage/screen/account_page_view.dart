@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AccountPageView extends GetView<AccountPageController> {
-  const AccountPageView({Key? key}) : super(key: key);
+  AccountPageView({Key? key}) : super(key: key);
+  AccountPageController accountPageController =
+      Get.put(AccountPageController());
 
   @override
   Widget build(BuildContext context) {

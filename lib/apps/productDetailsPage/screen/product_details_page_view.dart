@@ -11,10 +11,10 @@ import '../controller/product_details_page_controller.dart';
 import '../widgets/details_text.dart';
 
 class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
-  ProductModel productValue;
+  final ProductModel productValue;
 
   //CartModel cartModel;
-  ScrollController? scrollController = ScrollController();
+  final ScrollController? scrollController = ScrollController();
   ProductDetailsPageView({
     Key? key,
     required this.productValue,
@@ -27,6 +27,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       //extendBody: true,
+      //appBar: AppBar(),
       body: SafeArea(
         //top: false,
         child: CustomScrollView(
@@ -46,7 +47,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade300,
+                      color: Colors.grey.shade200,
                     ),
                     child: IconButton(
                       icon: const Icon(
@@ -63,49 +64,60 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     width: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade300,
+                      color: Colors.grey.shade200,
                     ),
                     child: IconButton(
                       icon: Obx(
-                        () => Badge(
-                          toAnimate: false,
-                          ignorePointer: true,
-                          alignment: Alignment.center,
-                          badgeColor: Colors.green,
-                          padding: const EdgeInsets.all(4),
-                          position: BadgePosition.topEnd(top: -10, end: -9),
-                          showBadge:
-                              cartPageController.cartLength > 0 ? true : false,
-                          badgeContent: Text(
-                            cartPageController.cartLength.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 8,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.shopping_cart_outlined,
-                            color: Colors.black87,
-                          ),
-                        ),
+                        () => authController.user.value != null
+                            ? Badge(
+                                toAnimate: false,
+                                ignorePointer: true,
+                                alignment: Alignment.center,
+                                badgeColor: Colors.green,
+                                padding: const EdgeInsets.all(4),
+                                position:
+                                    BadgePosition.topEnd(top: -10, end: -9),
+                                showBadge: cartPageController.cartLength > 0
+                                    ? true
+                                    : false,
+                                badgeContent: Text(
+                                  cartPageController.cartLength.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: Colors.black87,
+                                ),
+                              )
+                            : const Icon(
+                                Icons.shopping_cart_outlined,
+                                color: Colors.black87,
+                              ),
                       ),
                       onPressed: () {
-                        mainPageController.currentIndex.value = 3;
-                        Get.toNamed(RoutesClass.getMainRoute());
+                        Get.toNamed(RoutesClass.getCartPageRoute());
+                        // mainPageController.currentIndex.value = 3;
+                        // Get.toNamed(RoutesClass.getMainRoute());
                       },
                     ),
                   ),
                 ],
               ),
               automaticallyImplyLeading: false,
-              expandedHeight: Config.screenHeight! / 2.7,
+              expandedHeight: Config.screenHeight! / 2,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  productValue.image,
-                  fit: BoxFit.fill,
+                background: Hero(
+                  tag: productValue.productId.toString(),
+                  child: Image.network(
+                    productValue.image.toString(),
+                    // fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
@@ -119,7 +131,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       children: [
                         Container(
                           child: double.parse(
-                                    productValue.discountPrice,
+                                    productValue.discountPrice.toString(),
                                   ) ==
                                   0
                               ? null
@@ -136,13 +148,13 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                         ),
                         SizedBox(
                           width: double.parse(
-                                        productValue.price,
+                                        productValue.price.toString(),
                                       ) >
                                       double.parse(
-                                        productValue.discountPrice,
+                                        productValue.discountPrice.toString(),
                                       ) &&
                                   double.parse(
-                                        productValue.discountPrice,
+                                        productValue.discountPrice.toString(),
                                       ) !=
                                       0
                               ? 10
@@ -153,50 +165,50 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: double.parse(
-                                          productValue.price,
+                                          productValue.price.toString(),
                                         ) >
                                         double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) &&
                                     double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) !=
                                         0
                                 ? 14
                                 : 24,
                             color: double.parse(
-                                          productValue.price,
+                                          productValue.price.toString(),
                                         ) >
                                         double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) &&
                                     double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) !=
                                         0
                                 ? Colors.grey.shade600
                                 : Colors.red,
                             fontWeight: double.parse(
-                                          productValue.price,
+                                          productValue.price.toString(),
                                         ) >
                                         double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) &&
                                     double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) !=
                                         0
                                 ? null
                                 : FontWeight.bold,
                             overflow: TextOverflow.ellipsis,
                             decoration: double.parse(
-                                          productValue.price,
+                                          productValue.price.toString(),
                                         ) >
                                         double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) &&
                                     double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ) !=
                                         0
                                 ? TextDecoration.lineThrough
@@ -207,13 +219,13 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                           width: 7,
                         ),
                         double.parse(
-                                      productValue.price,
+                                      productValue.price.toString(),
                                     ) >
                                     double.parse(
-                                      productValue.discountPrice,
+                                      productValue.discountPrice.toString(),
                                     ) &&
                                 double.parse(
-                                      productValue.discountPrice,
+                                      productValue.discountPrice.toString(),
                                     ) !=
                                     0
                             ? Container(
@@ -226,10 +238,10 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                                 child: AutoSizeText(
                                   '-${productController.calculatePercentage(
                                         double.parse(
-                                          productValue.discountPrice,
+                                          productValue.discountPrice.toString(),
                                         ),
                                         double.parse(
-                                          productValue.price,
+                                          productValue.price.toString(),
                                         ),
                                       ).round()}%',
                                   style: TextStyle(
@@ -243,7 +255,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       ],
                     ),
                     Text(
-                      productValue.productName,
+                      productValue.productName.toString(),
                       style: const TextStyle(
                         height: 1.1,
                         fontSize: 17,
@@ -299,7 +311,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       height: 10,
                     ),
                     Text(
-                      productValue.discription.replaceAll('', ''),
+                      productValue.description.toString(),
                       style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 13,
@@ -335,14 +347,19 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
               Expanded(
                 child: CartButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Successfully added to the cart'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                    // cartPageController.addToCart(productValue);
-                    cartPageController.addProducToCart(productValue);
+                    authController.user.value != null
+                        ? cartPageController.addProducToCart(
+                            context, productValue)
+                        : ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                'Please Login First',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                              duration: const Duration(seconds: 2),
+                              backgroundColor: Colors.red.shade100,
+                            ),
+                          );
                   },
                   color: Colors.red,
                   title: 'Add to Cart',

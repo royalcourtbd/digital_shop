@@ -6,6 +6,6 @@ class Urls {
   static const PRODUCTS_COLLECTION = 'products';
   static const FAVOURITEDEALS_COLLECTION = 'favouriteDeals';
   static const receivedUsdCollection = 'received_USD';
-  static const USERCOLLECTION = 'user';
-  static const CARTCOLLECTION = 'Cart';
+  static const USER_COLLECTION = 'user';
+  static const CART_COLLECTION = 'Cart';
 }

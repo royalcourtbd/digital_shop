@@ -1,4 +1,6 @@
 import 'package:digital_shop/apps/accountPage/screen/account_page_view.dart';
+import 'package:digital_shop/apps/addressPage/screen/add_address_page_view.dart';
+import 'package:digital_shop/apps/addressPage/screen/address_page_view.dart';
 import 'package:digital_shop/apps/authPage/screen/login_page_view.dart';
 import 'package:digital_shop/apps/authPage/screen/signup_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/buy_page_view.dart';
@@ -29,6 +31,8 @@ class RoutesClass {
   static String signUpPage = '/signUpPage';
   static String productPage = '/productPage';
   static String productDetailPage = '/productDetailPage';
+  static String addressPage = '/addressPage';
+  static String addAddressPage = '/addAddressPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -44,6 +48,8 @@ class RoutesClass {
   static String getSignUpPagePageRoute() => signUpPage;
   static String getProductPageRoute() => productPage;
   static String getProductDetailPageRoute() => productDetailPage;
+  static String getAddressPageRoute() => addressPage;
+  static String getAddAddressPageRoute() => addAddressPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -51,7 +57,7 @@ class RoutesClass {
       name: mainPage,
     ),
     GetPage(
-      page: () => const AccountPageView(),
+      page: () => AccountPageView(),
       name: accountPage,
     ),
     GetPage(
@@ -63,7 +69,7 @@ class RoutesClass {
       name: categoryPage,
     ),
     GetPage(
-      page: () => ExchangePageView(),
+      page: () => const ExchangePageView(),
       name: exchangePage,
     ),
     GetPage(
@@ -94,13 +100,13 @@ class RoutesClass {
     ),
     GetPage(
       name: loginPage,
-      page: () => LoginPageView(),
+      page: () => const LoginPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
     GetPage(
       name: signUpPage,
-      page: () => SignUpPageView(),
+      page: () => const SignUpPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
@@ -116,5 +122,17 @@ class RoutesClass {
     //   // transition: Transition.leftToRight,
     //   // transitionDuration: const Duration(milliseconds: 1000),
     // ),
+    GetPage(
+      name: addressPage,
+      page: () => const AddressPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
+    GetPage(
+      name: addAddressPage,
+      page: () => AddAddressPageView(),
+      // transition: Transition.leftToRight,
+      // transitionDuration: const Duration(milliseconds: 1000),
+    ),
   ];
 }

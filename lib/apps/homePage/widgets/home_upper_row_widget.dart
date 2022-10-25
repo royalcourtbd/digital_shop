@@ -45,7 +45,7 @@ class HomeUpperRowWidget extends StatelessWidget {
                     width: Config.screenHeight! * 0.07,
                     height: Config.screenHeight! * 0.07,
                     decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.08),
+                        color: Colors.grey.withOpacity(0.06),
                         borderRadius: BorderRadius.circular(50)),
                     child: Icon(
                       icon[index],

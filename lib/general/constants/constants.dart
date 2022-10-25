@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/accountPage/controller/account_page_controller.dart';
+
+import 'package:digital_shop/apps/addressPage/controller/address_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/login_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/signup_page_controller.dart';
@@ -29,6 +31,8 @@ SellHistoryController sellHistoryController = SellHistoryController.instance;
 SellPageController sellPageController = SellPageController.instance;
 HomePageController homePageController = HomePageController.instance;
 MainPageController mainPageController = MainPageController.instance;
+AddressPageController addressPageController = AddressPageController.instance;
+
 ProductDetailsPageController productDetailsPageController =
     ProductDetailsPageController.instance;
 ProductController productController = ProductController.instance;

@@ -76,6 +76,17 @@ Widget MyEcomDraweList() {
               : const Color(0xfffafafa),
           title: 'Transaction History',
         ),
+        DrawerListItem(
+          icon: Icons.place_outlined,
+          onPressed: () => navigateToEcom(4),
+          color: Get.currentRoute == RoutesClass.addressPage
+              ? Colors.black
+              : Colors.black,
+          materialColor: Get.currentRoute == RoutesClass.addressPage
+              ? Colors.grey.shade300
+              : const Color(0xfffafafa),
+          title: 'Shipping Address',
+        ),
       ],
     ),
   );
@@ -94,5 +105,8 @@ navigateToEcom(int index) {
   } else if (index == 3) {
     Get.back();
     Get.toNamed(RoutesClass.getSellHistoryPageRoute());
+  } else if (index == 4) {
+    Get.back();
+    Get.toNamed(RoutesClass.getAddressPageRoute());
   }
 }

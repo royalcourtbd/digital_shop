@@ -1,15 +1,14 @@
-import 'package:digital_shop/apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../general/utils/config.dart';
+import '../../productDetailsPage/screen/product_details_page_view.dart';
 import '../controller/product_controller.dart';
-import '../model/products_model.dart';
 
 class ProductViewWidget extends GetView<ProductController> {
-  ProductModel? productModel;
+  //ProductModel? productModel;
 
-  ProductViewWidget({
+  const ProductViewWidget({
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +19,7 @@ class ProductViewWidget extends GetView<ProductController> {
       init: ProductController(),
       builder: <ProductController>(controller) {
         return GridView.builder(
+          padding: const EdgeInsets.only(bottom: 5),
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
           itemCount: controller.productsList.value.length,
@@ -34,11 +34,6 @@ class ProductViewWidget extends GetView<ProductController> {
           ),
           itemBuilder: (context, index) {
             return InkWell(
-              onDoubleTap: () {
-                print(controller.deleteItem(
-                  controller.productsList.value[index].id,
-                ));
-              },
               onTap: () {
                 Get.to(
                   () => ProductDetailsPageView(
@@ -46,12 +41,8 @@ class ProductViewWidget extends GetView<ProductController> {
                   ),
                 );
               },
-              onLongPress: () {
-                controller.deleteItem(
-                  controller.productsList.value[index].id,
-                );
-              },
-              child: Card(
+              child: Card( 
+                
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -65,15 +56,24 @@ class ProductViewWidget extends GetView<ProductController> {
                       ),
                       width: double.infinity,
                       height: Config.screenHeight! * .16,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(4),
-                          topRight: Radius.circular(4),
-                          //bottomRight: Radius.circular(4),
-                        ),
-                        child: Image.network(
-                          controller.productsList.value[index].image,
-                          fit: BoxFit.fill,
+                      child: Obx(
+                        () => ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            topRight: Radius.circular(4),
+                            //bottomRight: Radius.circular(4),
+                          ),
+                          child: controller.productsList.value[index].image !=
+                                  null
+                              ? Hero(
+                                  tag: controller
+                                      .productsList.value[index].productId,
+                                  child: Image.network(
+                                    controller.productsList.value[index].image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Image.asset('assets/currency/tether.png'),
                         ),
                       ),
                     ),
