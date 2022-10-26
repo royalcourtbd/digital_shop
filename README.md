@@ -7,4 +7,8 @@
       alt="Home Page"
       width="190"
       height="400"/>
-   
+   <img
+  src="https://user-images.githubusercontent.com/62033575/197323132-8ccf7238-dea8-437e-96aa-43c7171b2a7f.jpg"
+  alt="Cart Page"
+  width="190"
+  height="400"/>
