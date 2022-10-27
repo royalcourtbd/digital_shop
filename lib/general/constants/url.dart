@@ -8,4 +8,5 @@ class Urls {
   static const receivedUsdCollection = 'received_USD';
   static const USER_COLLECTION = 'user';
   static const CART_COLLECTION = 'Cart';
+  static const ADDRESS_COLLECTION = 'address';
 }
