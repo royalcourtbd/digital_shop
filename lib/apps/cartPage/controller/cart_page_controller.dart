@@ -89,35 +89,37 @@ class CartPageController extends GetxController {
           .collection(Urls.CART_COLLECTION)
           .orderBy('createdAt', descending: true)
           .snapshots()
-          .map((query) {
-        return query.docs.map(
-          (item) {
-            String docId = item.id;
+          .map(
+        (query) {
+          return query.docs.map(
+            (item) {
+              String docId = item.id;
 
-            return CartModel(
-              docId: item.id,
-              cartId: item["cartId"],
-              createdAt: item["createdAt"],
-              discountPrice: double.parse(item["discountPrice"].toString()),
-              image: item["image"],
-              price: double.parse(item["price"].toString()),
-              productId: item["productId"],
-              productName: item["productName"],
-              productTotalPrice:
-                  double.parse(item["productTotalPrice"].toString()),
-              quantity: int.parse(item["quantity"].toString()),
-              userId: item["userId"],
-            );
-          },
-        ).toList();
-      });
+              return CartModel(
+                docId: item.id,
+                cartId: item["cartId"],
+                createdAt: item["createdAt"],
+                discountPrice: double.parse(item["discountPrice"].toString()),
+                image: item["image"],
+                price: double.parse(item["price"].toString()),
+                productId: item["productId"],
+                productName: item["productName"],
+                productTotalPrice:
+                    double.parse(item["productTotalPrice"].toString()),
+                quantity: int.parse(item["quantity"].toString()),
+                userId: item["userId"],
+              );
+            },
+          ).toList();
+        },
+      );
 
   //
 
-  addProducToCart(context, ProductModel productModel) async {
+  addProducToCart(ProductModel productModel) async {
     try {
       if (isAlreadyAdded(productModel)) {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(Get.context!).showSnackBar(
           SnackBar(
             content: Text(
               '${productModel.productName!} already added to tha cart',
@@ -141,7 +143,7 @@ class CartPageController extends GetxController {
           1,
           DateTime.now().toString(),
         );
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(Get.context!).showSnackBar(
           SnackBar(
             content: Text(
               '${productModel.productName!} Successfully added to the cart',
@@ -152,7 +154,7 @@ class CartPageController extends GetxController {
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
         const SnackBar(
           content: Text("cannot added to the cart"),
           duration: Duration(seconds: 2),

@@ -20,7 +20,6 @@ import '../apps/productDetailsPage/controller/product_details_page_controller.da
 class AllControllerBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.lazyPut<AccountPageController>(
       () => AccountPageController(),
     );

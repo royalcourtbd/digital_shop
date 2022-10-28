@@ -348,8 +348,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                 child: CartButton(
                   onPressed: () {
                     authController.user.value != null
-                        ? cartPageController.addProducToCart(
-                            context, productValue)
+                        ? cartPageController.addProducToCart(productValue)
                         : ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: const Text(

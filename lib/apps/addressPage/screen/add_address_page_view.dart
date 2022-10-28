@@ -43,7 +43,7 @@ class AddAddressPageView extends GetView<AddressPageController> {
                 ],
               ),
               AddressTextField(
-                hintText: 'Type Your Address',
+                hintText: 'House no/ building/ area',
                 textEditingController: controller.addressController,
                 validator: (value) {
                   return controller.addressValidation(value!);
@@ -54,10 +54,10 @@ class AddAddressPageView extends GetView<AddressPageController> {
                 textEditingController: controller.divisionController,
               ),
               AddressTextField(
-                hintText: 'Type Your District',
-                textEditingController: controller.districtController,
+                hintText: 'Type Your Thana',
+                textEditingController: controller.thanaController,
                 validator: (value) {
-                  return controller.districtValidation(value!);
+                  return controller.thanaValidation(value!);
                 },
               ),
               AddressTextField(
@@ -75,18 +75,30 @@ class AddAddressPageView extends GetView<AddressPageController> {
                   children: [
                     AddressLabel(
                       title: 'Home',
+                      onTap: () {
+                        controller.selectLabel.value =
+                            !controller.selectLabel.value;
+                      },
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     AddressLabel(
                       title: 'Office',
+                      onTap: () {
+                        controller.selectLabel.value =
+                            !controller.selectLabel.value;
+                      },
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     AddressLabel(
                       title: 'Other',
+                      onTap: () {
+                        controller.selectLabel.value =
+                            !controller.selectLabel.value;
+                      },
                     ),
                     const SizedBox(
                       width: 10,
@@ -98,7 +110,11 @@ class AddAddressPageView extends GetView<AddressPageController> {
                 height: 15,
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  Get.dialog(const AlertDialog(
+                    content: CircularProgressIndicator(),
+                  ));
+
                   controller.saveAddressButton();
                 },
                 child: Container(

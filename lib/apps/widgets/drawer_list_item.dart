@@ -3,6 +3,7 @@ import 'package:digital_shop/apps/mainPage/controller/main_page_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class DrawerListItem extends GetView<MainPageController> {
   String title;
   IconData icon;
@@ -22,7 +23,6 @@ class DrawerListItem extends GetView<MainPageController> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Material(
       color: materialColor,
       child: InkWell(

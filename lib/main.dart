@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       // home: TestWidget(),
-      initialRoute: RoutesClass.getAddAddressPageRoute(),
+      initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),
     );
