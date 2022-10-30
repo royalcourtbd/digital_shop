@@ -24,7 +24,7 @@ class HomePageView extends GetView<HomePageController> {
           // mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: Config.screenHeight! * .25,
+              height: Config.screenHeight! * .29,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(7),
               ),
@@ -53,7 +53,7 @@ class HomePageView extends GetView<HomePageController> {
                 ),
               ),
             ),
-            ProductViewWidget(),
+            const ProductViewWidget(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
@@ -73,7 +73,7 @@ class HomePageView extends GetView<HomePageController> {
                 ),
               ),
             ),
-            TestWidget(),
+            const TestWidget(),
           ],
         ),
       ),

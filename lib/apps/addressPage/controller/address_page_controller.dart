@@ -145,7 +145,7 @@ class AddressPageController extends GetxController {
       addAddressItem(
         auth.currentUser!.uid,
         "default document id",
-        UniqueKey().toString(),
+        'DS${UniqueKey().toString().replaceAll('[#', '').replaceAll(']', '')}',
         nameController.text.trim(),
         numberController.text.trim(),
         addressController.text.trim(),

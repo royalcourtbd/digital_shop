@@ -65,7 +65,7 @@ class RoutesClass {
       name: cartPage,
     ),
     GetPage(
-      page: () => const CategoryPageView(),
+      page: () => CategoryPageView(),
       name: categoryPage,
     ),
     GetPage(

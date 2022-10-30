@@ -1,8 +1,11 @@
+import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 import '../../../general/utils/config.dart';
 
-class HomeUpperRowWidget extends StatelessWidget {
+class HomeUpperRowWidget extends GetView<HomePageController> {
   HomeUpperRowWidget({
     Key? key,
     required this.icon,
@@ -39,17 +42,32 @@ class HomeUpperRowWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: Config.screenWidth! * .05,
                   ),
-                  child: Container(
-                    alignment: Alignment.center,
-                    //padding: const EdgeInsets.all(8),
-                    width: Config.screenHeight! * 0.07,
-                    height: Config.screenHeight! * 0.07,
-                    decoration: BoxDecoration(
+                  child: InkWell(
+                    onTap: () {
+                      //
+                      Fluttertoast.showToast(
+                        msg: "Coming Soon",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.white,
+                        textColor: Colors.black54,
+                        fontSize: 16.0,
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      //padding: const EdgeInsets.all(8),
+                      width: Config.screenHeight! * 0.07,
+                      height: Config.screenHeight! * 0.07,
+                      decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.06),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Icon(
-                      icon[index],
-                      color: color[index],
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Icon(
+                        icon[index],
+                        color: color[index],
+                      ),
                     ),
                   ),
                 );

@@ -17,7 +17,7 @@ class ProductsPageView extends GetView<ProductController> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
-          children: [
+          children: const [
             ProductViewWidget(),
           ],
         ),

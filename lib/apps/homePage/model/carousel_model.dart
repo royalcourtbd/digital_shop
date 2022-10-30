@@ -1,19 +1,28 @@
-class CarouselModel {
-  CarouselModel({
-    required this.id,
-    required this.imagePath,
+class CarouselImageModel {
+  CarouselImageModel({
+    this.docId,
+    this.imageId,
+    this.imagePath,
+    this.createdAt,
   });
 
-  String id;
-  String imagePath;
+  String? docId;
+  String? imageId;
+  String? imagePath;
+  String? createdAt;
 
-  factory CarouselModel.fromJson(Map<String, dynamic> json) => CarouselModel(
-        id: json["id"],
+  factory CarouselImageModel.fromJson(Map<String, dynamic> json) =>
+      CarouselImageModel(
+        docId: json["docId"],
+        imageId: json["imageId"],
         imagePath: json["imagePath"],
+        createdAt: json["createdAt"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "docId": docId,
+        "imageId": imageId,
         "imagePath": imagePath,
+        "createdAt": createdAt,
       };
 }

@@ -1,4 +1,5 @@
 import 'package:digital_shop/general/utils/config.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,8 +52,11 @@ class BodyView extends GetView<CartPageController> {
                         padding: const EdgeInsets.all(5),
                         alignment: Alignment.center,
                         width: Config.screenWidth! * 0.23,
-                        child: Image.network(
-                          controller.cartItemList[index].image.toString(),
+                        child: FancyShimmerImage(
+                          imageUrl:
+                              controller.cartItemList[index].image.toString(),
+                          boxFit: BoxFit.contain,
+                          errorWidget: Image.asset('assets/images/loading.jpg'),
                         ),
                       ),
                       const SizedBox(

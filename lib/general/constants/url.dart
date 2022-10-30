@@ -1,5 +1,5 @@
 class Urls {
-  static const CAROUSEL_IMAGE = 'carousel_image';
+  static const CAROUSEL_IMAGE = 'carouselImage';
   static const SENDUSDCOLLECTION = 'send_USD';
   static const BDTCOLLECTION = 'send_BDT';
   static const ORDER_COLLECTION = 'order';
@@ -8,5 +8,6 @@ class Urls {
   static const receivedUsdCollection = 'received_USD';
   static const USER_COLLECTION = 'user';
   static const CART_COLLECTION = 'Cart';
+  static const CATEGORY_COLLECTION = 'categories';
   static const ADDRESS_COLLECTION = 'address';
 }

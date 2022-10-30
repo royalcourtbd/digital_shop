@@ -131,7 +131,7 @@ class CartPageController extends GetxController {
         );
       } else {
         cartItem(
-          UniqueKey().toString(),
+          UniqueKey().toString().replaceAll('[#', '').replaceAll(']', ''),
           auth.currentUser!.uid,
           productModel.docId!,
           productModel.productId!,
