@@ -12,18 +12,17 @@ class DrawerForExchangePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              const MyHeaderDrawer(),
-              MyDraweList(),
-            ],
-          ),
+        child: Column(
+          children: [
+            const MyHeaderDrawer(),
+            MyDraweList(),
+          ],
         ),
       ),
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget MyDraweList() {
     return Container(
       padding: const EdgeInsets.only(

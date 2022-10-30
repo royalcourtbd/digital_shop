@@ -1,6 +1,5 @@
 import 'package:digital_shop/apps/accountPage/screen/account_page_view.dart';
 import 'package:digital_shop/apps/addressPage/screen/add_address_page_view.dart';
-import 'package:digital_shop/apps/addressPage/screen/address_page_view.dart';
 import 'package:digital_shop/apps/authPage/screen/login_page_view.dart';
 import 'package:digital_shop/apps/authPage/screen/signup_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/buy_page_view.dart';
@@ -13,6 +12,7 @@ import 'package:digital_shop/apps/productPage/screen/products_page_view.dart';
 import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+import '../../apps/addressPage/screen/address_page_view.dart';
 import '../../apps/cartPage/screen/cart_page_view.dart';
 import '../../apps/categoryPage/screen/category_page_view.dart';
 
@@ -61,11 +61,11 @@ class RoutesClass {
       name: accountPage,
     ),
     GetPage(
-      page: () => CartPageView(),
+      page: () => const CartPageView(),
       name: cartPage,
     ),
     GetPage(
-      page: () => const CategoryPageView(),
+      page: () => CategoryPageView(),
       name: categoryPage,
     ),
     GetPage(

@@ -17,12 +17,12 @@ import '../widgets/bottom_menu_item_widget.dart';
 class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
-  final List<Widget> pages = [
-    const ExchangePageView(),
-    const CategoryPageView(),
-    const HomePageView(),
-    CartPageView(),
-    AccountPageView(),
+  final List<Map<String, dynamic>> pages = [
+    {'page': const ExchangePageView(), 'title': 'Convert Your Money'},
+    {'page': const CategoryPageView(), 'title': 'Category'},
+    {'page': const HomePageView(), 'title': 'Home'},
+    {'page': const CartPageView(), 'title': 'Cart'},
+    {'page': AccountPageView(), 'title': 'Account'}
   ];
 
   // Widget currentPage = HomePageView();
@@ -31,23 +31,7 @@ class MainPageView extends GetView<MainPageController> {
     Config().init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Obx(
-          () => Text(
-            // ignore: unrelated_type_equality_checks
-            controller.currentIndex == 0
-                ? 'Convert Your Money '
-                // ignore: unrelated_type_equality_checks
-                : controller.currentIndex == 1
-                    ? 'Category'
-                    // ignore: unrelated_type_equality_checks
-                    : controller.currentIndex == 2
-                        ? 'Home'
-                        // ignore: unrelated_type_equality_checks
-                        : controller.currentIndex == 3
-                            ? 'Cart'
-                            : 'Account',
-          ),
-        ),
+        title: Obx(() => Text(pages[controller.currentIndex.value]['title'])),
         elevation: 0.0,
         centerTitle: true,
         actions: [
@@ -56,12 +40,6 @@ class MainPageView extends GetView<MainPageController> {
               authController.signOut();
             },
             icon: const Icon(Icons.login),
-          ),
-          IconButton(
-            onPressed: () {
-              homePageController.addProducts();
-            },
-            icon: const Icon(Icons.card_travel),
           ),
         ],
       ),
@@ -74,7 +52,7 @@ class MainPageView extends GetView<MainPageController> {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body: Obx(
-        () => pages[controller.currentIndex.value],
+        () => pages[controller.currentIndex.value]['page'],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,

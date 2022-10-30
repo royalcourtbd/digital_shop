@@ -12,19 +12,18 @@ class DrawerForOtherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              const MyHeaderDrawer(),
-              MyEcomDraweList(),
-            ],
-          ),
+        child: Column(
+          children: [
+            const MyHeaderDrawer(),
+            MyEcomDraweList(),
+          ],
         ),
       ),
     );
   }
 }
 
+// ignore: non_constant_identifier_names
 Widget MyEcomDraweList() {
   return Container(
     padding: const EdgeInsets.only(

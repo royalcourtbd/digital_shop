@@ -2,7 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:badges/badges.dart';
 import 'package:digital_shop/apps/productDetailsPage/widgets/cart_button.dart';
 import 'package:digital_shop/general/routes/routes.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
@@ -114,13 +116,23 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
               flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
                   tag: productValue.productId.toString(),
-                  child: Image.network(
-                    productValue.image.toString(),
-                    // fit: BoxFit.fill,
+                  child: FancyShimmerImage(
+                    imageUrl: productValue.image!,
+                    boxFit: BoxFit.contain,
+                    errorWidget: Image.asset('assets/images/loading.jpg'),
                   ),
                 ),
               ),
             ),
+
+            // ProgressiveImage(
+            //         imageError: 'assets/images/loading.jpg',
+            //         image: productValue.image.toString(),
+            //         height: Config.screenHeight! / 2,
+            //         width: double.infinity,
+            //         fit: BoxFit.fitHeight,
+            //       )
+
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -339,7 +351,17 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
             children: [
               Expanded(
                 child: CartButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Fluttertoast.showToast(
+                      msg: "This is Center Short Toast",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  },
                   color: Colors.green,
                   title: 'Buy Now',
                 ),
@@ -348,8 +370,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                 child: CartButton(
                   onPressed: () {
                     authController.user.value != null
-                        ? cartPageController.addProducToCart(
-                            context, productValue)
+                        ? cartPageController.addProducToCart(productValue)
                         : ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: const Text(

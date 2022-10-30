@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer_image/shimmer_image.dart';
 
 import '../../../general/utils/config.dart';
 import '../../productDetailsPage/screen/product_details_page_view.dart';
@@ -41,8 +42,7 @@ class ProductViewWidget extends GetView<ProductController> {
                   ),
                 );
               },
-              child: Card( 
-                
+              child: Card(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -63,17 +63,16 @@ class ProductViewWidget extends GetView<ProductController> {
                             topRight: Radius.circular(4),
                             //bottomRight: Radius.circular(4),
                           ),
-                          child: controller.productsList.value[index].image !=
-                                  null
-                              ? Hero(
-                                  tag: controller
-                                      .productsList.value[index].productId,
-                                  child: Image.network(
-                                    controller.productsList.value[index].image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Image.asset('assets/currency/tether.png'),
+                          child: Hero(
+                            tag: controller.productsList.value[index].productId,
+                            child: ProgressiveImage(
+                              imageError: 'assets/images/loading.jpg',
+                              image: controller.productsList.value[index].image,
+                              width: double.infinity,
+                              height: Config.screenHeight! * .16,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),

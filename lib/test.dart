@@ -6,6 +6,8 @@ import 'apps/productDetailsPage/screen/product_details_page_view.dart';
 import 'general/utils/config.dart';
 
 class TestWidget extends GetView<ProductController> {
+  const TestWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -157,6 +159,7 @@ class TestWidget extends GetView<ProductController> {
                                               .toString(),
                                         ) &&
                                     double.parse(
+                                          // ignore: invalid_use_of_protected_member
                                           controller.favoritProduct.value[index]
                                               .discountPrice
                                               .toString(),

@@ -1,5 +1,6 @@
 import 'package:digital_shop/apps/exchangePage/controller/buy_page_controller.dart';
 import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,9 +30,10 @@ class BuyMethodBDTIcon extends GetView<BuyPageController> {
                 controller.imageBdt.value,
                 fit: BoxFit.cover,
               )
-            : Image.network(
-                controller.imageBdt.value,
-                fit: BoxFit.cover,
+            : FancyShimmerImage(
+                errorWidget: Image.asset('assets/images/loading.jpg'),
+                imageUrl: controller.imageBdt.value,
+                boxFit: BoxFit.cover,
               ),
       ),
     );
@@ -63,9 +65,10 @@ class BuyMethodUSDIcon extends GetView<BuyPageController> {
                 controller.imageUsd.value,
                 fit: BoxFit.cover,
               )
-            : Image.network(
-                controller.imageUsd.value,
-                fit: BoxFit.cover,
+            : FancyShimmerImage(
+                errorWidget: Image.asset('assets/images/loading.jpg'),
+                imageUrl: controller.imageUsd.value,
+                boxFit: BoxFit.cover,
               ),
       ),
     );
@@ -95,9 +98,10 @@ class SellMethodUSDIcon extends GetView<SellPageController> {
                 controller.imageUsd.value,
                 fit: BoxFit.cover,
               )
-            : Image.network(
-                controller.imageUsd.value,
-                fit: BoxFit.cover,
+            : FancyShimmerImage(
+                errorWidget: Image.asset('assets/images/loading.jpg'),
+                imageUrl: controller.imageUsd.value,
+                boxFit: BoxFit.cover,
               ),
       ),
     );
@@ -128,9 +132,10 @@ class SellMethodBDTIcon extends GetView<SellPageController> {
                 controller.imageBdt.value,
                 fit: BoxFit.cover,
               )
-            : Image.network(
-                controller.imageBdt.value,
-                fit: BoxFit.cover,
+            : FancyShimmerImage(
+                imageUrl: controller.imageBdt.value,
+                boxFit: BoxFit.cover,
+                errorWidget: Image.asset('assets/images/loading.jpg'),
               ),
       ),
     );
