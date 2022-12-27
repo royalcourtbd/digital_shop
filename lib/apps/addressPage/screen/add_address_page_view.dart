@@ -9,6 +9,8 @@ import '../../../general/utils/config.dart';
 import '../widgets/address_labe.dart';
 
 class AddAddressPageView extends GetView<AddressPageController> {
+  const AddAddressPageView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -73,32 +75,42 @@ class AddAddressPageView extends GetView<AddressPageController> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    AddressLabel(
-                      title: 'Home',
-                      onTap: () {
-                        controller.selectLabel.value =
-                            !controller.selectLabel.value;
-                      },
+                    Obx(
+                      () => AddressLabel(
+                        title: 'Home',
+                        onTap: () {
+                          controller.selectLabel.value = 'Home';
+                        },
+                        borderColor: controller.selectLabel.value == 'Home'
+                            ? Colors.green
+                            : Colors.black,
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    AddressLabel(
-                      title: 'Office',
-                      onTap: () {
-                        controller.selectLabel.value =
-                            !controller.selectLabel.value;
-                      },
-                    ),
+                    Obx(() => AddressLabel(
+                          title: 'Office',
+                          onTap: () {
+                            controller.selectLabel.value = 'Office';
+                          },
+                          borderColor: controller.selectLabel.value == 'Office'
+                              ? Colors.green
+                              : Colors.black,
+                        )),
                     const SizedBox(
                       width: 10,
                     ),
-                    AddressLabel(
-                      title: 'Other',
-                      onTap: () {
-                        controller.selectLabel.value =
-                            !controller.selectLabel.value;
-                      },
+                    Obx(
+                      () => AddressLabel(
+                        title: 'Other',
+                        onTap: () {
+                          controller.selectLabel.value = 'Other';
+                        },
+                        borderColor: controller.selectLabel.value == 'Other'
+                            ? Colors.green
+                            : Colors.black,
+                      ),
                     ),
                     const SizedBox(
                       width: 10,
@@ -111,16 +123,18 @@ class AddAddressPageView extends GetView<AddressPageController> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  Get.dialog(const AlertDialog(
-                    content: CircularProgressIndicator(),
-                  ));
+                  Get.dialog(
+                    const AlertDialog(
+                      content: CircularProgressIndicator(),
+                    ),
+                  );
 
                   controller.saveAddressButton();
                 },
                 child: Container(
                   alignment: Alignment.center,
                   height: 45,
-                  width: Config.screenWidth! * 0.4,
+                  width: Config.screenWidth! * 0.7,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(80.0),
                     gradient: const LinearGradient(

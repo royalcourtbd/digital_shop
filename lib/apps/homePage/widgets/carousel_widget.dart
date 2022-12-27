@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
+
 import 'package:get/get.dart';
 import 'package:shimmer_image/shimmer_image.dart';
 
@@ -16,7 +17,7 @@ class CarouselWidget extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Obx(
-      () => controller.carouselSliderList.value.isNotEmpty
+      () => controller.carouselSliderList.isNotEmpty
           ? CarouselSlider.builder(
               //scrollPhysics: const NeverScrollableScrollPhysics(),
               slideIndicator: CircularSlideIndicator(
@@ -27,28 +28,15 @@ class CarouselWidget extends GetView<HomePageController> {
               //autoSliderDelay: const Duration(seconds: 3),
               autoSliderTransitionTime: const Duration(seconds: 3),
               enableAutoSlider: true,
-              itemCount: controller.carouselSliderList.value.length,
+              itemCount: controller.carouselSliderList.length,
               slideBuilder: (index) {
                 return Container(
-                  decoration: const BoxDecoration(
-                      //color: Colors.red,
-                      // image: DecorationImage(
-                      //   image: NetworkImage(
-                      //     controller
-                      //         // ignore: invalid_use_of_protected_member
-                      //         .carouselSliderList
-                      //         .value[index]
-                      //         .imagePath,
-                      //   ),
-                      //   fit: BoxFit.fitHeight,
-                      // ),
-                      ),
+                  decoration: const BoxDecoration(),
                   child: ProgressiveImage(
                     imageError: 'assets/images/loading.jpg',
                     image: controller
                         // ignore: invalid_use_of_protected_member
-                        .carouselSliderList
-                        .value[index]
+                        .carouselSliderList[index]
                         .imagePath,
                     fit: BoxFit.fitHeight,
                     height: Config.screenHeight! * .30,

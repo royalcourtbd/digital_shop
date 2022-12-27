@@ -14,9 +14,11 @@ class DetailsText extends StatelessWidget {
       title,
       style: const TextStyle(
         decoration: TextDecoration.underline,
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: FontWeight.w600,
         color: Color.fromARGB(255, 82, 79, 79),
+        letterSpacing: 2,
+        height: 2,
       ),
     );
   }

@@ -1,6 +1,6 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer_image/shimmer_image.dart';
 
 import '../../../general/utils/config.dart';
 import '../../productDetailsPage/screen/product_details_page_view.dart';
@@ -27,7 +27,7 @@ class ProductViewWidget extends GetView<ProductController> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             //delete button remove korar por aita enabled korbo
-            childAspectRatio: 1 / 1.25,
+            childAspectRatio: 1 / 1.45,
 
             ///childAspectRatio: 1 / 1.4,
             crossAxisSpacing: 2,
@@ -55,7 +55,7 @@ class ProductViewWidget extends GetView<ProductController> {
                         ),
                       ),
                       width: double.infinity,
-                      height: Config.screenHeight! * .16,
+                      height: Config.screenHeight! * .2,
                       child: Obx(
                         () => ClipRRect(
                           borderRadius: const BorderRadius.only(
@@ -63,15 +63,14 @@ class ProductViewWidget extends GetView<ProductController> {
                             topRight: Radius.circular(4),
                             //bottomRight: Radius.circular(4),
                           ),
-                          child: Hero(
-                            tag: controller.productsList.value[index].productId,
-                            child: ProgressiveImage(
-                              imageError: 'assets/images/loading.jpg',
-                              image: controller.productsList.value[index].image,
-                              width: double.infinity,
-                              height: Config.screenHeight! * .16,
-                              fit: BoxFit.cover,
-                            ),
+                          child: FancyShimmerImage(
+                            errorWidget:
+                                Image.asset('assets/images/loading.jpg'),
+                            imageUrl:
+                                controller.productsList.value[index].image[0],
+                            width: double.infinity,
+                            height: Config.screenHeight! * 2,
+                            boxFit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -90,7 +89,7 @@ class ProductViewWidget extends GetView<ProductController> {
                                 : Text(
                                     '${controller.productsList.value[index].discountPrice}৳',
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
                                       overflow: TextOverflow.ellipsis,
@@ -118,6 +117,7 @@ class ProductViewWidget extends GetView<ProductController> {
                           Text(
                             '${controller.productsList.value[index].price}৳',
                             style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: double.parse(
                                             controller.productsList.value[index]
                                                 .price,
@@ -132,7 +132,7 @@ class ProductViewWidget extends GetView<ProductController> {
                                           ) !=
                                           0
                                   ? 14
-                                  : 16,
+                                  : 18,
                               color: double.parse(
                                             controller.productsList.value[index]
                                                 .price,
@@ -196,7 +196,7 @@ class ProductViewWidget extends GetView<ProductController> {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 15,
                           ),
                         ),
                       ),
@@ -207,7 +207,7 @@ class ProductViewWidget extends GetView<ProductController> {
                       child: Text(
                         '${controller.productsList.value[index].totalSell} sold',
                         style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Poppins',
                         ),

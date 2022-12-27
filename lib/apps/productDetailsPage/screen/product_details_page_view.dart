@@ -4,6 +4,9 @@ import 'package:digital_shop/apps/productDetailsPage/widgets/cart_button.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
+import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../general/constants/constants.dart';
@@ -114,25 +117,25 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                background: Hero(
-                  tag: productValue.productId.toString(),
-                  child: FancyShimmerImage(
-                    imageUrl: productValue.image!,
-                    boxFit: BoxFit.contain,
-                    errorWidget: Image.asset('assets/images/loading.jpg'),
+                background: CarouselSlider.builder(
+                  slideIndicator: CircularSlideIndicator(
+                    padding: const EdgeInsets.only(bottom: 15),
                   ),
+                  slideTransform: const DefaultTransform(),
+                  unlimitedMode: true,
+                  // autoSliderTransitionTime: const Duration(seconds: 3),
+                  enableAutoSlider: false,
+                  itemCount: productValue.image!.length,
+                  slideBuilder: (index) {
+                    return FancyShimmerImage(
+                      imageUrl: productValue.image![index],
+                      boxFit: BoxFit.contain,
+                      errorWidget: Image.asset('assets/images/loading.jpg'),
+                    );
+                  },
                 ),
               ),
             ),
-
-            // ProgressiveImage(
-            //         imageError: 'assets/images/loading.jpg',
-            //         image: productValue.image.toString(),
-            //         height: Config.screenHeight! / 2,
-            //         width: double.infinity,
-            //         fit: BoxFit.fitHeight,
-            //       )
-
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -150,9 +153,9 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                               : Text(
                                   '${productValue.discountPrice}৳',
                                   style: const TextStyle(
-                                    fontSize: 24,
+                                    fontSize: 29,
                                     color: Colors.red,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.bold,
                                     overflow: TextOverflow.ellipsis,
                                     fontFamily: 'Poppins',
                                   ),
@@ -281,8 +284,8 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     ),
                     Row(
                       children: [
-                        const Text(
-                          'Rating  4.5*',
+                        Text(
+                          'Rating ${productValue.rate!}*',
                         ),
                         const SizedBox(
                           height: 25,
@@ -308,11 +311,12 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       height: 10,
                     ),
                     Text(
-                      productValue.highlights!.replaceAll('•', '\n\u2022 '),
+                      productValue.highlights!.replaceAll('•', '\n\n\u2022 '),
                       style: const TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         height: 1.7,
                         color: Colors.black87,
+                        letterSpacing: 1,
                       ),
                     ),
                     const SizedBox(
@@ -326,8 +330,9 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       productValue.description.toString(),
                       style: const TextStyle(
                         color: Colors.black87,
-                        fontSize: 13,
+                        fontSize: 15,
                         height: 1.5,
+                        letterSpacing: 1,
                       ),
                     ),
                     const SizedBox(

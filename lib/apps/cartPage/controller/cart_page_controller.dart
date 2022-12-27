@@ -17,7 +17,6 @@ class CartPageController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     cartItemList.bindStream(cartList());
   }
@@ -48,7 +47,6 @@ class CartPageController extends GetxController {
   }
 
   Future<void> incrementQuantity(int index) async {
-    print(cartItemList[index].quantity);
     //update firestore *total price & quantity
 
     calculate(
@@ -64,7 +62,6 @@ class CartPageController extends GetxController {
   }
 
   Future<void> decreaseQuantity(int index) async {
-    print(cartItemList[index].quantity);
     if (cartItemList[index].quantity >= 2) {
       cartItemList[index].quantity--;
     } else {
@@ -91,26 +88,11 @@ class CartPageController extends GetxController {
           .snapshots()
           .map(
         (query) {
-          return query.docs.map(
-            (item) {
-              String docId = item.id;
-
-              return CartModel(
-                docId: item.id,
-                cartId: item["cartId"],
-                createdAt: item["createdAt"],
-                discountPrice: double.parse(item["discountPrice"].toString()),
-                image: item["image"],
-                price: double.parse(item["price"].toString()),
-                productId: item["productId"],
-                productName: item["productName"],
-                productTotalPrice:
-                    double.parse(item["productTotalPrice"].toString()),
-                quantity: int.parse(item["quantity"].toString()),
-                userId: item["userId"],
-              );
-            },
-          ).toList();
+          return query.docs
+              .map(
+                (item) => CartModel.fromJson(item.data()),
+              )
+              .toList();
         },
       );
 
@@ -130,12 +112,22 @@ class CartPageController extends GetxController {
           ),
         );
       } else {
+        Get.dialog(const AlertDialog(
+          content: SizedBox(
+            height: 50,
+            width: 40,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ));
+        await Future.delayed(const Duration(seconds: 2));
+        Get.back();
         cartItem(
           UniqueKey().toString().replaceAll('[#', '').replaceAll(']', ''),
           auth.currentUser!.uid,
-          productModel.docId!,
           productModel.productId!,
-          productModel.image!,
+          productModel.image![0],
           productModel.productName!,
           double.parse(productModel.price!),
           double.parse(productModel.discountPrice!),
@@ -166,7 +158,6 @@ class CartPageController extends GetxController {
   cartItem(
     String cartId,
     String userId,
-    String docId,
     String productId,
     String image,
     String productName,
@@ -176,9 +167,12 @@ class CartPageController extends GetxController {
     int quantity,
     String createdAt,
   ) async {
+    final id = firestoreCartList.doc().id;
+    final docRef = firestoreCartList.doc(id);
+
     var cartItem = CartModel(
       cartId: cartId,
-      docId: docId,
+      docId: id,
       userId: userId,
       productId: productId,
       image: image,
@@ -189,11 +183,13 @@ class CartPageController extends GetxController {
       quantity: quantity,
       createdAt: createdAt,
     );
-    await firestore
-        .collection(Urls.USER_COLLECTION)
-        .doc(auth.currentUser!.uid)
-        .collection(Urls.CART_COLLECTION)
-        .add(cartItem.toJson());
+    // await firestore
+    //     .collection(Urls.USER_COLLECTION)
+    //     .doc(auth.currentUser!.uid)
+    //     .collection(Urls.CART_COLLECTION)
+    //     .add(cartItem.toJson());
+
+    await docRef.set(cartItem.toJson());
   }
 
 //Delete Cart Item

@@ -54,12 +54,5 @@ class LoginPageController extends GetxController {
       emailController.text.trim(),
       passwordController.text.trim(),
     );
-    // Get.dialog(
-    //   const AlertDialog(
-    //     title: Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   ),
-    // );
   }
 }

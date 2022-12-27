@@ -58,6 +58,8 @@ dependencies:
   shimmer_image: ^0.0.2
   fluttertoast: ^8.1.1
   fancy_shimmer_image: ^2.0.2
+  iconly: ^1.0.1
+  fade_shimmer: ^2.2.0
 
 
 dev_dependencies:

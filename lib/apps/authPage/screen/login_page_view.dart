@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/login_page_controller.dart';
 import 'package:digital_shop/apps/authPage/screen/password_reset.dart';
 import 'package:digital_shop/apps/authPage/widgets/background.dart';
@@ -58,26 +57,28 @@ class LoginPageView extends GetView<LoginPageController> {
                     height: Config.screenHeight! * 0.02,
                   ),
 
-                  Obx(() => TextFieldForInUp(
-                        controller: controller.passwordController,
-                        keyboardType: TextInputType.text,
-                        labelText: 'Password',
-                        obscureText: controller.passwordVisibility.value,
-                        suffixIcon: InkWell(
-                          child: Icon(
-                            controller.passwordVisibility.value
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility,
-                          ),
-                          onTap: () {
-                            controller.passwordVisibility.value =
-                                !controller.passwordVisibility.value;
-                          },
+                  Obx(
+                    () => TextFieldForInUp(
+                      controller: controller.passwordController,
+                      keyboardType: TextInputType.text,
+                      labelText: 'Password',
+                      obscureText: controller.passwordVisibility.value,
+                      suffixIcon: InkWell(
+                        child: Icon(
+                          controller.passwordVisibility.value
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility,
                         ),
-                        validator: ((value) {
-                          return controller.passwordValidation(value);
-                        }),
-                      )),
+                        onTap: () {
+                          controller.passwordVisibility.value =
+                              !controller.passwordVisibility.value;
+                        },
+                      ),
+                      validator: ((value) {
+                        return controller.passwordValidation(value);
+                      }),
+                    ),
+                  ),
 
                   Container(
                     alignment: Alignment.centerRight,

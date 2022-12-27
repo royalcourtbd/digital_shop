@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 class AddressLabel extends GetView<AddressPageController> {
   String title;
   VoidCallback onTap;
+  Color? borderColor;
   AddressLabel({
     Key? key,
     required this.title,
+    this.borderColor,
     required this.onTap,
   }) : super(key: key);
 
@@ -15,24 +17,20 @@ class AddressLabel extends GetView<AddressPageController> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Obx(() => Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: controller.selectLabel.value != true
-                    ? Colors.black26
-                    : Colors.green,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 15),
-            ),
-          )),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 8,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(color: borderColor!),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 15),
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:digital_shop/apps/authPage/model/user_model.dart';
 import 'package:digital_shop/general/constants/url.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,6 +32,7 @@ class AuthController extends GetxController {
     super.onInit();
     user = Rx<User?>(auth.currentUser);
     user.bindStream(auth.userChanges());
+    getToken();
   }
 
   initialScreen(User? user) {
@@ -58,6 +62,9 @@ class AuthController extends GetxController {
           .then(
         (result) {
           String userId = result.user!.uid;
+          // String uName = result.user!.displayName!;
+          // String email = result.user!.email!;
+
           addUserToFirestore(userId);
         },
       );
@@ -70,7 +77,8 @@ class AuthController extends GetxController {
       //GetStorage().write('uid', auth.currentUser!.uid);
 
       Get.offAllNamed(RoutesClass.getLoginPageRoute());
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      log(e.code);
       Get.back();
       Get.snackbar(
         'Account Creation Failed',
@@ -130,16 +138,26 @@ class AuthController extends GetxController {
     storage.remove('uid');
   }
 
+  void getToken() async {
+    await messaging.getToken().then((token) {
+      storage.write('deviceToken', token!);
+      log(storage.read('deviceToken'));
+    });
+  }
+
   addUserToFirestore(String userId) {
-    firestore.collection(Urls.USER_COLLECTION).doc(userId).set(
-      {
-        "accountBalance": 0,
-        "name": signUpPageController.nameController.text.trim(),
-        "email": signUpPageController.emailController.text.trim(),
-        "number": signUpPageController.numberController.text.trim(),
-        "userId": userId,
-        "password": signUpPageController.passwordController.text.trim(),
-      },
+    var userModel = UserModel(
+      accountBalance: 0,
+      email: signUpPageController.emailController.text,
+      name: signUpPageController.nameController.text,
+      userId: userId,
+      image: '',
+      createdAt: DateTime.now().toString(),
+      deviceToken: storage.read('deviceToken'),
     );
+    firestore
+        .collection(Urls.USER_COLLECTION)
+        .doc(userId)
+        .set(userModel.toJson());
   }
 }

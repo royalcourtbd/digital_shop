@@ -10,10 +10,11 @@ import 'package:digital_shop/apps/exchangePage/controller/sell_history_controlle
 import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.dart';
 import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:digital_shop/apps/productPage/controller/product_controller.dart';
-import 'package:digital_shop/apps/profilePage/controller/profile_page_controller.dart';
+import 'package:digital_shop/apps/checkoutPage/controller/checkout_page_controller.dart';
 import 'package:get/get.dart';
 
 import '../apps/accountPage/controller/account_page_controller.dart';
+
 import '../apps/mainPage/controller/main_page_controller.dart';
 import '../apps/productDetailsPage/controller/product_details_page_controller.dart';
 
@@ -43,8 +44,8 @@ class AllControllerBinding implements Bindings {
       () => MainPageController(),
       fenix: true,
     );
-    Get.lazyPut<ProfilePageController>(
-      () => ProfilePageController(),
+    Get.lazyPut<CheckoutPageController>(
+      () => CheckoutPageController(),
       fenix: true,
     );
     Get.lazyPut<BuyPageController>(
