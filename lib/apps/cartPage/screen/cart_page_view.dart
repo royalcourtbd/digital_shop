@@ -3,6 +3,7 @@ import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/routes/routes.dart';
 import '../../../general/utils/config.dart';
 import '../widgets/body_view.dart';
 
@@ -26,7 +27,29 @@ class CartPageView extends GetView<CartPageController> {
             Obx(
               () => authController.user.value != null
                   ? BodyView()
-                  : const Text('data'),
+                  : Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/oops.jpg',
+                          scale: 2,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Config.screenWidth! * .2,
+                              vertical: Config.screenHeight! * .02,
+                            ),
+                          ),
+                          child: const Text('Please Login Your Account'),
+                          onPressed: () {
+                            Get.offAllNamed(RoutesClass.getLoginPageRoute());
+                          },
+                        ),
+                      ],
+                    ),
             ),
           ],
         ),
@@ -52,12 +75,14 @@ class CartPageView extends GetView<CartPageController> {
                         ),
                       ),
                     ),
-                    Obx(() => Text(
-                          '৳ ${controller.totalPrice}',
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        )),
+                    Obx(
+                      () => Text(
+                        '৳ ${controller.totalPrice}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
@@ -65,7 +90,7 @@ class CartPageView extends GetView<CartPageController> {
                         child: Container(
                           alignment: Alignment.center,
                           height: Config.screenHeight! * .06,
-                          width: Config.screenWidth! * .3,
+                          width: Config.screenWidth! * .35,
                           decoration: BoxDecoration(
                               color: Colors.green,
                               borderRadius: BorderRadius.circular(7)),

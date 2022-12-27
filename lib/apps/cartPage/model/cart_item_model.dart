@@ -25,7 +25,7 @@ class CartModel {
   double? productTotalPrice;
   String? createdAt;
 
-  factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
+  factory CartModel.fromJson(Map<String, dynamic> json) => CartModel( 
         docId: json["docId"],
         cartId: json["cartId"],
         userId: json["userId"],

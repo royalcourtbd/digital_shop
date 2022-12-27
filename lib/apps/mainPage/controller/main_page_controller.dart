@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class MainPageController extends GetxController {
   static MainPageController instance = Get.find();
   var currentIndex = 2.obs;
-  var currentPage = 1.obs;
+  //var currentPage = 1.obs;
 
   void changeCurrentIndex(int index) {
     currentIndex.value = index;
@@ -32,6 +32,7 @@ class MainPageController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+
     _initBannerAdd();
     // initAdd();
   }

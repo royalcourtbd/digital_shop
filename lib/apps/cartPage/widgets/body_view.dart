@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../controller/cart_page_controller.dart';
 
 class BodyView extends GetView<CartPageController> {
+  const BodyView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -63,116 +65,109 @@ class BodyView extends GetView<CartPageController> {
                         width: 9,
                       ),
                       Expanded(
-                        child: Container(
-                          //width: 100,
-
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  alignment: Alignment.centerLeft,
-                                  //color: Colors.red,
-                                  width: Config.screenWidth! * 0.7,
-                                  child: Text(
-                                    controller.cartItemList[index].productName
-                                        .toString(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                //color: Colors.red,
+                                width: Config.screenWidth! * 0.7,
+                                child: Text(
+                                  controller.cartItemList[index].productName
+                                      .toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontFamily: '',
+                                    fontSize: 16,
+                                    //fontWeight: FontWeight.w500,
+                                    color: Colors.black54,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontFamily: '',
-                                      fontSize: 16,
-                                      //fontWeight: FontWeight.w500,
-                                      color: Colors.black54,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    maxLines: 2,
                                   ),
+                                  maxLines: 2,
                                 ),
                               ),
-                              Expanded(
-                                child: Container(
-                                  // color: Colors.blue,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            '${controller.cartItemList[index].productTotalPrice} ৳',
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        '${controller.cartItemList[index].productTotalPrice} ৳',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black54,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      padding: const EdgeInsets.all(7),
+                                      //alignment: Alignment.centerRight,
+                                      //color: Colors.green,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          //decrement method
+                                          IconButton(
+                                            onPressed: () async {
+                                              controller
+                                                  .decreaseQuantity(index);
+                                            },
+                                            icon: const Icon(
+                                              Icons.remove_circle_outline,
                                               color: Colors.black54,
-                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.centerRight,
-                                          padding: const EdgeInsets.all(7),
-                                          //alignment: Alignment.centerRight,
-                                          //color: Colors.green,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              //decrement method
-                                              IconButton(
-                                                onPressed: () async {
-                                                  controller
-                                                      .decreaseQuantity(index);
-                                                },
-                                                icon: const Icon(
-                                                  Icons.remove_circle_outline,
-                                                  color: Colors.black54,
-                                                ),
-                                              ),
 
-                                              // show Quantity
-                                              Obx(
-                                                () => Text(
-                                                  // controller.cartItemList[index]
-                                                  //     .quantity
-                                                  //     .toString(),
-                                                  controller.cartItemList[index]
-                                                      .quantity
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                    color: Colors.black54,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
+                                          // show Quantity
+                                          Obx(
+                                            () => Text(
+                                              // controller.cartItemList[index]
+                                              //     .quantity
+                                              //     .toString(),
+                                              controller
+                                                  .cartItemList[index].quantity
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
                                               ),
-
-                                              //increment method
-                                              IconButton(
-                                                onPressed: () {
-                                                  controller
-                                                      .incrementQuantity(index);
-                                                },
-                                                icon: const Icon(
-                                                  Icons.add_circle_outline,
-                                                  color: Colors.black54,
-                                                ),
-                                              ),
-                                              // SizedBox(
-                                              //   width: 7,
-                                              // )
-                                            ],
+                                            ),
                                           ),
-                                        ),
+
+                                          //increment method
+                                          IconButton(
+                                            onPressed: () {
+                                              controller
+                                                  .incrementQuantity(index);
+                                            },
+                                            icon: const Icon(
+                                              Icons.add_circle_outline,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                          // SizedBox(
+                                          //   width: 7,
+                                          // )
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

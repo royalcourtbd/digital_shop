@@ -8,8 +8,7 @@ import 'package:digital_shop/apps/exchangePage/screen/sell_history_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
-import 'package:digital_shop/apps/productPage/screen/products_page_view.dart';
-import 'package:digital_shop/apps/profilePage/screen/profile_page_view.dart';
+import 'package:digital_shop/apps/checkoutPage/screen/checkout_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import '../../apps/addressPage/screen/address_page_view.dart';
@@ -23,7 +22,7 @@ class RoutesClass {
   static String categoryPage = '/categoryPage';
   static String exchangePage = '/exchangePage';
   static String homePage = '/homepage';
-  static String profilePage = '/profilePage';
+  static String checkout = '/checkout';
   static String buyPage = '/buyPage';
   static String sellPage = '/sellPage';
   static String sellHistory = '/sellHistory';
@@ -40,7 +39,7 @@ class RoutesClass {
   static String getCategoryPageRoute() => categoryPage;
   static String getExchangePageRoute() => exchangePage;
   static String getHomePageRoute() => homePage;
-  static String getProfilePageRoute() => profilePage;
+  static String getCheckoutPageRoute() => checkout;
   static String getBuyPageRoute() => buyPage;
   static String getSellPageRoute() => sellPage;
   static String getSellHistoryPageRoute() => sellHistory;
@@ -65,7 +64,7 @@ class RoutesClass {
       name: cartPage,
     ),
     GetPage(
-      page: () => CategoryPageView(),
+      page: () => const CategoryPageView(),
       name: categoryPage,
     ),
     GetPage(
@@ -73,12 +72,12 @@ class RoutesClass {
       name: exchangePage,
     ),
     GetPage(
-      page: () => const HomePageView(),
+      page: () => HomePageView(),
       name: homePage,
     ),
     GetPage(
-      page: () => ProfilePageView(),
-      name: profilePage,
+      page: () => CheckoutPageView(),
+      name: checkout,
     ),
     GetPage(
       page: () => const BuyPageView(),
@@ -110,12 +109,12 @@ class RoutesClass {
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),
-    GetPage(
-      name: productPage,
-      page: () => const ProductsPageView(),
-      // transition: Transition.leftToRight,
-      // transitionDuration: const Duration(milliseconds: 1000),
-    ),
+    // GetPage(
+    //   name: productPage,
+    //   page: () =>  ProductsPageView(),
+    //   // transition: Transition.leftToRight,
+    //   // transitionDuration: const Duration(milliseconds: 1000),
+    // ),
     // GetPage(
     //   name: productDetailPage,
     //   page: () => ProductDetailsPageView(),

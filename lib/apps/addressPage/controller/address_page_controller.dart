@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 class AddressPageController extends GetxController {
   static AddressPageController instance = Get.find();
 
-  var selectLabel = false.obs;
+  // var selectLabel = false.obs;
+  final selectLabel = RxString('');
 
   GlobalKey<FormState> addressFormKey =
       GlobalKey<FormState>(debugLabel: '_addressFormKey');
@@ -33,7 +34,6 @@ class AddressPageController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     addressList.bindStream(addressItem());
   }
@@ -57,8 +57,6 @@ class AddressPageController extends GetxController {
     divisionController.clear();
     thanaController.clear();
     zipCodeController.clear();
-
-    print('delete');
   }
 
   RxList addressList = [].obs;
@@ -144,7 +142,6 @@ class AddressPageController extends GetxController {
       //
       addAddressItem(
         auth.currentUser!.uid,
-        "default document id",
         'DS${UniqueKey().toString().replaceAll('[#', '').replaceAll(']', '')}',
         nameController.text.trim(),
         numberController.text.trim(),
@@ -152,7 +149,7 @@ class AddressPageController extends GetxController {
         divisionController.text.trim(),
         thanaController.text.trim(),
         zipCodeController.text.trim(),
-        "Home",
+        selectLabel.value,
         DateTime.now().toString(),
       );
 
@@ -180,7 +177,6 @@ class AddressPageController extends GetxController {
 
   addAddressItem(
     String userId,
-    String docId,
     String addressId,
     String name,
     String number,
@@ -191,8 +187,20 @@ class AddressPageController extends GetxController {
     String label,
     String createdAt,
   ) async {
+    final id = firestore
+        .collection(Urls.USER_COLLECTION)
+        .doc(auth.currentUser!.uid)
+        .collection(Urls.ADDRESS_COLLECTION)
+        .doc()
+        .id;
+    final docRef = firestore
+        .collection(Urls.USER_COLLECTION)
+        .doc(auth.currentUser!.uid)
+        .collection(Urls.ADDRESS_COLLECTION)
+        .doc(id);
+
     var add = AddressModel(
-      docId: docId,
+      docId: id,
       userId: userId,
       addressId: addressId,
       name: name,
@@ -204,10 +212,12 @@ class AddressPageController extends GetxController {
       label: label,
       createdAt: createdAt,
     );
-    await firestore
-        .collection(Urls.USER_COLLECTION)
-        .doc(auth.currentUser!.uid)
-        .collection(Urls.ADDRESS_COLLECTION)
-        .add(add.toJson());
+    // await firestore
+    //     .collection(Urls.USER_COLLECTION)
+    //     .doc(auth.currentUser!.uid)
+    //     .collection(Urls.ADDRESS_COLLECTION)
+    //     .add(add.toJson());
+
+    await docRef.set(add.toJson());
   }
 }

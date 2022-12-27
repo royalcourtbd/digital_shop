@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/signup_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

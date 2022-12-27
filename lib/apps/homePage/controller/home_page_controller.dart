@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/homePage/model/carousel_model.dart';
+import 'package:digital_shop/apps/widgets/use_for_back_button.dart';
 import 'package:digital_shop/general/constants/url.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -26,7 +28,14 @@ class HomePageController extends GetxController {
     carouselSnapshot();
     fToast = FToast();
     fToast.init(Get.context!);
+
     super.onInit();
+  }
+
+  void getToken() async {
+    await FirebaseMessaging.instance.getToken().then((token) {
+      print('I am the token$token');
+    });
   }
 
   showToast() {
@@ -68,22 +77,21 @@ class HomePageController extends GetxController {
     );
   }
 
+  Future<bool> exitButton() async {
+    return UseForBackButton.backButton();
+  }
+
   getCarouselImage() async {
     var response = await firestore.collection(Urls.CAROUSEL_IMAGE).get();
     carouselMap(response);
   }
 
   carouselMap(QuerySnapshot<Map<String, dynamic>> response) async {
-    var imageList = response.docs.map(
-      (e) {
-        return CarouselImageModel(
-          docId: e.id,
-          imageId: e["imageId"],
-          imagePath: e["imagePath"],
-          createdAt: e["createdAt"],
-        );
-      },
-    ).toList();
+    var imageList = response.docs
+        .map(
+          (e) => CarouselImageModel.fromJson(e.data()),
+        )
+        .toList();
     carouselSliderList.value = imageList;
   }
 

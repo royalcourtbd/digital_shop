@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digital_shop/apps/exchangePage/controller/exchange_page_controller.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -72,16 +71,28 @@ class ExchangePageView extends GetView<ExchangePageController> {
                   ],
                 ),
               )
-            : Center(
-                child: InkWell(
-                  onTap: () {
-                    Get.offAllNamed(RoutesClass.getLoginPageRoute());
-                  },
-                  child: const AutoSizeText(
-                    'Please Login First',
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
+            : Column(
+                children: [
+                  Image.asset(
+                    'assets/images/oops.jpg',
+                    scale: 2,
                   ),
-                ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Config.screenWidth! * .2,
+                        vertical: Config.screenHeight! * .02,
+                      ),
+                    ),
+                    child: const Text('Please Login Your Account'),
+                    onPressed: () {
+                      Get.offAllNamed(RoutesClass.getLoginPageRoute());
+                    },
+                  ),
+                ],
               ),
       ),
     );

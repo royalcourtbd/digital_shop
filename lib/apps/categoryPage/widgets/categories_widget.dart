@@ -1,9 +1,11 @@
 import 'package:digital_shop/apps/categoryPage/controller/category_page_controller.dart';
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_image/shimmer_image.dart';
+
+import '../../productPage/screen/products_page_view.dart';
 
 class CategoriesWidget extends GetView<CategoryPageController> {
   const CategoriesWidget({Key? key}) : super(key: key);
@@ -28,16 +30,39 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                 mainAxisSpacing: 10),
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: () {
-                  Fluttertoast.showToast(
-                    msg: controller.categoryList[index].categoryName!,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white70,
-                    fontSize: 16.0,
+                onTap: () async {
+                  Get.dialog(const AlertDialog(
+                    content: SizedBox(
+                      height: 50,
+                      width: 40,
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  ));
+                  categoryPageController.getProducts(
+                    controller.categoryList[index].categoryName!,
                   );
+                  categoryPageController.productsSnapshot(
+                    controller.categoryList[index].categoryName!,
+                  );
+
+                  await Future.delayed(const Duration(seconds: 2));
+                  Get.back();
+
+                  Get.to(
+                    () => ProductsPageView(
+                      title: controller.categoryList[index].categoryName!,
+                      products: categoryPageController.getProductByCategory,
+                    ),
+                  );
+                  // Fluttertoast.showToast(
+                  //   msg: controller.categoryList[index].categoryName!,
+                  //   toastLength: Toast.LENGTH_SHORT,
+                  //   gravity: ToastGravity.BOTTOM,
+                  //   timeInSecForIosWeb: 1,
+                  //   backgroundColor: Colors.green,
+                  //   textColor: Colors.white70,
+                  //   fontSize: 16.0,
+                  // );
                 },
                 child: Container(
                   decoration: BoxDecoration(
