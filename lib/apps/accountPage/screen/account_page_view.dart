@@ -228,7 +228,7 @@ class AccountPageView extends GetView<AccountPageController> {
                         ),
                         ProfileListTile(
                           onTap: () {
-                            Get.to(() => const PasswordResetPage());
+                            Get.to(() => PasswordResetPageView());
                           },
                           title: 'Change Password',
                           bgColor: const Color.fromARGB(255, 39, 42, 237),

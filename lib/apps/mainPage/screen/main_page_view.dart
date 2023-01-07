@@ -1,8 +1,8 @@
 import 'package:badges/badges.dart';
+import 'package:digital_shop/apps/authPage/screen/password_reset.dart';
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
-import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_exchange_page.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class MainPageView extends GetView<MainPageController> {
   final List<Map<String, dynamic>> pages = [
     {'page': const ExchangePageView(), 'title': 'Convert Your Money'},
     {'page': const CategoryPageView(), 'title': 'Category'},
-    {'page': const HomePageView(), 'title': 'Home'},
+    {'page': PasswordResetPageView(), 'title': 'Home'},
     {'page': const CartPageView(), 'title': 'Cart'},
     {'page': const AccountPageView(), 'title': 'Account'}
   ];

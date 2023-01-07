@@ -87,7 +87,7 @@ class LoginPageView extends GetView<LoginPageController> {
                         horizontal: 40, vertical: 10),
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => const PasswordResetPage());
+                        Get.to(() => PasswordResetPageView());
                       },
                       child: const AutoSizeText(
                         'Forgot Your Password?',

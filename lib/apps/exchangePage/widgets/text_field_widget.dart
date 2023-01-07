@@ -16,6 +16,7 @@ class TextFieldWidget extends GetView<BuyPageController> {
   bool autofocus;
   int maxLength;
   FocusNode? focusNode;
+  Widget? prefixIcon;
   List<TextInputFormatter> inputFormatters;
   TextEditingController textEditingController;
   TextFieldWidget({
@@ -32,6 +33,7 @@ class TextFieldWidget extends GetView<BuyPageController> {
     this.onTap,
     this.onSaved,
     this.validator,
+    this.prefixIcon,
     required this.textEditingController,
   }) : super(key: key);
 
@@ -65,6 +67,7 @@ class TextFieldWidget extends GetView<BuyPageController> {
             counterText: '',
             focusColor: Colors.white,
             border: InputBorder.none,
+            prefixIcon: prefixIcon,
           ),
           maxLength: maxLength,
           style: const TextStyle(
