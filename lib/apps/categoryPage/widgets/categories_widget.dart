@@ -54,6 +54,7 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                       products: categoryPageController.getProductByCategory,
                     ),
                   );
+                  mainPageController.interstitialAd.show();
                   // Fluttertoast.showToast(
                   //   msg: controller.categoryList[index].categoryName!,
                   //   toastLength: Toast.LENGTH_SHORT,
