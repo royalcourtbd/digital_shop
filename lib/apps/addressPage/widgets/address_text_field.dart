@@ -11,6 +11,8 @@ class AddressTextField extends GetView<AddressPageController> {
   List<TextInputFormatter> inputFormatters;
   TextInputType? keyboardType;
   int? maxLength;
+  Widget? prefixIcon;
+  Widget? suffixIcon;
 
   String hintText;
 
@@ -25,6 +27,8 @@ class AddressTextField extends GetView<AddressPageController> {
     this.onChanged,
     this.onSaved,
     this.onTap,
+    this.prefixIcon,
+    this.suffixIcon,
     this.maxLength,
     this.keyboardType = TextInputType.text,
     this.inputFormatters = const [],
@@ -45,6 +49,8 @@ class AddressTextField extends GetView<AddressPageController> {
         inputFormatters: inputFormatters,
         maxLength: maxLength,
         decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
           border: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.green,

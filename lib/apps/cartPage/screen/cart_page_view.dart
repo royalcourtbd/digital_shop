@@ -1,6 +1,8 @@
 import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../general/routes/routes.dart';
@@ -20,40 +22,53 @@ class CartPageView extends GetView<CartPageController> {
               centerTitle: true,
             )
           : null,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Obx(
-              () => authController.user.value != null
-                  ? BodyView()
-                  : Column(
-                      children: [
-                        Image.asset(
-                          'assets/images/oops.jpg',
-                          scale: 2,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Config.screenWidth! * .2,
-                              vertical: Config.screenHeight! * .02,
-                            ),
+      body: authController.user.value != null
+          ? SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Obx(
+                    () => controller.cartItemList.isNotEmpty
+                        ? const BodyView()
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: Config.screenHeight! * .1,
+                              ),
+                              Image.asset(
+                                'assets/images/empty.png',
+                              ),
+                              const Text('Nothing is added to cart')
+                            ],
                           ),
-                          child: const Text('Please Login Your Account'),
-                          onPressed: () {
-                            Get.offAllNamed(RoutesClass.getLoginPageRoute());
-                          },
-                        ),
-                      ],
+                  ),
+                ],
+              ),
+            )
+          : Column(
+              children: [
+                Image.asset(
+                  'assets/images/oops.jpg',
+                  scale: 2,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Config.screenWidth! * .2,
+                      vertical: Config.screenHeight! * .02,
                     ),
+                  ),
+                  child: const Text('Please Login Your Account'),
+                  onPressed: () {
+                    Get.offAllNamed(RoutesClass.getLoginPageRoute());
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
       bottomNavigationBar: authController.user.value != null
           ? BottomAppBar(
               elevation: 0,
@@ -86,7 +101,29 @@ class CartPageView extends GetView<CartPageController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          if (controller.cartLength > 0) {
+                            checkoutPageController.getChargeFromDB();
+
+                            EasyLoading.show(status: 'Please wait');
+
+                            await Future.delayed(const Duration(seconds: 2));
+                            EasyLoading.dismiss();
+
+                            Get.toNamed(RoutesClass.getCheckoutPageRoute());
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'Your Cart Is Empty',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white70,
+                              fontSize: 16.0,
+                            );
+                            print('cart is empty');
+                          }
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           height: Config.screenHeight! * .06,

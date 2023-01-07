@@ -1,5 +1,6 @@
 import 'package:digital_shop/apps/productPage/model/products_model.dart';
 import 'package:digital_shop/general/constants/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../general/constants/url.dart';
@@ -10,6 +11,7 @@ class ProductController extends GetxController {
 
   RxList<ProductModel> featuredProduct = RxList<ProductModel>([]);
   RxList<ProductModel> productsList = RxList<ProductModel>([]);
+  TextEditingController searchController = TextEditingController();
 
   //GlobalKey<CarouselSliderState> sliderKey = GlobalKey();
 
@@ -23,22 +25,17 @@ class ProductController extends GetxController {
   }
 
   @override
+  void onClose() {
+    mainPageController.initAdd();
+    super.onClose();
+  }
+
+  @override
   void onReady() {
     super.onReady();
     featuredProduct.bindStream(getFeaturedProducts());
     productsList.bindStream(getProduct());
   }
-
-  // Stream<List<ProductModel>> getFavoritProducts() =>
-  //     firestore.collection(Urls.FAVOURITEDEALS_COLLECTION).snapshots().map(
-  //           (query) => query.docs
-  //               .map(
-  //                 (item) => ProductModel.fromJson(
-  //                   item.data(),
-  //                 ),
-  //               )
-  //               .toList(),
-  //         );
 
   Stream<List<ProductModel>> getProduct() => firestore
           .collection(Urls.PRODUCTS_COLLECTION)

@@ -70,7 +70,7 @@ class ProductViewWidget extends GetView<ProductController> {
                                 controller.productsList.value[index].image[0],
                             width: double.infinity,
                             height: Config.screenHeight! * 2,
-                            boxFit: BoxFit.contain,
+                            boxFit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -80,10 +80,8 @@ class ProductViewWidget extends GetView<ProductController> {
                       child: Row(
                         children: [
                           Container(
-                            child: double.parse(
-                                      controller.productsList.value[index]
-                                          .discountPrice,
-                                    ) ==
+                            child: controller.productsList.value[index]
+                                        .discountPrice! ==
                                     0
                                 ? null
                                 : Text(
@@ -98,18 +96,11 @@ class ProductViewWidget extends GetView<ProductController> {
                                   ),
                           ),
                           SizedBox(
-                            width: double.parse(
-                                          controller
-                                              .productsList.value[index].price,
-                                        ) >
-                                        double.parse(
-                                          controller.productsList.value[index]
-                                              .discountPrice,
-                                        ) &&
-                                    double.parse(
-                                          controller.productsList.value[index]
-                                              .discountPrice,
-                                        ) !=
+                            width: controller.productsList.value[index].price! >
+                                        controller.productsList.value[index]
+                                            .discountPrice! &&
+                                    controller.productsList.value[index]
+                                            .discountPrice! !=
                                         0
                                 ? 15
                                 : 0,
@@ -118,67 +109,51 @@ class ProductViewWidget extends GetView<ProductController> {
                             '${controller.productsList.value[index].price}৳',
                             style: TextStyle(
                               fontFamily: 'Poppins',
-                              fontSize: double.parse(
-                                            controller.productsList.value[index]
-                                                .price,
-                                          ) >
-                                          double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) &&
-                                      double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) !=
-                                          0
-                                  ? 14
-                                  : 18,
-                              color: double.parse(
-                                            controller.productsList.value[index]
-                                                .price,
-                                          ) >
-                                          double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) &&
-                                      double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) !=
-                                          0
-                                  ? null
-                                  : Colors.red,
-                              fontWeight: double.parse(
-                                            controller.productsList.value[index]
-                                                .price,
-                                          ) >
-                                          double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) &&
-                                      double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) !=
-                                          0
-                                  ? null
-                                  : FontWeight.bold,
+                              fontSize:
+                                  controller.productsList.value[index].price! >
+                                              controller
+                                                  .productsList
+                                                  .value[index]
+                                                  .discountPrice! &&
+                                          controller.productsList.value[index]
+                                                  .discountPrice! !=
+                                              0
+                                      ? 14
+                                      : 18,
+                              color:
+                                  controller.productsList.value[index].price! >
+                                              controller
+                                                  .productsList
+                                                  .value[index]
+                                                  .discountPrice! &&
+                                          controller.productsList.value[index]
+                                                  .discountPrice! !=
+                                              0
+                                      ? null
+                                      : Colors.red,
+                              fontWeight:
+                                  controller.productsList.value[index].price! >
+                                              controller
+                                                  .productsList
+                                                  .value[index]
+                                                  .discountPrice! &&
+                                          controller.productsList.value[index]
+                                                  .discountPrice! !=
+                                              0
+                                      ? null
+                                      : FontWeight.bold,
                               overflow: TextOverflow.ellipsis,
-                              decoration: double.parse(
-                                            controller.productsList.value[index]
-                                                .price,
-                                          ) >
-                                          double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) &&
-                                      double.parse(
-                                            controller.productsList.value[index]
-                                                .discountPrice,
-                                          ) !=
-                                          0
-                                  ? TextDecoration.lineThrough
-                                  : null,
+                              decoration:
+                                  controller.productsList.value[index].price! >
+                                              controller
+                                                  .productsList
+                                                  .value[index]
+                                                  .discountPrice! &&
+                                          controller.productsList.value[index]
+                                                  .discountPrice! !=
+                                              0
+                                      ? TextDecoration.lineThrough
+                                      : null,
                             ),
                           ),
                         ],

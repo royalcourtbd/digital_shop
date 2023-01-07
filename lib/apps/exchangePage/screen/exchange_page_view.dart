@@ -1,5 +1,6 @@
 import 'package:digital_shop/apps/exchangePage/controller/exchange_page_controller.dart';
 import 'package:digital_shop/general/routes/routes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class ExchangePageView extends GetView<ExchangePageController> {
   @override
   Widget build(BuildContext context) {
     Config().init(context);
-    // TODO: implement build
+
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: true,
@@ -48,7 +49,9 @@ class ExchangePageView extends GetView<ExchangePageController> {
                       color: const Color(0xffE9DAC1),
                       onTap: () {
                         Get.toNamed(RoutesClass.getSellPageRoute());
-                        print('Sell Dollar From here');
+                        if (kDebugMode) {
+                          print('Sell Dollar From here');
+                        }
                       },
                       svgIcon: 'sell_icon.svg',
                     ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/categoryPage/model/category_model.dart';
 import 'package:digital_shop/apps/productPage/model/products_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../general/constants/constants.dart';
@@ -8,6 +9,11 @@ import '../../../general/constants/url.dart';
 
 class CategoryPageController extends GetxController {
   static CategoryPageController instance = Get.find();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final categoryList = RxList<CategoryModel>([]);
+  final getProductByCategory = RxList<ProductModel>([]);
+
+  int get categoryLength => categoryList.length;
 
   @override
   void onReady() {
@@ -20,10 +26,6 @@ class CategoryPageController extends GetxController {
     super.onInit();
     categoryList.bindStream(categoryItemList());
   }
-
-  final categoryList = RxList<CategoryModel>([]);
-
-  int get categoryLength => categoryList.length;
 
 //fetch Category from Firebase
   Stream<List<CategoryModel>> categoryItemList() =>
@@ -39,22 +41,6 @@ class CategoryPageController extends GetxController {
 
   //
 
-  // Stream<List<ProductModel>> getAllProductsByCategory(String category) =>
-  //     firestore
-  //         .collection(Urls.PRODUCTS_COLLECTION)
-  //         .where('category', isEqualTo: category)
-  //         .snapshots()
-  //         .map(
-  //           (query) => query.docs
-  //               .map(
-  //                 (item) => ProductModel.fromJson(
-  //                   item.data(),
-  //                 ),
-  //               )
-  //               .toList(),
-  //         );
-  final getProductByCategory = RxList<ProductModel>([]);
-
 //fetch Category Products by Category Name from Firebase
   getProducts(String category) async {
     var response = await firestore
@@ -62,6 +48,7 @@ class CategoryPageController extends GetxController {
         .where('category', isEqualTo: category)
         .where('available', isEqualTo: true)
         .get();
+
     productsMap(response);
   }
 
@@ -71,6 +58,7 @@ class CategoryPageController extends GetxController {
           (e) => ProductModel.fromJson(e.data()),
         )
         .toList();
+
     getProductByCategory.value = list;
   }
 

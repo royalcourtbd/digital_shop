@@ -10,4 +10,7 @@ class Urls {
   static const CART_COLLECTION = 'Cart';
   static const CATEGORY_COLLECTION = 'categories';
   static const ADDRESS_COLLECTION = 'address';
+  static const EXCHANGE_HISTORY = 'EXCHANGE_HISTORY';
+  static const SettingsCollection = 'Settings';
+  static const OrderProducts = 'OrderProducts';
 }

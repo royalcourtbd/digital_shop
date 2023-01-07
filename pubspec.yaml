@@ -60,7 +60,8 @@ dependencies:
   fancy_shimmer_image: ^2.0.2
   iconly: ^1.0.1
   fade_shimmer: ^2.2.0
-
+  flutter_typeahead: ^4.1.1
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:

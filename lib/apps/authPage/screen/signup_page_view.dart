@@ -16,6 +16,7 @@ class SignUpPageView extends GetView<SignUpPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
+      key: controller.scaffoldKey,
       extendBody: true,
       resizeToAvoidBottomInset: false,
       body: BackGround(

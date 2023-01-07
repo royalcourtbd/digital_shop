@@ -56,7 +56,7 @@ class RoutesClass {
       name: mainPage,
     ),
     GetPage(
-      page: () => AccountPageView(),
+      page: () => const AccountPageView(),
       name: accountPage,
     ),
     GetPage(
@@ -72,7 +72,7 @@ class RoutesClass {
       name: exchangePage,
     ),
     GetPage(
-      page: () => HomePageView(),
+      page: () => const HomePageView(),
       name: homePage,
     ),
     GetPage(
@@ -129,7 +129,7 @@ class RoutesClass {
     ),
     GetPage(
       name: addAddressPage,
-      page: () => AddAddressPageView(),
+      page: () => const AddAddressPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),

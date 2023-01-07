@@ -5,6 +5,7 @@ import '../../../general/constants/constants.dart';
 
 class SignUpPageController extends GetxController {
   static SignUpPageController instance = Get.find();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   GlobalKey<FormState> registerFormKey =
       GlobalKey<FormState>(debugLabel: '_signinFormKey');

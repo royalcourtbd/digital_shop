@@ -3,14 +3,10 @@ import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.d
 import 'package:digital_shop/apps/exchangePage/widgets/dollar_method_icon.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/info_title.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/text_field_for_sell_page.dart';
-import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
-import 'package:digital_shop/apps/mainPage/controller/main_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
 import '../model/bdt_product_model.dart';
 import '../model/send_usd_model.dart';
@@ -62,7 +58,7 @@ class SellPageView extends GetView<SellPageController> {
                             items: controller.sellUsdItem.map((SendUsdModel e) {
                               return DropdownMenuItem(
                                 value: e.dollarName,
-                                child: Text(e.dollarName),
+                                child: Text(e.dollarName!),
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -73,12 +69,12 @@ class SellPageView extends GetView<SellPageController> {
                               );
                               controller.imageUsd.value = controller
                                   .sellUsdItem[controller.indexUsd.value]
-                                  .dollarIcon;
+                                  .dollarIcon!;
 
                               controller.calculatAmount.value = double.parse(
                                 controller
                                     .sellUsdItem[controller.indexUsd.value]
-                                    .currentPrice,
+                                    .currentPrice!,
                               );
                             },
                           ),
@@ -119,7 +115,7 @@ class SellPageView extends GetView<SellPageController> {
                                 .map((BdtProductsModel e) {
                               return DropdownMenuItem(
                                 value: e.bdBankName,
-                                child: Text(e.bdBankName),
+                                child: Text(e.bdBankName!),
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -131,7 +127,7 @@ class SellPageView extends GetView<SellPageController> {
 
                               controller.imageBdt.value = controller
                                   .sellBDTItem[controller.indexBdt.value]
-                                  .bdBankIcon;
+                                  .bdBankIcon!;
 
                               print(controller.imageBdt.value);
                             },
@@ -347,13 +343,13 @@ class SellPageView extends GetView<SellPageController> {
           ),
         ),
       ),
-      bottomNavigationBar: mainPageController.isAdLoaded
-          ? SizedBox(
-              height: mainPageController.bannerAd.size.height.toDouble(),
-              width: mainPageController.bannerAd.size.width.toDouble(),
-              child: AdWidget(ad: mainPageController.bannerAd),
-            )
-          : const SizedBox(),
+      // bottomNavigationBar: mainPageController.isAdLoaded
+      //     ? SizedBox(
+      //         height: mainPageController.bannerAd.size.height.toDouble(),
+      //         width: mainPageController.bannerAd.size.width.toDouble(),
+      //         child: AdWidget(ad: mainPageController.bannerAd),
+      //       )
+      //     : const SizedBox(),
     );
   }
 }

@@ -9,6 +9,7 @@ import '../../../general/constants/url.dart';
 
 class CartPageController extends GetxController {
   static CartPageController instance = Get.find();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   get firestoreCartList => firestore
       .collection(Urls.USER_COLLECTION)
@@ -27,7 +28,9 @@ class CartPageController extends GetxController {
     cartItemList.bindStream(cartList());
   }
 
-  RxList cartItemList = [].obs;
+  //RxList cartItemList = [].obs;
+
+  RxList<CartModel> cartItemList = RxList<CartModel>([]);
 
   int get cartLength => cartItemList.length;
 
@@ -51,7 +54,7 @@ class CartPageController extends GetxController {
 
     calculate(
       cartItemList[index].discountPrice!.toDouble(),
-      cartItemList[index].quantity + 1,
+      cartItemList[index].quantity! + 1,
     );
     await firestoreCartList.doc(cartItemList[index].docId!).update(
       {
@@ -62,14 +65,14 @@ class CartPageController extends GetxController {
   }
 
   Future<void> decreaseQuantity(int index) async {
-    if (cartItemList[index].quantity >= 2) {
-      cartItemList[index].quantity--;
+    if (cartItemList[index].quantity! >= 2) {
+      cartItemList[index].quantity;
     } else {
       deleteItem(cartItemList[index].docId.toString());
     }
     calculate(
       cartItemList[index].discountPrice!.toDouble(),
-      cartItemList[index].quantity,
+      cartItemList[index].quantity!,
     );
     await firestoreCartList.doc(cartItemList[index].docId.toString()).update(
       {
@@ -106,6 +109,7 @@ class CartPageController extends GetxController {
             content: Text(
               '${productModel.productName!} already added to tha cart',
               style: const TextStyle(color: Colors.black54),
+              maxLines: 2,
             ),
             duration: const Duration(seconds: 2),
             backgroundColor: Colors.red.shade100,
@@ -124,14 +128,15 @@ class CartPageController extends GetxController {
         await Future.delayed(const Duration(seconds: 2));
         Get.back();
         cartItem(
+          productModel.docId,
           UniqueKey().toString().replaceAll('[#', '').replaceAll(']', ''),
           auth.currentUser!.uid,
           productModel.productId!,
           productModel.image![0],
           productModel.productName!,
-          double.parse(productModel.price!),
-          double.parse(productModel.discountPrice!),
-          calculate(double.parse(productModel.discountPrice.toString()), 1),
+          double.parse(productModel.price!.toString()),
+          double.parse(productModel.discountPrice!.toString()),
+          calculate(productModel.discountPrice!, 1),
           1,
           DateTime.now().toString(),
         );
@@ -139,6 +144,7 @@ class CartPageController extends GetxController {
           SnackBar(
             content: Text(
               '${productModel.productName!} Successfully added to the cart',
+              maxLines: 2,
             ),
             duration: const Duration(seconds: 2),
             backgroundColor: Colors.green.shade100,
@@ -156,6 +162,7 @@ class CartPageController extends GetxController {
   }
 
   cartItem(
+    String? docId,
     String cartId,
     String userId,
     String productId,
@@ -167,12 +174,12 @@ class CartPageController extends GetxController {
     int quantity,
     String createdAt,
   ) async {
-    final id = firestoreCartList.doc().id;
-    final docRef = firestoreCartList.doc(id);
+    // final id = firestoreCartList.doc().id;
+    final docRef = firestoreCartList.doc(docId);
 
     var cartItem = CartModel(
       cartId: cartId,
-      docId: id,
+      docId: docId,
       userId: userId,
       productId: productId,
       image: image,

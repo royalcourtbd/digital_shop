@@ -21,6 +21,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
+import '../../apps/orderHistory/controller/order_history_page_controller.dart';
+
 AccountPageController accountPageController = AccountPageController.instance;
 AuthController authController = AuthController.instance;
 LoginPageController loginPageController = LoginPageController.instance;
@@ -34,6 +36,8 @@ SellPageController sellPageController = SellPageController.instance;
 HomePageController homePageController = HomePageController.instance;
 MainPageController mainPageController = MainPageController.instance;
 AddressPageController addressPageController = AddressPageController.instance;
+OrderHistoryPageController orderHistoryPageController =
+    OrderHistoryPageController.instance;
 
 ProductDetailsPageController productDetailsPageController =
     ProductDetailsPageController.instance;
