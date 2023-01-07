@@ -16,6 +16,7 @@ class LoginPageView extends GetView<LoginPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
+      key: controller.scaffoldKey,
       extendBody: true,
       resizeToAvoidBottomInset: false,
       body: BackGround(

@@ -5,6 +5,7 @@ import '../../../general/constants/constants.dart';
 
 class LoginPageController extends GetxController {
   static LoginPageController instance = Get.find();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> loginFormKey =
       GlobalKey<FormState>(debugLabel: '_loginFormKey');
   var passwordVisibility = true.obs;

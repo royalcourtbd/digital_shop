@@ -33,7 +33,6 @@ class SellPageController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     sendAmountController = TextEditingController();
     sendNumberController = TextEditingController();
@@ -52,7 +51,6 @@ class SellPageController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     myFocusNode.dispose();
     sendAmountController.dispose();
     sendNumberController.dispose();
@@ -96,42 +94,36 @@ class SellPageController extends GetxController {
     return null;
   }
 
-  void sellSubmitButton() {
+  void sellSubmitButton() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
     formKey.currentState!.save();
+    addItem(
+      sendContactNumberController.text.trim(),
+      sendEmailController.text.trim(),
+      sendNoteController.text.trim(),
+      receiveAmount.value.toString(),
+      titleBdt.value,
+      titleUsd.value,
+      sendNumberController.text.trim(),
+      sendAmountController.text.trim(),
+      '${DateFormat('dd/MMM/yyyy').format(DateTime.now())} at ${DateFormat('hh:mm a').format(DateTime.now())}',
+    );
     Get.dialog(
       const AlertDialog(
-        title: Center(
-          child: CircularProgressIndicator(),
+        title: SizedBox(
+          height: 50,
+          width: 40,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       ),
     );
-    var contactNumber = sendContactNumberController.text.trim();
-    var email = sendEmailController.text.trim();
-    var note = sendNoteController.text.trim();
-    receiveAmount.value.toString();
-    var receiveMethod = titleBdt.value;
-    var sendMethod = titleUsd.value;
-    var sendNumber = sendNumberController.text.trim();
-    var sendAmount = sendAmountController.text.trim();
+    await Future.delayed(const Duration(seconds: 2));
 
-    var time =
-        '${DateFormat('dd/MMM/yyyy').format(DateTime.now())} at ${DateFormat('hh:mm a').format(DateTime.now())}';
-
-    addItem(
-      contactNumber,
-      email,
-      note,
-      receiveAmount,
-      receiveMethod,
-      sendMethod,
-      sendNumber,
-      sendAmount,
-      time,
-    );
     Get.back();
     Get.snackbar(
       'Succes',

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digital_shop/apps/exchangePage/controller/buy_page_controller.dart';
+import 'package:digital_shop/apps/exchangePage/model/send_usd_model.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/info_title.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/material_button_widget.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/text_field_widget.dart';
@@ -66,7 +67,7 @@ class BuyPageView extends GetView<BuyPageController> {
                                 .map((BdtProductsModel e) {
                               return DropdownMenuItem(
                                 value: e.bdBankName,
-                                child: Text(e.bdBankName),
+                                child: Text(e.bdBankName!),
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -78,7 +79,7 @@ class BuyPageView extends GetView<BuyPageController> {
 
                               controller.imageBdt.value = controller
                                   .bdProductsList[controller.indexBdt.value]
-                                  .bdBankIcon;
+                                  .bdBankIcon!;
 
                               value == 'bkash'
                                   ? controller.isBkash.value = false
@@ -269,7 +270,7 @@ class BuyPageView extends GetView<BuyPageController> {
               //Email Text Field
               TextFieldWidget(
                 textEditingController: controller.sendEmailController,
-                hintText: '@',
+                hintText: 'Coinbase Email',
                 textInputType: TextInputType.emailAddress,
                 validator: (value) {
                   return controller.validateEmail(value!);
@@ -344,7 +345,8 @@ class BuyPageView extends GetView<BuyPageController> {
                     Obx(
                       () => MaterialButtonWidget(
                         onPressed: () {
-                          controller.buySubmit();
+                          controller.buySubmit(
+                              BdtProductsModel(), SendUsdModel());
                         },
                         minWidth: 120,
                         text: controller.titleBdt.value == 'bkash'

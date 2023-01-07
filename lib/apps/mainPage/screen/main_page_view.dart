@@ -6,11 +6,11 @@ import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_exchange_page.dart';
 import 'package:digital_shop/apps/widgets/drawer_for_other_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../general/constants/constants.dart';
-import '../../../general/routes/routes.dart';
 import '../../../general/utils/config.dart';
 import '../../accountPage/screen/account_page_view.dart';
 import '../controller/main_page_controller.dart';
@@ -24,7 +24,7 @@ class MainPageView extends GetView<MainPageController> {
     {'page': const CategoryPageView(), 'title': 'Category'},
     {'page': const HomePageView(), 'title': 'Home'},
     {'page': const CartPageView(), 'title': 'Cart'},
-    {'page': AccountPageView(), 'title': 'Account'}
+    {'page': const AccountPageView(), 'title': 'Account'}
   ];
 
   // Widget currentPage = HomePageView();
@@ -161,42 +161,27 @@ class MainPageView extends GetView<MainPageController> {
                       svgIcon: 'account.svg',
                       onPressed: (() async {
                         if (authController.user.value != null) {
-                          Get.dialog(const AlertDialog(
-                            content: SizedBox(
-                              height: 50,
-                              width: 40,
-                              child: Center(child: CircularProgressIndicator()),
-                            ),
-                          ));
+                          accountPageController.getUserInfo();
+                          // accountPageController
+                          //     .getUserFromDB(auth.currentUser!.uid);
+
+                          // Get.dialog(
+                          //   const AlertDialog(
+                          //     content: SizedBox(
+                          //       height: 50,
+                          //       width: 40,
+                          //       child:
+                          //           Center(child: CircularProgressIndicator()),
+                          //     ),
+                          //   ),
+                          // );
+
+                          EasyLoading.show(status: 'Please wait');
                           await Future.delayed(const Duration(seconds: 2));
-                          Get.back();
+                          EasyLoading.dismiss();
                           controller.currentIndex.value = 4;
                         } else {
                           controller.currentIndex.value = 4;
-                          Column(
-                            children: [
-                              Image.asset(
-                                'assets/images/oops.jpg',
-                                scale: 2,
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: Config.screenWidth! * .2,
-                                    vertical: Config.screenHeight! * .02,
-                                  ),
-                                ),
-                                child: const Text('Please Login Your Account'),
-                                onPressed: () {
-                                  Get.offAllNamed(
-                                      RoutesClass.getLoginPageRoute());
-                                },
-                              ),
-                            ],
-                          );
                         }
                       }),
                       buttonName: 'Account',

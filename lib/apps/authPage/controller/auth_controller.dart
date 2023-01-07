@@ -6,7 +6,7 @@ import 'package:digital_shop/general/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 import '../../../general/constants/constants.dart';
 import '../../mainPage/screen/main_page_view.dart';
@@ -15,8 +15,6 @@ import '../screen/login_page_view.dart';
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> user;
-
-  GetStorage storage = GetStorage();
 
   @override
   void onReady() {
@@ -62,8 +60,6 @@ class AuthController extends GetxController {
           .then(
         (result) {
           String userId = result.user!.uid;
-          // String uName = result.user!.displayName!;
-          // String email = result.user!.email!;
 
           addUserToFirestore(userId);
         },
@@ -152,7 +148,8 @@ class AuthController extends GetxController {
       name: signUpPageController.nameController.text,
       userId: userId,
       image: '',
-      createdAt: DateTime.now().toString(),
+      createdAt:
+          '${DateFormat('dd/MMM/yyyy').format(DateTime.now())} at ${DateFormat('hh:mm a').format(DateTime.now())}',
       deviceToken: storage.read('deviceToken'),
     );
     firestore

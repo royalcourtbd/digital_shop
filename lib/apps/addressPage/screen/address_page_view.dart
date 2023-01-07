@@ -15,6 +15,7 @@ class AddressPageView extends GetView<AddressPageController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
+      key: controller.scaffoldKey,
       appBar: AppBar(
         title: const Text('Shipping Address'),
       ),

@@ -56,12 +56,14 @@ class HomePageView extends GetView<HomePageController> {
                   ));
                   await Future.delayed(const Duration(seconds: 2));
                   Get.back();
+
                   Get.to(
                     () => ProductsPageView(
                       title: 'Featured Product',
                       products: productController.featuredProduct,
                     ),
                   );
+                  mainPageController.interstitialAd.show();
                 },
                 child: const Chip(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -107,15 +109,29 @@ class HomePageView extends GetView<HomePageController> {
                 ),
                 Flexible(
                   child: SizedBox(
-                    height: Config.screenHeight! * .34,
+                    height: Config.screenHeight! * .37,
                     child: const featuredProductWidget(),
                   ),
                 ),
               ],
             ),
             const SizedBox(
-              width: 8,
+              height: 15,
             ),
+            // Container(
+            //   alignment: Alignment.center,
+            //   height: mainPageController.bannerAd.size.height.toDouble(),
+            //   width: mainPageController.bannerAd.size.width.toDouble(),
+            //   child: Obx(
+            //     () => mainPageController.googleAdsModel.value!.banner1 != null
+            //         ? AdWidget(ad: mainPageController.bannerAd)
+            //         : const SizedBox(),
+            //   ),
+            // ),
+            const SizedBox(
+              height: 15,
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -149,10 +165,13 @@ class HomePageView extends GetView<HomePageController> {
                       ));
                       await Future.delayed(const Duration(seconds: 2));
                       Get.back();
-                      Get.to(() => ProductsPageView(
-                            title: 'All Products',
-                            products: productController.productsList,
-                          ));
+                      Get.to(
+                        () => ProductsPageView(
+                          title: 'All Products',
+                          products: productController.productsList,
+                        ),
+                      );
+                      mainPageController.interstitialAd.show();
                     },
                     child: const Chip(
                       padding:

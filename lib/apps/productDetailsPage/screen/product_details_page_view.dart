@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
@@ -346,52 +345,55 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
         ),
       ),
 
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-        child: Container(
-          alignment: Alignment.center,
-          height: Config.screenHeight! * .06,
-          child: Row(
-            children: [
-              Expanded(
-                child: CartButton(
-                  onPressed: () {
-                    Fluttertoast.showToast(
-                      msg: "This is Center Short Toast",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
-                  },
-                  color: Colors.green,
-                  title: 'Buy Now',
-                ),
-              ),
-              Expanded(
-                child: CartButton(
-                  onPressed: () {
-                    authController.user.value != null
-                        ? cartPageController.addProducToCart(productValue)
-                        : ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text(
-                                'Please Login First',
-                                style: TextStyle(color: Colors.black54),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: BottomAppBar(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
+          child: Container(
+            alignment: Alignment.center,
+            height: Config.screenHeight! * .07,
+            child: Row(
+              children: [
+                // Expanded(
+                //   child: CartButton(
+                //     onPressed: () {
+                //       Fluttertoast.showToast(
+                //         msg: "This is Center Short Toast",
+                //         toastLength: Toast.LENGTH_SHORT,
+                //         gravity: ToastGravity.BOTTOM,
+                //         timeInSecForIosWeb: 1,
+                //         backgroundColor: Colors.red,
+                //         textColor: Colors.white,
+                //         fontSize: 16.0,
+                //       );
+                //     },
+                //     color: Colors.green,
+                //     title: 'Buy Now',
+                //   ),
+                // ),
+                Expanded(
+                  child: CartButton(
+                    onPressed: () {
+                      authController.user.value != null
+                          ? cartPageController.addProducToCart(productValue)
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text(
+                                  'Please Login First',
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: Colors.red.shade100,
                               ),
-                              duration: const Duration(seconds: 2),
-                              backgroundColor: Colors.red.shade100,
-                            ),
-                          );
-                  },
-                  color: Colors.red,
-                  title: 'Add to Cart',
+                            );
+                    },
+                    color: Colors.red,
+                    title: 'Add to Cart',
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

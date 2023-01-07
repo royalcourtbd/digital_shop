@@ -12,14 +12,14 @@ class BottomMenuItemWidget extends GetView<MainPageController> {
   VoidCallback onPressed;
   double fontSize;
   int color;
-  BottomMenuItemWidget(
-      {Key? key,
-      required this.svgIcon,
-      required this.onPressed,
-      required this.buttonName,
-      this.fontSize = 12.0,
-      required this.color})
-      : super(key: key);
+  BottomMenuItemWidget({
+    Key? key,
+    required this.svgIcon,
+    required this.onPressed,
+    required this.buttonName,
+    this.fontSize = 12.0,
+    required this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

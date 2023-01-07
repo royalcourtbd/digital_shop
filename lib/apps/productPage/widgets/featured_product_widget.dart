@@ -28,7 +28,7 @@ class featuredProductWidget extends GetView<ProductController> {
             child: InkWell(
               onTap: () {
                 Get.to(
-                  ProductDetailsPageView(
+                  () => ProductDetailsPageView(
                     productValue: productController.featuredProduct[index],
                   ),
                 );
@@ -48,7 +48,7 @@ class featuredProductWidget extends GetView<ProductController> {
                           ),
                         ),
                         width: double.infinity,
-                        height: Config.screenHeight! * .17,
+                        height: Config.screenHeight! * .18,
                         child: Obx(
                           () => ClipRRect(
                             borderRadius: const BorderRadius.only(
@@ -63,7 +63,7 @@ class featuredProductWidget extends GetView<ProductController> {
                                   .featuredProduct[index].image![0],
                               width: double.infinity,
                               height: Config.screenHeight! * .16,
-                              boxFit: BoxFit.contain,
+                              boxFit: BoxFit.fill,
                             ),
                           ),
                         ),
@@ -73,11 +73,8 @@ class featuredProductWidget extends GetView<ProductController> {
                         child: Row(
                           children: [
                             Container(
-                              child: double.parse(
-                                        productController.featuredProduct[index]
-                                            .discountPrice
-                                            .toString(),
-                                      ) ==
+                              child: productController.featuredProduct[index]
+                                          .discountPrice! ==
                                       0
                                   ? null
                                   : Text(
@@ -92,23 +89,13 @@ class featuredProductWidget extends GetView<ProductController> {
                                     ),
                             ),
                             SizedBox(
-                              width: double.parse(
-                                            productController
-                                                .featuredProduct[index].price
-                                                .toString(),
-                                          ) >
-                                          double.parse(
-                                            productController
-                                                .featuredProduct[index]
-                                                .discountPrice
-                                                .toString(),
-                                          ) &&
-                                      double.parse(
-                                            productController
-                                                .featuredProduct[index]
-                                                .discountPrice
-                                                .toString(),
-                                          ) !=
+                              width: productController
+                                              .featuredProduct[index].price! >
+                                          productController
+                                              .featuredProduct[index]
+                                              .discountPrice! &&
+                                      productController.featuredProduct[index]
+                                              .discountPrice !=
                                           0
                                   ? 15
                                   : 0,
@@ -116,85 +103,44 @@ class featuredProductWidget extends GetView<ProductController> {
                             Text(
                               '${productController.featuredProduct[index].price}৳',
                               style: TextStyle(
-                                fontSize: double.parse(
-                                              productController
-                                                  .featuredProduct[index].price
-                                                  .toString(),
-                                            ) >
-                                            double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) &&
-                                        double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) !=
+                                fontSize: productController
+                                                .featuredProduct[index].price! >
+                                            productController
+                                                .featuredProduct[index]
+                                                .discountPrice! &&
+                                        productController.featuredProduct[index]
+                                                .discountPrice !=
                                             0
                                     ? 14
                                     : 16,
-                                color: double.parse(
-                                              productController
-                                                  .featuredProduct[index].price
-                                                  .toString(),
-                                            ) >
-                                            double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) &&
-                                        double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) !=
+                                color: productController
+                                                .featuredProduct[index].price! >
+                                            productController
+                                                .featuredProduct[index]
+                                                .discountPrice! &&
+                                        productController.featuredProduct[index]
+                                                .discountPrice !=
                                             0
                                     ? null
                                     : Colors.red,
-                                fontWeight: double.parse(
-                                              productController
-                                                  .featuredProduct[index].price
-                                                  .toString(),
-                                            ) >
-                                            double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) &&
-                                        double.parse(
-                                              // ignore: invalid_use_of_protected_member
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) !=
+                                fontWeight: productController
+                                                .featuredProduct[index].price! >
+                                            productController
+                                                .featuredProduct[index]
+                                                .discountPrice! &&
+                                        productController.featuredProduct[index]
+                                                .discountPrice !=
                                             0
                                     ? null
                                     : FontWeight.bold,
                                 overflow: TextOverflow.ellipsis,
-                                decoration: double.parse(
-                                              productController
-                                                  .featuredProduct[index].price
-                                                  .toString(),
-                                            ) >
-                                            double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) &&
-                                        double.parse(
-                                              productController
-                                                  .featuredProduct[index]
-                                                  .discountPrice
-                                                  .toString(),
-                                            ) !=
+                                decoration: productController
+                                                .featuredProduct[index].price! >
+                                            productController
+                                                .featuredProduct[index]
+                                                .discountPrice! &&
+                                        productController.featuredProduct[index]
+                                                .discountPrice !=
                                             0
                                     ? TextDecoration.lineThrough
                                     : null,

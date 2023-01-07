@@ -1,6 +1,7 @@
 import 'package:digital_shop/general/utils/config.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:get/get.dart';
 
@@ -10,6 +11,9 @@ import '../model/products_model.dart';
 
 class ProductsPageView extends GetView<ProductController> {
   List<ProductModel> products;
+
+  List<ProductModel>? searchList;
+
   String? title;
   ProductsPageView({Key? key, required this.products, this.title})
       : super(key: key);
@@ -26,6 +30,100 @@ class ProductsPageView extends GetView<ProductController> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TypeAheadFormField(
+                getImmediateSuggestions: true,
+                hideSuggestionsOnKeyboardHide: true,
+                hideOnEmpty: false,
+                onSuggestionSelected: (ProductModel suggestion) {
+                  controller.searchController.text =
+                      suggestion.productName.toString();
+                },
+                itemBuilder: (context, ProductModel itemData) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        onTap: () async {
+                          searchList = products
+                              .where((element) =>
+                                  element.productName == itemData.productName)
+                              .toList();
+
+                          await Get.off(
+                            () => ProductsPageView(
+                              title: 'Searched Products',
+                              products: searchList!,
+                            ),
+                          );
+                        },
+                        title: Text(itemData.productName.toString()),
+                      ),
+                      const Divider(),
+                    ],
+                  );
+                },
+                textFieldConfiguration: TextFieldConfiguration(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    //enabledBorder: InputBorder.none,
+                    //focusedBorder: InputBorder.none,
+                    hintStyle:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    hoverColor: Colors.black,
+                    prefixIcon: const Icon(Icons.search),
+                    prefixIconColor: Theme.of(context).colorScheme.primary,
+                    contentPadding: const EdgeInsets.only(top: 16),
+                    hintText: 'Search Here...',
+                  ),
+
+                  controller: controller.searchController,
+                  // style:
+                  //     TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.search,
+                  onSubmitted: (value) async {
+                    print('object');
+                    searchList = products
+                        .where((element) => element.productName!
+                            .toLowerCase()
+                            .contains(value.toLowerCase()))
+                        .toList();
+
+                    await Get.to(
+                      () => ProductsPageView(
+                        title: 'Searched Products',
+                        products: searchList!,
+                      ),
+                    );
+                  },
+                ),
+                suggestionsCallback: (pattern) => products.where(
+                  (element) {
+                    if (element.productName!
+                        .toLowerCase()
+                        .contains(pattern.toLowerCase())) {
+                      return element.productName!
+                          .toLowerCase()
+                          .contains(pattern.toLowerCase());
+                    } else if (element.description!
+                        .toLowerCase()
+                        .contains(pattern.toLowerCase())) {
+                      return element.description!
+                          .toLowerCase()
+                          .contains(pattern.toLowerCase());
+                    } else {
+                      return element.category!
+                          .toLowerCase()
+                          .contains(pattern.toLowerCase());
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             Obx(
               () => products.isNotEmpty
                   ? GridView(
@@ -78,7 +176,7 @@ class ProductsPageView extends GetView<ProductController> {
                                           imageUrl: element.image![0],
                                           width: double.infinity,
                                           height: Config.screenHeight! * 2,
-                                          boxFit: BoxFit.contain,
+                                          boxFit: BoxFit.fill,
                                         ),
                                       ),
                                     ),
@@ -88,10 +186,7 @@ class ProductsPageView extends GetView<ProductController> {
                                       child: Row(
                                         children: [
                                           Container(
-                                            child: double.parse(
-                                                      element.discountPrice!,
-                                                    ) ==
-                                                    0
+                                            child: element.discountPrice! == 0
                                                 ? null
                                                 : Text(
                                                     '${element.discountPrice}৳',
@@ -107,19 +202,10 @@ class ProductsPageView extends GetView<ProductController> {
                                                   ),
                                           ),
                                           SizedBox(
-                                            width: double.parse(
-                                                          element.price
-                                                              .toString(),
-                                                        ) >
-                                                        double.parse(
-                                                          element.discountPrice
-                                                              .toString(),
-                                                        ) &&
-                                                    double.parse(
-                                                          element.discountPrice
-                                                              .toString(),
-                                                        ) !=
-                                                        0
+                                            width: element.price! >
+                                                        element
+                                                            .discountPrice! &&
+                                                    element.discountPrice != 0
                                                 ? 15
                                                 : 0,
                                           ),
@@ -127,73 +213,30 @@ class ProductsPageView extends GetView<ProductController> {
                                             '${element.price}৳',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
-                                              fontSize: double.parse(
-                                                            element.price
-                                                                .toString(),
-                                                          ) >
-                                                          double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) &&
-                                                      double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) !=
-                                                          0
+                                              fontSize: element.price! >
+                                                          element
+                                                              .discountPrice! &&
+                                                      element.discountPrice != 0
                                                   ? 14
                                                   : 18,
-                                              color: double.parse(
-                                                            element.price
-                                                                .toString(),
-                                                          ) >
-                                                          double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) &&
-                                                      double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) !=
+                                              color: element.price! >
+                                                          element
+                                                              .discountPrice! &&
+                                                      element.discountPrice! !=
                                                           0
                                                   ? null
                                                   : Colors.red,
-                                              fontWeight: double.parse(
-                                                            element.price
-                                                                .toString(),
-                                                          ) >
-                                                          double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) &&
-                                                      double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) !=
-                                                          0
+                                              fontWeight: element.price! >
+                                                          element
+                                                              .discountPrice! &&
+                                                      element.discountPrice != 0
                                                   ? null
                                                   : FontWeight.bold,
                                               overflow: TextOverflow.ellipsis,
-                                              decoration: double.parse(
-                                                            element.price
-                                                                .toString(),
-                                                          ) >
-                                                          double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) &&
-                                                      double.parse(
-                                                            element
-                                                                .discountPrice
-                                                                .toString(),
-                                                          ) !=
-                                                          0
+                                              decoration: element.price! >
+                                                          element
+                                                              .discountPrice! &&
+                                                      element.discountPrice != 0
                                                   ? TextDecoration.lineThrough
                                                   : null,
                                             ),

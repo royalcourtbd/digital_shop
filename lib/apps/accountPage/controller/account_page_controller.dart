@@ -1,18 +1,18 @@
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/authPage/model/user_model.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/constants/url.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-
-UserModel? userModel;
+import 'package:image_picker/image_picker.dart';
 
 class AccountPageController extends GetxController {
   static AccountPageController instance = Get.find();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   RxBool isShimmerActive = true.obs;
 
   List iconList = [
@@ -37,36 +37,26 @@ class AccountPageController extends GetxController {
   Rx<UserModel?> profile = UserModel().obs;
 
   @override
-  void onReady() {
-    authController.user.value != null
-        ? getUserFromDB(auth.currentUser!.uid)
-        : null;
-    super.onReady();
-  }
-
-  @override
   void onInit() {
-    authController.user.value != null
-        ? getUserFromDB(auth.currentUser!.uid)
-        : null;
+    getUserInfo();
     super.onInit();
   }
 
 //fetch Account Data to firebase firestore
 
-  Future getUserFromDB(String uid) async {
+  getUserInfo() async {
+    String uid = auth.currentUser!.uid;
+
     try {
-      var userData =
-          await firestore.collection(Urls.USER_COLLECTION).doc(uid).get();
-
-      userModel = UserModel.fromJson(userData.data()!);
-
-      log(userModel!.userId!);
-      profile.value = userModel;
-
-      return userModel!;
-    } on FirebaseException catch (e) {
-      return e.message;
+      firestore
+          .collection(Urls.USER_COLLECTION)
+          .doc(uid)
+          .snapshots()
+          .listen((event) {
+        profile.value = UserModel.fromJson(event.data()!);
+      });
+    } catch (error) {
+      throw Exception(error);
     }
   }
 
@@ -84,5 +74,44 @@ class AccountPageController extends GetxController {
         .doc(auth.currentUser!.uid)
         .collection('order')
         .add(order.toJson());
+  }
+
+  final isUploading = RxBool(false);
+
+  final profileImage = RxString('');
+
+  final ImageSource _imageSource = ImageSource.gallery;
+
+  Future<String> updateImage(XFile xFile) async {
+    final imageName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final photoRef =
+        FirebaseStorage.instance.ref().child('Profile Image/$imageName');
+    final uploadTask = photoRef.putFile(File(xFile.path));
+    final snapshot = await uploadTask.whenComplete(() => null);
+
+    return snapshot.ref.getDownloadURL();
+  }
+
+  void addProfileImage(String uid) async {
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    if (selectedImage != null) {
+      isUploading.value = true;
+
+      try {
+        final url = await updateImage(selectedImage);
+
+        profileImage.value = url;
+        await firestore.collection(Urls.USER_COLLECTION).doc(uid).update(
+          {
+            'image': url,
+          },
+        );
+        log(url);
+        isUploading.value = false;
+      } catch (e) {
+        //
+      } finally {}
+    }
   }
 }

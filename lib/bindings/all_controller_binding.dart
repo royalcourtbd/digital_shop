@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import '../apps/accountPage/controller/account_page_controller.dart';
 
 import '../apps/mainPage/controller/main_page_controller.dart';
+import '../apps/orderHistory/controller/order_history_page_controller.dart';
 import '../apps/productDetailsPage/controller/product_details_page_controller.dart';
 
 class AllControllerBinding implements Bindings {
@@ -23,6 +24,7 @@ class AllControllerBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<AccountPageController>(
       () => AccountPageController(),
+      fenix: true,
     );
     Get.lazyPut<CartPageController>(
       () => CartPageController(),
@@ -34,7 +36,7 @@ class AllControllerBinding implements Bindings {
     );
     Get.lazyPut<ExchangePageController>(
       () => ExchangePageController(),
-      //fenix: true,
+      fenix: true,
     );
     Get.lazyPut<HomePageController>(
       () => HomePageController(),
@@ -83,6 +85,10 @@ class AllControllerBinding implements Bindings {
     );
     Get.lazyPut<AddressPageController>(
       () => AddressPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<OrderHistoryPageController>(
+      () => OrderHistoryPageController(),
       fenix: true,
     );
   }

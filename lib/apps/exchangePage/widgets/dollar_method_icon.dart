@@ -33,7 +33,7 @@ class BuyMethodBDTIcon extends GetView<BuyPageController> {
             : FancyShimmerImage(
                 errorWidget: Image.asset('assets/images/loading.jpg'),
                 imageUrl: controller.imageBdt.value,
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
               ),
       ),
     );
@@ -63,12 +63,12 @@ class BuyMethodUSDIcon extends GetView<BuyPageController> {
         child: controller.imageUsd.value == 'assets/currency/bank.png'
             ? Image.asset(
                 controller.imageUsd.value,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               )
             : FancyShimmerImage(
                 errorWidget: Image.asset('assets/images/loading.jpg'),
                 imageUrl: controller.imageUsd.value,
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
               ),
       ),
     );
@@ -101,7 +101,7 @@ class SellMethodUSDIcon extends GetView<SellPageController> {
             : FancyShimmerImage(
                 errorWidget: Image.asset('assets/images/loading.jpg'),
                 imageUrl: controller.imageUsd.value,
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
               ),
       ),
     );
@@ -134,7 +134,7 @@ class SellMethodBDTIcon extends GetView<SellPageController> {
               )
             : FancyShimmerImage(
                 imageUrl: controller.imageBdt.value,
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
                 errorWidget: Image.asset('assets/images/loading.jpg'),
               ),
       ),

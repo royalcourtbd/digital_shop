@@ -11,16 +11,16 @@ String sendUsdModelToJson(SendUsdModel data) => json.encode(data.toJson());
 
 class SendUsdModel {
   SendUsdModel({
-    required this.id,
-    required this.dollarName,
-    required this.dollarIcon,
-    required this.currentPrice,
+    this.id,
+    this.dollarName,
+    this.dollarIcon,
+    this.currentPrice,
   });
 
-  String id;
-  String dollarName;
-  String dollarIcon;
-  String currentPrice;
+  String? id;
+  String? dollarName;
+  String? dollarIcon;
+  String? currentPrice;
 
   factory SendUsdModel.fromJson(Map<String, dynamic> json) => SendUsdModel(
         id: json["id"],

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digital_shop/apps/exchangePage/model/exchange_history_model.dart';
 import 'package:digital_shop/apps/exchangePage/model/received_usd_model.dart';
+import 'package:digital_shop/apps/exchangePage/model/send_usd_model.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../general/constants/url.dart';
 import '../model/bdt_product_model.dart';
 
 class BuyPageController extends GetxController {
@@ -81,12 +84,23 @@ class BuyPageController extends GetxController {
     return null;
   }
 
-  void buySubmit() {
+  void buySubmit(BdtProductsModel bdtProductsModel, SendUsdModel sendUsdModel) {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
     formKey.currentState!.save();
+    buyDollar(
+      sendNumberController.text,
+      DateTime.now().toString(),
+      receiveAmount.value.toString(),
+      titleBdt.value,
+      imageBdt.value,
+      sendAmountController.text,
+      titleUsd.value,
+      imageUsd.value,
+      false,
+    );
   }
 
   void cancelButton() {
@@ -96,6 +110,20 @@ class BuyPageController extends GetxController {
     sendTrxIdController.clear();
     sendNumberController.clear();
   }
+
+//fetch Category from Firebase
+  Stream<List<ReceivedUsdModel>> usdItemList() =>
+      firestore.collection(Urls.CATEGORY_COLLECTION).snapshots().map(
+            (query) => query.docs
+                .map(
+                  (item) => ReceivedUsdModel.fromJson(
+                    item.data(),
+                  ),
+                )
+                .toList(),
+          );
+
+  //
 
   Future getBDTProductsList() async {
     var response = await firestore.collection(bdtCollection).get();
@@ -150,7 +178,7 @@ class BuyPageController extends GetxController {
 
   //
   var paymentNotice =
-      'নিচের BKash নাম্বারে টাকা পাঠানোর পর Submit Button-এ ক্লিক করুন ।\nCash Out From : 01749247855   (Agent Number)'
+      'নিচের BKash নাম্বারে টাকা পাঠানোর পর Submit Button-এ ক্লিক করুন ।\nPayment To : 01642294321   (Merchant Number)'
           .obs;
   final scrollController = ScrollController();
   RxString imageBdt = 'assets/currency/bank.png'.obs;
@@ -177,5 +205,35 @@ class BuyPageController extends GetxController {
 
   void visibility() {
     isBkash.value = !isBkash.value;
+  }
+
+  buyDollar(
+      String contactNumber,
+      String createdAt,
+      String receivedAmount,
+      String receivedMethod,
+      String receivedMethodIcon,
+      String sendAmount,
+      String sendMethod,
+      String sendMethodIcon,
+      bool status,
+      {String? trxId}) async {
+    final id = firestore.collection(Urls.EXCHANGE_HISTORY).doc().id;
+    final docRef = firestore.collection(Urls.EXCHANGE_HISTORY).doc(id);
+    final toExchange = ExchangeHistoryModel(
+      docId: id,
+      contactNumber: contactNumber,
+      createdAt: createdAt,
+      receivedAmount: receivedAmount,
+      receivedMethod: receivedMethod,
+      receivedMethodIcon: receivedMethodIcon,
+      sendAmount: sendAmount,
+      sendMethod: sendMethod,
+      sendMethodIcon: sendMethodIcon,
+      status: status,
+      trxId: trxId,
+    );
+
+    await docRef.set(toExchange.toJson());
   }
 }

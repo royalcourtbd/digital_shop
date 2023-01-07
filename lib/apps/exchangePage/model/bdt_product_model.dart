@@ -1,15 +1,15 @@
 class BdtProductsModel {
   BdtProductsModel({
-    required this.id,
-    required this.bdBankName,
-    required this.bdBankIcon,
-    required this.baBankAccountNumber,
+    this.id,
+    this.bdBankName,
+    this.bdBankIcon,
+    this.baBankAccountNumber,
   });
 
-  String id;
-  String bdBankName;
-  String bdBankIcon;
-  String baBankAccountNumber;
+  String? id;
+  String? bdBankName;
+  String? bdBankIcon;
+  String? baBankAccountNumber;
 
   factory BdtProductsModel.fromJson(Map<String, dynamic> json) =>
       BdtProductsModel(
