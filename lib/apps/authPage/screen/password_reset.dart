@@ -13,6 +13,7 @@ class PasswordResetPageView extends GetView<PasswordResetController> {
   Widget build(BuildContext context) {
     Config().init(context);
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
@@ -49,7 +50,7 @@ class PasswordResetPageView extends GetView<PasswordResetController> {
                 child: TextFieldWidget(
                   textInputType: TextInputType.emailAddress,
                   hintText: 'Email Address',
-                  textEditingController: controller.controller,
+                  textEditingController: controller.passwordController,
                   prefixIcon: const Icon(IconlyLight.message),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (p0) {

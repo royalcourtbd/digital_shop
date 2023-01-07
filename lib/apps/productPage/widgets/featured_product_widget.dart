@@ -48,7 +48,7 @@ class featuredProductWidget extends GetView<ProductController> {
                           ),
                         ),
                         width: double.infinity,
-                        height: Config.screenHeight! * .18,
+                        height: Config.screenHeight! * .2,
                         child: Obx(
                           () => ClipRRect(
                             borderRadius: const BorderRadius.only(

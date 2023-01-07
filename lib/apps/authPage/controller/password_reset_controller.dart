@@ -1,16 +1,25 @@
+import 'package:digital_shop/general/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class PasswordResetController extends GetxController {
   static PasswordResetController instance = Get.find();
   GlobalKey<FormState> formKey = GlobalKey<FormState>(debugLabel: '_formKey');
 
-  final controller = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void onInit() {
+    passwordController = TextEditingController();
+    super.onInit();
+  }
+
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    passwordController.dispose();
   }
 
   Future passwordReset() async {
@@ -20,17 +29,10 @@ class PasswordResetController extends GetxController {
     }
     formKey.currentState!.save();
 
-    Get.dialog(
-      const AlertDialog(
-        title: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
+    EasyLoading.show();
 
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: controller.text.trim());
+      await auth.sendPasswordResetEmail(email: passwordController.text.trim());
       Get.back();
 
       Get.snackbar(
@@ -38,8 +40,10 @@ class PasswordResetController extends GetxController {
         'An email send to your registered email address',
         snackPosition: SnackPosition.BOTTOM,
       );
-      controller.clear();
+      EasyLoading.dismiss();
+      passwordController.clear();
     } on FirebaseAuthException catch (e) {
+      EasyLoading.dismiss();
       Get.back();
       showDialog(
         context: Get.context!,

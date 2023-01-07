@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 class AddressLabel extends GetView<AddressPageController> {
   String title;
   VoidCallback onTap;
+  Color? backgroundColor;
   Color? borderColor;
+  Color? textColor;
   AddressLabel({
     Key? key,
     required this.title,
     this.borderColor,
+    this.backgroundColor,
+    this.textColor,
     required this.onTap,
   }) : super(key: key);
 
@@ -18,17 +22,19 @@ class AddressLabel extends GetView<AddressPageController> {
     return InkWell(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
+          horizontal: 15,
+          vertical: 10,
         ),
         decoration: BoxDecoration(
           border: Border.all(color: borderColor!),
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
           title,
-          style: const TextStyle(fontSize: 15),
+          style: TextStyle(fontSize: 18, color: textColor),
         ),
       ),
     );

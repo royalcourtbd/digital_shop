@@ -10,7 +10,6 @@ import 'package:iconly/iconly.dart';
 
 import '../../../general/routes/routes.dart';
 import '../../../general/utils/config.dart';
-import '../../authPage/screen/password_reset.dart';
 import '../widgets/profile_list_tile.dart';
 
 class AccountPageView extends GetView<AccountPageController> {
@@ -24,6 +23,7 @@ class AccountPageView extends GetView<AccountPageController> {
       body: authController.user.value != null
           ? Obx(
               (() => SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -228,7 +228,9 @@ class AccountPageView extends GetView<AccountPageController> {
                         ),
                         ProfileListTile(
                           onTap: () {
-                            Get.to(() => PasswordResetPageView());
+                            Get.toNamed(
+                              RoutesClass.getPasswordResetPageRoute(),
+                            );
                           },
                           title: 'Change Password',
                           bgColor: const Color.fromARGB(255, 39, 42, 237),
