@@ -38,7 +38,7 @@ class AccountPageController extends GetxController {
 
   @override
   void onInit() {
-    getUserInfo();
+    authController.user.value != null ? getUserInfo() : null;
     super.onInit();
   }
 

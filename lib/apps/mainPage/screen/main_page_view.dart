@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:badges/badges.dart';
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
@@ -20,11 +22,11 @@ class MainPageView extends GetView<MainPageController> {
   MainPageView({Key? key}) : super(key: key);
 
   final List<Map<String, dynamic>> pages = [
-    {'page': const ExchangePageView(), 'title': 'Convert Your Money'},
-    {'page': const CategoryPageView(), 'title': 'Category'},
-    {'page': const HomePageView(), 'title': 'Home'},
-    {'page': const CartPageView(), 'title': 'Cart'},
-    {'page': const AccountPageView(), 'title': 'Account'}
+    {'page': const ExchangePageView(), 'title': 'assets/images/DS_Logo.png'},
+    {'page': const CategoryPageView(), 'title': 'assets/images/DS_Logo.png'},
+    {'page': const HomePageView(), 'title': 'assets/images/DS_Logo.png'},
+    {'page': const CartPageView(), 'title': 'assets/images/DS_Logo.png'},
+    {'page': const AccountPageView(), 'title': 'assets/images/DS_Logo.png'}
   ];
 
   // Widget currentPage = HomePageView();
@@ -35,7 +37,12 @@ class MainPageView extends GetView<MainPageController> {
       onWillPop: () => homePageController.exitButton(),
       child: Scaffold(
         appBar: AppBar(
-          title: Obx(() => Text(pages[controller.currentIndex.value]['title'])),
+          title: Obx(
+            () => Image.asset(
+              pages[controller.currentIndex.value]['title'],
+              height: 45,
+            ),
+          ),
           elevation: 0.0,
           centerTitle: true,
           actions: [
@@ -93,6 +100,7 @@ class MainPageView extends GetView<MainPageController> {
                       svgIcon: 'exchange.svg',
                       onPressed: (() {
                         controller.currentIndex.value = 0;
+                        log(controller.currentIndex.value.toString());
                       }),
                       buttonName: 'Exchange',
                       fontSize: 10,
@@ -102,6 +110,7 @@ class MainPageView extends GetView<MainPageController> {
                       svgIcon: 'category.svg',
                       onPressed: (() {
                         controller.currentIndex.value = 1;
+                        log(controller.currentIndex.value.toString());
                       }),
                       buttonName: 'Category',
                       fontSize: 10,
@@ -141,6 +150,7 @@ class MainPageView extends GetView<MainPageController> {
                                 svgIcon: 'cart.svg',
                                 onPressed: (() {
                                   controller.currentIndex.value = 3;
+                                  log(controller.currentIndex.value.toString());
                                 }),
                                 buttonName: 'Cart',
                                 fontSize: 10,
@@ -151,6 +161,7 @@ class MainPageView extends GetView<MainPageController> {
                               svgIcon: 'cart.svg',
                               onPressed: (() {
                                 controller.currentIndex.value = 3;
+                                log(controller.currentIndex.value.toString());
                               }),
                               buttonName: 'Cart',
                               fontSize: 10,
@@ -162,19 +173,6 @@ class MainPageView extends GetView<MainPageController> {
                       onPressed: (() async {
                         if (authController.user.value != null) {
                           accountPageController.getUserInfo();
-                          // accountPageController
-                          //     .getUserFromDB(auth.currentUser!.uid);
-
-                          // Get.dialog(
-                          //   const AlertDialog(
-                          //     content: SizedBox(
-                          //       height: 50,
-                          //       width: 40,
-                          //       child:
-                          //           Center(child: CircularProgressIndicator()),
-                          //     ),
-                          //   ),
-                          // );
 
                           EasyLoading.show(status: 'Please wait');
                           await Future.delayed(const Duration(seconds: 2));
@@ -182,6 +180,7 @@ class MainPageView extends GetView<MainPageController> {
                           controller.currentIndex.value = 4;
                         } else {
                           controller.currentIndex.value = 4;
+                          log(controller.currentIndex.value.toString());
                         }
                       }),
                       buttonName: 'Account',

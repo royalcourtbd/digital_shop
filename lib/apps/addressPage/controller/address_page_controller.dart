@@ -3,6 +3,7 @@ import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/constants/url.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class AddressPageController extends GetxController {
@@ -63,6 +64,19 @@ class AddressPageController extends GetxController {
   RxList addressList = [].obs;
 
   int get addressLength => addressList.length;
+
+  String? get getAddress => addressLength.isEqual(0)
+      ? null
+      : addressList[0].address +
+          ', ' +
+          addressList[0].thana +
+          ', ' +
+          addressList[0].division +
+          ', ' +
+          addressList[0].zip;
+  String? get getNameNumber => addressLength.isEqual(0)
+      ? null
+      : addressList[0].name + ', ' + addressList[0].number;
 
   Stream<List<AddressModel>> addressItem() => firestore
       .collection(Urls.USER_COLLECTION)
@@ -126,13 +140,16 @@ class AddressPageController extends GetxController {
     return null;
   }
 
-  void saveAddressButton() {
+  void saveAddressButton() async {
     final isValid = addressFormKey.currentState!.validate();
     if (!isValid) {
       return;
     }
     addressFormKey.currentState!.save();
-    Future.delayed(
+
+    EasyLoading.show();
+
+    await Future.delayed(
       const Duration(seconds: 1),
     );
     addAddress();
@@ -153,13 +170,14 @@ class AddressPageController extends GetxController {
         selectLabel.value,
         DateTime.now().toString(),
       );
+      EasyLoading.dismiss();
 
       ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(
           content: const Text(
             'Shipping Address  Successfully added ',
           ),
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 1),
           backgroundColor: Colors.green.shade100,
         ),
       );
@@ -167,6 +185,7 @@ class AddressPageController extends GetxController {
       Get.offAndToNamed(RoutesClass.getAddressPageRoute());
     } catch (e) {
       //
+      EasyLoading.dismiss();
       ScaffoldMessenger.of(Get.context!).showSnackBar(
         const SnackBar(
           content: Text("cannot add address"),

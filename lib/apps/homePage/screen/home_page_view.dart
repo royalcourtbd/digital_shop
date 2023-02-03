@@ -4,6 +4,7 @@ import 'package:digital_shop/apps/productPage/widgets/product_view_widget.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../general/utils/config.dart';
@@ -118,16 +119,17 @@ class HomePageView extends GetView<HomePageController> {
             const SizedBox(
               height: 15,
             ),
-            // Container(
-            //   alignment: Alignment.center,
-            //   height: mainPageController.bannerAd.size.height.toDouble(),
-            //   width: mainPageController.bannerAd.size.width.toDouble(),
-            //   child: Obx(
-            //     () => mainPageController.googleAdsModel.value!.banner1 != null
-            //         ? AdWidget(ad: mainPageController.bannerAd)
-            //         : const SizedBox(),
-            //   ),
-            // ),
+            Container(
+              alignment: Alignment.center,
+              height: mainPageController.bannerAd.size.height.toDouble(),
+              width: mainPageController.bannerAd.size.width.toDouble(),
+              child: Obx(
+                () => mainPageController.googleAdsModel.value!.banner1 != null
+                    ? AdWidget(ad: mainPageController.bannerAd)
+                    : const SizedBox(),
+              ),
+            ),
+
             const SizedBox(
               height: 15,
             ),

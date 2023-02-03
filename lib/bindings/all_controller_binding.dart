@@ -1,6 +1,7 @@
 import 'package:digital_shop/apps/addressPage/controller/address_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/login_page_controller.dart';
+import 'package:digital_shop/apps/authPage/controller/password_reset_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/signup_page_controller.dart';
 import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/apps/categoryPage/controller/category_page_controller.dart';
@@ -11,6 +12,7 @@ import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.d
 import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart';
 import 'package:digital_shop/apps/productPage/controller/product_controller.dart';
 import 'package:digital_shop/apps/checkoutPage/controller/checkout_page_controller.dart';
+import 'package:digital_shop/apps/walletPage/controller/wallet_page_controller.dart';
 import 'package:get/get.dart';
 
 import '../apps/accountPage/controller/account_page_controller.dart';
@@ -89,6 +91,14 @@ class AllControllerBinding implements Bindings {
     );
     Get.lazyPut<OrderHistoryPageController>(
       () => OrderHistoryPageController(),
+      fenix: true,
+    );
+    Get.lazyPut<PasswordResetController>(
+      () => PasswordResetController(),
+      fenix: true,
+    );
+    Get.lazyPut<WalletPageController>(
+      () => WalletPageController(),
       fenix: true,
     );
   }

@@ -26,7 +26,7 @@ class CarouselWidget extends GetView<HomePageController> {
               slideTransform: const DefaultTransform(),
               unlimitedMode: true,
               //autoSliderDelay: const Duration(seconds: 3),
-              autoSliderTransitionTime: const Duration(seconds: 3),
+              autoSliderTransitionTime: const Duration(seconds: 5),
               enableAutoSlider: true,
               itemCount: controller.carouselSliderList.length,
               slideBuilder: (index) {
@@ -38,8 +38,8 @@ class CarouselWidget extends GetView<HomePageController> {
                         // ignore: invalid_use_of_protected_member
                         .carouselSliderList[index]
                         .imagePath,
-                    fit: BoxFit.fitHeight,
-                    height: Config.screenHeight! * .30,
+                    fit: BoxFit.fill,
+                    height: Config.screenHeight! * .25,
                     width: double.infinity,
                   ),
                 );

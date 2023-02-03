@@ -1,9 +1,9 @@
 import 'package:digital_shop/apps/categoryPage/controller/category_page_controller.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/utils/config.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer_image/shimmer_image.dart';
 
 import '../../productPage/screen/products_page_view.dart';
 
@@ -24,17 +24,18 @@ class CategoriesWidget extends GetView<CategoryPageController> {
             shrinkWrap: true,
             itemCount: controller.categoryList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 240 / 250,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
+              crossAxisCount: 2,
+              childAspectRatio: 220 / 250,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () async {
                   Get.dialog(const AlertDialog(
                     content: SizedBox(
                       height: 50,
-                      width: 40,
+                      width: 50,
                       child: Center(child: CircularProgressIndicator()),
                     ),
                   ));
@@ -54,6 +55,7 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                       products: categoryPageController.getProductByCategory,
                     ),
                   );
+                  mainPageController.interstitialAd.show();
                   // Fluttertoast.showToast(
                   //   msg: controller.categoryList[index].categoryName!,
                   //   toastLength: Toast.LENGTH_SHORT,
@@ -85,18 +87,19 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: Config.screenWidth! * .34,
+                        height: Config.screenWidth! * .39,
                         width: double.infinity,
                         decoration: const BoxDecoration(),
                         child: ClipRRect(
                           borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(8)),
-                          child: ProgressiveImage(
-                            imageError: 'assets/images/loading.jpg',
-                            image: controller.categoryList[index].image,
+                          child: FancyShimmerImage(
+                            imageUrl: controller.categoryList[index].image,
+                            errorWidget:
+                                Image.asset('assets/images/loading.jpg'),
                             height: Config.screenWidth! * .34,
                             width: double.infinity,
-                            fit: BoxFit.cover,
+                            boxFit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -105,7 +108,9 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                       ),
                       Text(
                         controller.categoryList[index].categoryName,
-                        style: const TextStyle(fontSize: 16),
+                        style: context.textTheme.bodyText1!.copyWith(
+                          fontSize: 18,
+                        ),
                       )
                     ],
                   ),

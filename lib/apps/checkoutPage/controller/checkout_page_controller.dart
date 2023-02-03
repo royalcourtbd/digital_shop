@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/checkoutPage/model/charge_model.dart';
 import 'package:digital_shop/apps/checkoutPage/model/order_model.dart';
-import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
 import 'package:digital_shop/apps/success_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../general/constants/constants.dart';
@@ -66,18 +66,32 @@ class CheckoutPageController extends GetxController {
         charge.value!.deliveryFee!.round();
   }
 
+  String? get deliveryAddress => addressPageController.addressLength.isEqual(0)
+      ? null
+      : '${addressPageController.getNameNumber}, ${addressPageController.getAddress}';
+
 //
   checkoutProduct(
-      List<ProductModel> productList, List<CartModel> cartList) async {
+    List<ProductModel> productList,
+    List<CartModel> cartList,
+  ) async {
     try {
-      if (cartList.isEmpty) {
-        print('Plase Add address');
+      if (deliveryAddress == null) {
+        Fluttertoast.showToast(
+          msg: 'Please Add Delivery Address',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       } else {
         EasyLoading.show();
         await Future.delayed(const Duration(seconds: 2));
         EasyLoading.dismiss();
         addNewOrder(
-          UniqueKey().toString().replaceAll('[#', '').replaceAll(']', ''),
+          'DS${UniqueKey().toString().replaceAll('[#', '').replaceAll(']', '')}',
           auth.currentUser!.uid,
           DateTime.now().toString(),
           'Pending',
@@ -89,7 +103,7 @@ class CheckoutPageController extends GetxController {
           double.parse(
             getGrandTotal(cartPageController.totalPrice).round().toString(),
           ),
-          'deliveryAddress',
+          deliveryAddress!,
           cartList,
           productList,
         );

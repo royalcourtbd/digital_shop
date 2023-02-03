@@ -4,6 +4,7 @@ import 'package:digital_shop/apps/accountPage/controller/account_page_controller
 import 'package:digital_shop/apps/addressPage/controller/address_page_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/auth_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/login_page_controller.dart';
+import 'package:digital_shop/apps/authPage/controller/password_reset_controller.dart';
 import 'package:digital_shop/apps/authPage/controller/signup_page_controller.dart';
 import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/apps/categoryPage/controller/category_page_controller.dart';
@@ -22,6 +23,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
 import '../../apps/orderHistory/controller/order_history_page_controller.dart';
+import '../../apps/walletPage/controller/wallet_page_controller.dart';
 
 AccountPageController accountPageController = AccountPageController.instance;
 AuthController authController = AuthController.instance;
@@ -36,8 +38,11 @@ SellPageController sellPageController = SellPageController.instance;
 HomePageController homePageController = HomePageController.instance;
 MainPageController mainPageController = MainPageController.instance;
 AddressPageController addressPageController = AddressPageController.instance;
+WalletPageController walletPageController = WalletPageController.instance;
 OrderHistoryPageController orderHistoryPageController =
     OrderHistoryPageController.instance;
+PasswordResetController passwordResetController =
+    PasswordResetController.instance;
 
 ProductDetailsPageController productDetailsPageController =
     ProductDetailsPageController.instance;

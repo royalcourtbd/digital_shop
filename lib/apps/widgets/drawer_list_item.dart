@@ -34,7 +34,7 @@ class DrawerListItem extends GetView<MainPageController> {
               Expanded(
                 child: Icon(
                   icon,
-                  size: 20,
+                  size: 24,
                   color: color,
                 ),
               ),
