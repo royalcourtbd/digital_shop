@@ -65,6 +65,19 @@ class AddressPageController extends GetxController {
 
   int get addressLength => addressList.length;
 
+  String? get getAddress => addressLength.isEqual(0)
+      ? null
+      : addressList[0].address +
+          ', ' +
+          addressList[0].thana +
+          ', ' +
+          addressList[0].division +
+          ', ' +
+          addressList[0].zip;
+  String? get getNameNumber => addressLength.isEqual(0)
+      ? null
+      : addressList[0].name + ', ' + addressList[0].number;
+
   Stream<List<AddressModel>> addressItem() => firestore
       .collection(Urls.USER_COLLECTION)
       .doc(auth.currentUser!.uid)

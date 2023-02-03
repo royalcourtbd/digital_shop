@@ -23,6 +23,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 
 import '../../apps/orderHistory/controller/order_history_page_controller.dart';
+import '../../apps/walletPage/controller/wallet_page_controller.dart';
 
 AccountPageController accountPageController = AccountPageController.instance;
 AuthController authController = AuthController.instance;
@@ -37,6 +38,7 @@ SellPageController sellPageController = SellPageController.instance;
 HomePageController homePageController = HomePageController.instance;
 MainPageController mainPageController = MainPageController.instance;
 AddressPageController addressPageController = AddressPageController.instance;
+WalletPageController walletPageController = WalletPageController.instance;
 OrderHistoryPageController orderHistoryPageController =
     OrderHistoryPageController.instance;
 PasswordResetController passwordResetController =

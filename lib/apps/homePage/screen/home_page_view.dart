@@ -129,6 +129,7 @@ class HomePageView extends GetView<HomePageController> {
                     : const SizedBox(),
               ),
             ),
+
             const SizedBox(
               height: 15,
             ),

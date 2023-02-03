@@ -136,6 +136,15 @@ class AuthController extends GetxController {
 
   void getToken() async {
     await messaging.getToken().then((token) {
+      if (authController.user.value != null) {
+        log('device Tocken update success');
+        firestore
+            .collection(Urls.USER_COLLECTION)
+            .doc(auth.currentUser!.uid)
+            .update({
+          'deviceToken': token!,
+        });
+      }
       storage.write('deviceToken', token!);
       log(storage.read('deviceToken'));
     });

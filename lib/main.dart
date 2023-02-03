@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -18,39 +16,19 @@ import 'general/routes/routes.dart';
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-Future<dynamic> backgroundMessageHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  log('On Background: ${message.notification!.title!}/${message.notification!.body!}/${message.notification!.titleLocKey!}');
+Future<void> backgroundMessageHandler(RemoteMessage message) async {
+  print(
+      'On Background: ${message.notification!.title!}/${message.notification!.body!}/${message.notification!.titleLocKey!}');
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await Noti.initialize(flutterLocalNotificationsPlugin);
 
-  FirebaseMessaging.onMessage.listen(
-    (RemoteMessage message) {
-      log('Got a message  in the foreground!');
-      log('Message data: ${message.data}');
-      Noti.showBigTextNotification(
-        title: message.notification!.title!,
-        body: message.notification!.body!,
-        fln: flutterLocalNotificationsPlugin,
-      );
-
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-      }
-    },
-  );
-
-  FirebaseMessaging.onMessageOpenedApp.listen(
-    (RemoteMessage message) {},
-  );
   try {
     if (GetPlatform.isMobile) {
       final RemoteMessage? remoteMessage = await messaging.getInitialMessage();
+      await HelperNotification.initialize(flutterLocalNotificationsPlugin);
 
       FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
     }
@@ -59,9 +37,6 @@ void main() async {
   }
 
   MobileAds.instance.initialize();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   SystemChrome.setPreferredOrientations(
     [
@@ -93,7 +68,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         scaffoldBackgroundColor: Colors.white,
       ),
-      //home: CheckoutPageView(),
+      //home: const PrivacyPolicyPageView(),
       initialRoute: RoutesClass.getMainRoute(),
       getPages: RoutesClass.routes,
       initialBinding: AllControllerBinding(),

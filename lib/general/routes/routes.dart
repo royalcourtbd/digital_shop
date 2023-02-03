@@ -10,6 +10,7 @@ import 'package:digital_shop/apps/exchangePage/screen/sell_page_view.dart';
 import 'package:digital_shop/apps/homePage/screen/home_page_view.dart';
 import 'package:digital_shop/apps/mainPage/screen/main_page_view.dart';
 import 'package:digital_shop/apps/checkoutPage/screen/checkout_page_view.dart';
+import 'package:digital_shop/apps/walletPage/screen/wallet_page_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import '../../apps/addressPage/screen/address_page_view.dart';
@@ -34,6 +35,7 @@ class RoutesClass {
   static String addressPage = '/addressPage';
   static String addAddressPage = '/addAddressPage';
   static String passwordResetPage = '/passwordResetPage';
+  static String walletPage = '/walletPage';
 
   static String getMainRoute() => mainPage;
   static String getAccountPageRoute() => accountPage;
@@ -52,6 +54,7 @@ class RoutesClass {
   static String getAddressPageRoute() => addressPage;
   static String getAddAddressPageRoute() => addAddressPage;
   static String getPasswordResetPageRoute() => passwordResetPage;
+  static String getWalletPageRoute() => walletPage;
 
   static List<GetPage> routes = [
     GetPage(
@@ -81,6 +84,10 @@ class RoutesClass {
     GetPage(
       page: () => CheckoutPageView(),
       name: checkout,
+    ),
+    GetPage(
+      page: () => WalletPageView(),
+      name: walletPage,
     ),
     GetPage(
       page: () => const BuyPageView(),
@@ -138,7 +145,7 @@ class RoutesClass {
     ),
     GetPage(
       name: passwordResetPage,
-      page: () => PasswordResetPageView(),
+      page: () => const PasswordResetPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),

@@ -326,7 +326,10 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                       height: 10,
                     ),
                     Text(
-                      productValue.description.toString(),
+                      productValue.description!
+                          .replaceAll('\\n', '\n\n')
+                          .replaceAll('•', '\n\n\u2022 ')
+                          .toString(),
                       style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 15,

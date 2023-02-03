@@ -24,6 +24,9 @@ class MainPageController extends GetxController {
   void onReady() {
     _initBannerAdd();
     initAdd();
+    authController.user.value != null
+        ? accountPageController.getUserInfo()
+        : null;
     super.onReady();
   }
 
@@ -32,6 +35,7 @@ class MainPageController extends GetxController {
     super.onInit();
     getAdsUnitID();
     _initBannerAdd();
+
     initAdd();
   }
 
@@ -54,6 +58,7 @@ class MainPageController extends GetxController {
   _initBannerAdd() {
     bannerAd = BannerAd(
       size: AdSize.banner,
+      // adUnitId: 'ca-app-pub-3940256099942544/6300978111',
       adUnitId: googleAdsModel.value!.banner1 == null
           ? ''
           : googleAdsModel.value!.banner1!,
@@ -73,6 +78,7 @@ class MainPageController extends GetxController {
 
   void initAdd() {
     InterstitialAd.load(
+      //adUnitId: 'ca-app-pub-3940256099942544/1033173712',
       adUnitId: googleAdsModel.value!.interstitial1 == null
           ? ''
           : googleAdsModel.value!.interstitial1!,

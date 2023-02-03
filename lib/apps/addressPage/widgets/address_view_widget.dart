@@ -22,6 +22,13 @@ class AddressViewWidget extends StatelessWidget {
           shrinkWrap: true,
           itemCount: controller.addressLength,
           itemBuilder: (context, index) {
+            final test = controller.addressList[index].address +
+                ', ' +
+                controller.addressList[index].thana +
+                ', ' +
+                controller.addressList[index].division +
+                ', ' +
+                controller.addressList[index].zip;
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -69,13 +76,7 @@ class AddressViewWidget extends StatelessWidget {
                               ),
                               const Divider(),
                               AutoSizeText(
-                                controller.addressList[index].address +
-                                    ', ' +
-                                    controller.addressList[index].thana +
-                                    ', ' +
-                                    controller.addressList[index].division +
-                                    ', ' +
-                                    controller.addressList[index].zip,
+                                test,
                                 //'Vogra Bypass More, Gazipur Sadar, Post : Nationnal University Gazipur, Dhaka, bangladesh, 1711',
                                 style: const TextStyle(
                                   //fontWeight: FontWeight.w500,

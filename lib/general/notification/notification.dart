@@ -1,49 +1,75 @@
+import 'dart:developer';
+
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
-class Noti {
-  static Future initialize(
+class HelperNotification {
+  static Future<void> initialize(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    var androidInitialize =
-        const AndroidInitializationSettings('drawable/ic_launcher');
+    var androidInitialize = const AndroidInitializationSettings('ic_launcher');
 
     var iOSInitialize = const IOSInitializationSettings();
 
     var initializationsSettings =
         InitializationSettings(android: androidInitialize, iOS: iOSInitialize);
 
-    flutterLocalNotificationsPlugin.initialize(initializationsSettings);
-    await flutterLocalNotificationsPlugin.initialize(
+    flutterLocalNotificationsPlugin.initialize(
       initializationsSettings,
-      onSelectNotification: (payload) {
+      onSelectNotification: (payload) async {
         try {
           if (payload != null && payload.isNotEmpty) {
-            print('nexr page link');
+            Get.to(const CartPageView());
           } else {
             //
           }
         } catch (error) {
-          return;
+          throw Exception(error);
         }
+        return;
       },
     );
+
     await messaging.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('app opened');
-      try {
-        if (message.notification!.titleLocKey != null) {
-          Get.to(const CartPageView());
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
+        log('Got a message  in the foreground!');
+        log('Message data: ${message.notification!.title}/${message.notification!.body}/${message.notification!.titleLocKey}');
+        HelperNotification.showBigTextNotification(
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          fln: flutterLocalNotificationsPlugin,
+        );
+
+        if (message.notification != null) {
+          print(
+              'Message also contained a notification: ${message.notification}');
         }
-      } catch (error) {}
-    });
+      },
+    );
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) {
+        if (kDebugMode) {
+          print('app opened');
+        }
+        try {
+          if (message.notification!.titleLocKey != null) {
+            Get.to(const CartPageView());
+          }
+        } catch (error) {
+          throw Exception(error);
+        }
+      },
+    );
   }
 
   static Future showBigTextNotification({
