@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:digital_shop/apps/cartPage/controller/cart_page_controller.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +123,7 @@ class CartPageView extends GetView<CartPageController> {
                               textColor: Colors.white70,
                               fontSize: 16.0,
                             );
-                            print('cart is empty');
+                            log('cart is empty');
                           }
                         },
                         child: Container(

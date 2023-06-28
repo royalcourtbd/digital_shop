@@ -36,7 +36,7 @@ class BuyPageView extends GetView<BuyPageController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InfoTitle(
+              const InfoTitle(
                 title: 'Send Method',
               ),
               Padding(
@@ -54,7 +54,7 @@ class BuyPageView extends GetView<BuyPageController> {
                   height: 50,
                   child: Row(
                     children: [
-                      BuyMethodBDTIcon(),
+                      const BuyMethodBDTIcon(),
                       Obx(
                         () => Container(
                           width: Config.screenWidth! - 82,
@@ -93,7 +93,7 @@ class BuyPageView extends GetView<BuyPageController> {
                 ),
               ),
 
-              InfoTitle(
+              const InfoTitle(
                 title: 'Receive Method',
               ),
               Padding(
@@ -152,7 +152,7 @@ class BuyPageView extends GetView<BuyPageController> {
                 ),
               ),
 
-              InfoTitle(
+              const InfoTitle(
                 title: 'Receive Amount (\$)',
               ),
               TextFieldWidget(
@@ -178,7 +178,7 @@ class BuyPageView extends GetView<BuyPageController> {
                 onSaved: (value) {},
               ),
 
-              InfoTitle(
+              const InfoTitle(
                 title: 'Send Amount (৳)',
               ),
               Padding(
@@ -278,7 +278,7 @@ class BuyPageView extends GetView<BuyPageController> {
 
                 //maxLines: 5,
               ),
-              InfoTitle(
+              const InfoTitle(
                 title: 'Note',
               ),
               Padding(
@@ -310,7 +310,7 @@ class BuyPageView extends GetView<BuyPageController> {
                   ),
                 ),
               ),
-              InfoTitle(title: ''),
+              const InfoTitle(title: ''),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Container(

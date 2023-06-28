@@ -82,10 +82,10 @@ class HomePageView extends GetView<HomePageController> {
 
             Row(
               children: [
-                RotatedBox(
+                const RotatedBox(
                   quarterTurns: -1,
                   child: Row(
-                    children: const [
+                    children: [
                       Text(
                         'On Sale',
                         style: TextStyle(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProfileListTile extends StatelessWidget {
-  Color? bgColor;
-  IconData? icon;
-  String title;
-  bool isLast = true;
-  VoidCallback onTap;
-  ProfileListTile({
+  final Color? bgColor;
+  final IconData? icon;
+  final String title;
+  final bool isLast;
+  final VoidCallback onTap;
+  const ProfileListTile({
     Key? key,
     required this.title,
     required this.onTap,

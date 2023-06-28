@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digital_shop/apps/homePage/model/carousel_model.dart';
 import 'package:digital_shop/apps/widgets/use_for_back_button.dart';
@@ -34,7 +36,7 @@ class HomePageController extends GetxController {
 
   void getToken() async {
     await FirebaseMessaging.instance.getToken().then((token) {
-      print('I am the token$token');
+      log('I am the token$token');
     });
   }
 
@@ -45,9 +47,9 @@ class HomePageController extends GetxController {
         borderRadius: BorderRadius.circular(25.0),
         color: Colors.greenAccent,
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           Icon(Icons.check),
           SizedBox(
             width: 12.0,

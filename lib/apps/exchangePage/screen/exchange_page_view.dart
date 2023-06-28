@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:digital_shop/apps/exchangePage/controller/exchange_page_controller.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:flutter/foundation.dart';
@@ -26,7 +28,7 @@ class ExchangePageView extends GetView<ExchangePageController> {
                 controller: controller.scrollController,
                 child: Column(
                   children: [
-                    ExchangePageHeadingWidget(
+                    const ExchangePageHeadingWidget(
                       headingText:
                           'Welcome to Digital Shop Virtual Dollar Center!',
                     ),
@@ -50,7 +52,7 @@ class ExchangePageView extends GetView<ExchangePageController> {
                       onTap: () {
                         Get.toNamed(RoutesClass.getSellPageRoute());
                         if (kDebugMode) {
-                          print('Sell Dollar From here');
+                          log('Sell Dollar From here');
                         }
                       },
                       svgIcon: 'sell_icon.svg',

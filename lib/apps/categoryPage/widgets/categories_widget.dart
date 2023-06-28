@@ -108,7 +108,7 @@ class CategoriesWidget extends GetView<CategoryPageController> {
                       ),
                       Text(
                         controller.categoryList[index].categoryName,
-                        style: context.textTheme.bodyText1!.copyWith(
+                        style: context.textTheme.bodyLarge!.copyWith(
                           fontSize: 18,
                         ),
                       )

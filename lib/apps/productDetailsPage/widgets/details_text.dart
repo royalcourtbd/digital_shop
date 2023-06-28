@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DetailsText extends StatelessWidget {
-  String title;
-  DetailsText({
+  final String title;
+  const DetailsText({
     Key? key,
     required this.title,
   }) : super(key: key);

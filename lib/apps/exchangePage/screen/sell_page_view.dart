@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digital_shop/apps/exchangePage/controller/sell_page_controller.dart';
 import 'package:digital_shop/apps/exchangePage/widgets/dollar_method_icon.dart';
@@ -13,6 +15,8 @@ import '../model/send_usd_model.dart';
 import '../widgets/material_button_widget.dart';
 
 class SellPageView extends GetView<SellPageController> {
+  const SellPageView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -31,7 +35,7 @@ class SellPageView extends GetView<SellPageController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InfoTitle(title: 'Send Method'),
+              const InfoTitle(title: 'Send Method'),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
@@ -46,7 +50,7 @@ class SellPageView extends GetView<SellPageController> {
                   ),
                   child: Row(
                     children: [
-                      SellMethodUSDIcon(),
+                      const SellMethodUSDIcon(),
                       Obx(
                         () => Container(
                           width: Config.screenWidth! - 82,
@@ -84,7 +88,7 @@ class SellPageView extends GetView<SellPageController> {
                   ),
                 ),
               ),
-              InfoTitle(
+              const InfoTitle(
                 title: 'Receive Method',
               ),
               Padding(
@@ -102,7 +106,7 @@ class SellPageView extends GetView<SellPageController> {
                   height: 50,
                   child: Row(
                     children: [
-                      SellMethodBDTIcon(),
+                      const SellMethodBDTIcon(),
                       Obx(
                         () => Container(
                           width: Config.screenWidth! - 82,
@@ -129,7 +133,7 @@ class SellPageView extends GetView<SellPageController> {
                                   .sellBDTItem[controller.indexBdt.value]
                                   .bdBankIcon!;
 
-                              print(controller.imageBdt.value);
+                              log(controller.imageBdt.value);
                             },
                           ),
                         ),
@@ -138,7 +142,7 @@ class SellPageView extends GetView<SellPageController> {
                   ),
                 ),
               ),
-              InfoTitle(
+              const InfoTitle(
                 title: 'Send Amount (\$)',
               ),
               TextFieldForSell(
@@ -163,7 +167,7 @@ class SellPageView extends GetView<SellPageController> {
                 }),
                 onSaved: (value) {},
               ),
-              InfoTitle(
+              const InfoTitle(
                 title: 'Receive Amount (৳)',
               ),
               Padding(
@@ -236,7 +240,7 @@ class SellPageView extends GetView<SellPageController> {
                       },
                       //maxLines: 5,
                     ),
-                    InfoTitle(
+                    const InfoTitle(
                       title: 'Contact Number',
                     ),
                     TextFieldForSell(
@@ -252,7 +256,7 @@ class SellPageView extends GetView<SellPageController> {
                       },
                       maxLength: 11,
                     ),
-                    InfoTitle(
+                    const InfoTitle(
                       title: 'Note',
                     ),
                     Padding(
@@ -284,7 +288,7 @@ class SellPageView extends GetView<SellPageController> {
                         ),
                       ),
                     ),
-                    InfoTitle(title: ''),
+                    const InfoTitle(title: ''),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Container(

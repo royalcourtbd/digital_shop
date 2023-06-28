@@ -18,7 +18,7 @@ class SellPageController extends GetxController {
 
   List<SendUsdModel> sellUsdItem = [];
   List<BdtProductsModel> sellBDTItem = [];
-  List<SellOrderModel> sell_order_model_list = [];
+  List<SellOrderModel> sellOrderModelList = [];
   late FocusNode myFocusNode;
 
   final formKey = GlobalKey<FormState>();
@@ -170,7 +170,7 @@ class SellPageController extends GetxController {
         )
         .toList();
 
-    sell_order_model_list = sellList.obs;
+    sellOrderModelList = sellList.obs;
   }
 
   dataSnapshotsForSellOrder() {

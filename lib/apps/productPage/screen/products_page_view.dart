@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:digital_shop/general/utils/config.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +12,11 @@ import '../controller/product_controller.dart';
 import '../model/products_model.dart';
 
 class ProductsPageView extends GetView<ProductController> {
-  List<ProductModel> products;
+  final List<ProductModel> products;
 
   List<ProductModel>? searchList;
 
-  String? title;
+  final String? title;
   ProductsPageView({Key? key, required this.products, this.title})
       : super(key: key);
 
@@ -83,7 +85,7 @@ class ProductsPageView extends GetView<ProductController> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.search,
                   onSubmitted: (value) async {
-                    print('object');
+                    log('object');
                     searchList = products
                         .where((element) => element.productName!
                             .toLowerCase()

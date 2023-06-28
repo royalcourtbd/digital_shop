@@ -36,10 +36,10 @@ class AuthController extends GetxController {
   initialScreen(User? user) {
     if (user == null) {
       Get.offAll(() => const LoginPageView());
-      print('this function calld');
+      log('this function calld');
     } else {
       Get.offAll(() => MainPageView());
-      print('no this function calld');
+      log('no this function calld');
     }
   }
 

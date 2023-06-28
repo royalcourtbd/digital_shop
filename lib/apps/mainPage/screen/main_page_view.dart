@@ -1,6 +1,5 @@
 import 'dart:developer';
-
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:digital_shop/apps/cartPage/screen/cart_page_view.dart';
 import 'package:digital_shop/apps/categoryPage/screen/category_page_view.dart';
 import 'package:digital_shop/apps/exchangePage/screen/exchange_page_view.dart';
@@ -124,16 +123,16 @@ class MainPageView extends GetView<MainPageController> {
                   children: [
                     Obx(
                       () => authController.user.value != null
-                          ? Badge(
-                              toAnimate: false,
+                          ? badges.Badge(
+                              //  toAnimate: false,
                               ignorePointer: true,
-                              alignment: Alignment.center,
-                              badgeColor: Colors.green,
-                              padding: const EdgeInsets.all(3),
+                              //  alignment: Alignment.center,
+                              //  badgeColor: Colors.green,
+                              //  padding: const EdgeInsets.all(3),
                               showBadge: cartPageController.cartLength > 0
                                   ? true
                                   : false,
-                              position: BadgePosition.topEnd(
+                              position: badges.BadgePosition.topEnd(
                                 top: 5,
                                 end: 5,
                               ),

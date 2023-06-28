@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OrderSummaryRow extends StatelessWidget {
-  String? title;
-  String? value;
-  OrderSummaryRow({
+  final String? title;
+  final String? value;
+  const OrderSummaryRow({
     Key? key,
     this.title,
     this.value,

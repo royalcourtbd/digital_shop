@@ -1,12 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:digital_shop/apps/productDetailsPage/widgets/cart_button.dart';
 import 'package:digital_shop/general/routes/routes.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
-import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:get/get.dart';
 import '../../../general/constants/constants.dart';
 import '../../../general/utils/config.dart';
@@ -73,14 +71,14 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     child: IconButton(
                       icon: Obx(
                         () => authController.user.value != null
-                            ? Badge(
-                                toAnimate: false,
+                            ? badges.Badge(
+                                //  toAnimate: false,
                                 ignorePointer: true,
-                                alignment: Alignment.center,
-                                badgeColor: Colors.green,
-                                padding: const EdgeInsets.all(4),
-                                position:
-                                    BadgePosition.topEnd(top: -10, end: -9),
+                                //   alignment: Alignment.center,
+                                //    badgeColor: Colors.green,
+                                //    padding: const EdgeInsets.all(4),
+                                position: badges.BadgePosition.topEnd(
+                                    top: -10, end: -9),
                                 showBadge: cartPageController.cartLength > 0
                                     ? true
                                     : false,
@@ -305,7 +303,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     const SizedBox(
                       height: 5,
                     ),
-                    DetailsText(title: 'Highlights'),
+                    const DetailsText(title: 'Highlights'),
                     const SizedBox(
                       height: 10,
                     ),
@@ -321,7 +319,7 @@ class ProductDetailsPageView extends GetView<ProductDetailsPageController> {
                     const SizedBox(
                       height: 12,
                     ),
-                    DetailsText(title: 'Description'),
+                    const DetailsText(title: 'Description'),
                     const SizedBox(
                       height: 10,
                     ),

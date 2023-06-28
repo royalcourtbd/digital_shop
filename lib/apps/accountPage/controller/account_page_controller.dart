@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:digital_shop/apps/authPage/model/user_model.dart';
 import 'package:digital_shop/general/constants/constants.dart';
 import 'package:digital_shop/general/constants/url.dart';

@@ -6,8 +6,8 @@ import '../../../general/utils/config.dart';
 import '../controller/exchange_page_controller.dart';
 
 class ExchangePageHeadingWidget extends GetView<ExchangePageController> {
-  String headingText;
-  ExchangePageHeadingWidget({Key? key, required this.headingText})
+  final String headingText;
+  const ExchangePageHeadingWidget({Key? key, required this.headingText})
       : super(key: key);
 
   @override

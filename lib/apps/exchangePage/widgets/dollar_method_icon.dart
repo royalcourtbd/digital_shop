@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import '../../../general/utils/config.dart';
 
 class BuyMethodBDTIcon extends GetView<BuyPageController> {
+  const BuyMethodBDTIcon({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -76,6 +78,8 @@ class BuyMethodUSDIcon extends GetView<BuyPageController> {
 }
 
 class SellMethodUSDIcon extends GetView<SellPageController> {
+  const SellMethodUSDIcon({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -109,6 +113,8 @@ class SellMethodUSDIcon extends GetView<SellPageController> {
 }
 
 class SellMethodBDTIcon extends GetView<SellPageController> {
+  const SellMethodBDTIcon({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);

@@ -82,11 +82,11 @@ class RoutesClass {
       name: homePage,
     ),
     GetPage(
-      page: () => CheckoutPageView(),
+      page: () => const CheckoutPageView(),
       name: checkout,
     ),
     GetPage(
-      page: () => WalletPageView(),
+      page: () => const WalletPageView(),
       name: walletPage,
     ),
     GetPage(
@@ -97,7 +97,7 @@ class RoutesClass {
     ),
     GetPage(
       name: sellPage,
-      page: () => SellPageView(),
+      page: () => const SellPageView(),
       // transition: Transition.leftToRight,
       // transitionDuration: const Duration(milliseconds: 1000),
     ),

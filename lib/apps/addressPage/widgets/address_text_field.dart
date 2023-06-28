@@ -4,23 +4,23 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddressTextField extends GetView<AddressPageController> {
-  Function(String)? onChanged;
-  Function()? onTap;
-  Function(String?)? onSaved;
-  String? Function(String?)? validator;
-  List<TextInputFormatter> inputFormatters;
-  TextInputType? keyboardType;
-  int? maxLength;
-  Widget? prefixIcon;
-  Widget? suffixIcon;
+  final Function(String)? onChanged;
+  final Function()? onTap;
+  final Function(String?)? onSaved;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter> inputFormatters;
+  final TextInputType? keyboardType;
+  final int? maxLength;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
 
-  String hintText;
+  final String hintText;
 
-  FocusNode? focusNode;
+  final FocusNode? focusNode;
 
-  TextEditingController textEditingController;
+  final TextEditingController textEditingController;
 
-  AddressTextField({
+  const AddressTextField({
     Key? key,
     required this.hintText,
     this.focusNode,

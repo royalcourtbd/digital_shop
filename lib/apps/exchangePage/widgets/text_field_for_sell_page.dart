@@ -5,21 +5,21 @@ import 'package:get/get.dart';
 import '../controller/sell_page_controller.dart';
 
 class TextFieldForSell extends GetView<SellPageController> {
-  TextInputType textInputType;
+  final TextInputType textInputType;
 
-  Function(String)? onChanged;
-  Function()? onTap;
-  Function(String?)? onSaved;
-  String? Function(String?)? validator;
+  final Function(String)? onChanged;
+  final Function()? onTap;
+  final Function(String?)? onSaved;
+  final String? Function(String?)? validator;
 
-  int maxLines;
-  String hintText;
-  bool autofocus;
-  int maxLength;
-  FocusNode? focusNode;
-  List<TextInputFormatter> inputFormatters;
-  TextEditingController textEditingController;
-  TextFieldForSell({
+  final int maxLines;
+  final String hintText;
+  final bool autofocus;
+  final int maxLength;
+  final FocusNode? focusNode;
+  final List<TextInputFormatter> inputFormatters;
+  final TextEditingController textEditingController;
+  const TextFieldForSell({
     Key? key,
     required this.textInputType,
     required this.hintText,

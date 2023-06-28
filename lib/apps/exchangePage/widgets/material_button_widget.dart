@@ -2,13 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class MaterialButtonWidget extends StatelessWidget {
-  VoidCallback onPressed;
-  double minWidth;
-  Color textColor;
-  Color backgroundColor;
-  String text;
+  final VoidCallback onPressed;
+  final double minWidth;
+  final Color textColor;
+  final Color backgroundColor;
+  final String text;
 
-  MaterialButtonWidget({
+  const MaterialButtonWidget({
     Key? key,
     required this.onPressed,
     this.minWidth = 90,

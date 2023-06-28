@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldForInUp extends StatelessWidget {
-  Function(String)? onChanged;
-  Function()? onTap;
-  Function(String?)? onSaved;
-  bool obscureText;
-  int? maxLength;
-  Widget? suffixIcon;
-  String? Function(String?)? validator;
-  List<TextInputFormatter> inputFormatters;
-  TextInputType keyboardType;
-  String labelText;
-  TextEditingController controller;
-  TextFieldForInUp({
+  final Function(String)? onChanged;
+  final Function()? onTap;
+  final Function(String?)? onSaved;
+  final bool obscureText;
+  final int? maxLength;
+  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter> inputFormatters;
+  final TextInputType keyboardType;
+  final String labelText;
+  final TextEditingController controller;
+  const TextFieldForInUp({
     Key? key,
     required this.keyboardType,
     required this.labelText,

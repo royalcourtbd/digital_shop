@@ -12,9 +12,9 @@ class CategoryPageView extends GetView<CategoryPageController> {
     Config().init(context);
     return Scaffold(
       key: controller.scaffoldKey,
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             CategoriesWidget(),
           ],
         ),

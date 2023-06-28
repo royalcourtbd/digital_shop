@@ -11,7 +11,7 @@ class HomeUpperRowWidget extends GetView<HomePageController> {
     required this.icon,
   }) : super(key: key);
 
-  List color = [
+  final List color = [
     const Color.fromARGB(255, 122, 175, 124),
     const Color.fromARGB(255, 204, 160, 157),
     const Color.fromARGB(255, 170, 166, 129),

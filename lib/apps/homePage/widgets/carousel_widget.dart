@@ -2,8 +2,6 @@ import 'package:digital_shop/apps/homePage/controller/home_page_controller.dart'
 import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
-import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 
 import 'package:get/get.dart';
 import 'package:shimmer_image/shimmer_image.dart';

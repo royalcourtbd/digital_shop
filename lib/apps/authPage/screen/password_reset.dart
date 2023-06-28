@@ -27,7 +27,7 @@ class PasswordResetPageView extends GetView<PasswordResetController> {
                 padding: const EdgeInsets.all(8.0),
                 child: AutoSizeText(
                   'Forgot Password?',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
               const SizedBox(
@@ -37,7 +37,7 @@ class PasswordResetPageView extends GetView<PasswordResetController> {
                 padding: const EdgeInsets.all(8.0),
                 child: AutoSizeText(
                   'Don\'t worry! we will send an email to your registered email address.',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               const SizedBox(

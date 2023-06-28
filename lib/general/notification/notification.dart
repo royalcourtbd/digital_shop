@@ -50,8 +50,7 @@ class HelperNotification {
         );
 
         if (message.notification != null) {
-          print(
-              'Message also contained a notification: ${message.notification}');
+          log('Message also contained a notification: ${message.notification}');
         }
       },
     );
@@ -59,7 +58,7 @@ class HelperNotification {
     FirebaseMessaging.onMessageOpenedApp.listen(
       (RemoteMessage message) {
         if (kDebugMode) {
-          print('app opened');
+          log('app opened');
         }
         try {
           if (message.notification!.titleLocKey != null) {

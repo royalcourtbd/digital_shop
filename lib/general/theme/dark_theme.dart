@@ -5,38 +5,38 @@ import 'package:flutter/material.dart';
 ThemeData customDarkTheme() {
   TextTheme _customDarkThemesTextTheme(TextTheme base) {
     return base.copyWith(
-      headline1: base.headline1!.copyWith(
+      displayLarge: base.displayLarge!.copyWith(
         fontFamily: 'Roboto',
         color: ColorResources.COLOR_WHITE,
       ),
-      headline2: base.headline2!.copyWith(
+      displayMedium: base.displayMedium!.copyWith(
           fontFamily: 'Roboto',
           color: ColorResources.PRIMARY_COLOR,
           decoration: TextDecoration.underline),
-      headline3: base.headline3!.copyWith(
+      displaySmall: base.displaySmall!.copyWith(
         fontFamily: 'Roboto',
         color: ColorResources.COLOR_BLACK,
       ),
-      headline4: base.headline4!.copyWith(
+      headlineMedium: base.headlineMedium!.copyWith(
         fontFamily: 'Roboto',
         color: ColorResources.PRIMARY_COLOR,
         fontWeight: FontWeight.w700,
       ),
-      headline5: base.headline5!.copyWith(
+      headlineSmall: base.headlineSmall!.copyWith(
           fontFamily: 'Roboto',
           color: ColorResources.COLOR_WHITE,
           fontWeight: FontWeight.w700),
-      headline6: base.headline6!.copyWith(
+      titleLarge: base.titleLarge!.copyWith(
         fontSize: 15.0,
         color: Colors.orange,
       ),
-      caption: base.caption!.copyWith(
+      bodySmall: base.bodySmall!.copyWith(
         color: const Color(0xFFCCC5AF),
       ),
-      bodyText2: base.bodyText2!.copyWith(
+      bodyMedium: base.bodyMedium!.copyWith(
         color: const Color(0xFF807A6B),
       ),
-      bodyText1: base.bodyText1!.copyWith(color: Colors.brown),
+      bodyLarge: base.bodyLarge!.copyWith(color: Colors.brown),
     );
   }
 
@@ -82,8 +82,7 @@ ThemeData customDarkTheme() {
     focusColor: const Color(0xFFADC4C8),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        primary: Colors.white,
-        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, textStyle: const TextStyle(color: Colors.white),
       ),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(

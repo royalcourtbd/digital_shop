@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:digital_shop/apps/cartPage/widgets/body_view.dart';
 import 'package:digital_shop/apps/checkoutPage/controller/checkout_page_controller.dart';
 import 'package:digital_shop/general/routes/routes.dart';
@@ -10,6 +12,8 @@ import '../../../general/constants/constants.dart';
 import '../widgets/order_summary_row.dart';
 
 class CheckoutPageView extends GetView<CheckoutPageController> {
+  const CheckoutPageView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Config().init(context);
@@ -44,14 +48,14 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                             horizontalTitleGap: 0,
                             title: Text(
                               'Add New Address',
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
                         )
                       : Card(
                           child: ListTile(
                             onTap: () {
-                              print(addressPageController.getAddress);
+                              log(addressPageController.getAddress.toString());
                             },
                             minLeadingWidth: 30,
                             contentPadding:
@@ -90,7 +94,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                   Card(
                     child: ListTile(
                       onTap: () {
-                        print(controller.deliveryAddress);
+                        log(controller.deliveryAddress.toString());
                       },
                       minLeadingWidth: 32,
                       contentPadding:
@@ -102,7 +106,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                       horizontalTitleGap: 0,
                       title: Text(
                         'Select Payment Method',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       trailing: const Icon(IconlyLight.arrow_right_2),
                     ),
@@ -116,7 +120,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                       children: [
                         Text(
                           'Product Info',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(
                           height: 14,
@@ -140,7 +144,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                                   Text(
                                     'Order Summary',
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                   const SizedBox(
                                     height: 8,

@@ -2,10 +2,10 @@ import 'package:digital_shop/general/utils/config.dart';
 import 'package:flutter/material.dart';
 
 class HomeAndEditButtonWidget extends StatelessWidget {
-  String title;
-  double height, width, fontSize;
-  Color bgColor, borderColor, fontColor;
-  HomeAndEditButtonWidget({
+  final String title;
+  final double height, width, fontSize;
+  final Color bgColor, borderColor, fontColor;
+  const HomeAndEditButtonWidget({
     Key? key,
     required this.title,
     this.height = 20,

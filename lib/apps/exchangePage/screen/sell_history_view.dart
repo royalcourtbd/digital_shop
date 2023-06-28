@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:digital_shop/apps/exchangePage/controller/sell_history_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class SellHistoryPageView extends GetView<SellHistoryController> {
                 child: ListTile(
                   onTap: () {
                     if (kDebugMode) {
-                      print(index.toString());
+                      log(index.toString());
                     }
                   },
                   title: Text(

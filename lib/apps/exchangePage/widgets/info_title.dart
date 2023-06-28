@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InfoTitle extends GetView<BuyPageController> {
-  String title;
-  InfoTitle({Key? key, required this.title}) : super(key: key);
+  final String title;
+  const InfoTitle({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

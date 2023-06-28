@@ -4,22 +4,21 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TextFieldWidget extends GetView<BuyPageController> {
-  TextInputType textInputType;
-
-  Function(String)? onChanged;
-  Function()? onTap;
-  Function(String?)? onSaved;
-  String? Function(String?)? validator;
-  AutovalidateMode? autovalidateMode;
-  int maxLines;
-  String hintText;
-  bool autofocus;
-  int maxLength;
-  FocusNode? focusNode;
-  Widget? prefixIcon;
-  List<TextInputFormatter> inputFormatters;
-  TextEditingController textEditingController;
-  TextFieldWidget({
+  final TextInputType textInputType;
+  final Function(String)? onChanged;
+  final Function()? onTap;
+  final Function(String?)? onSaved;
+  final String? Function(String?)? validator;
+  final AutovalidateMode? autovalidateMode;
+  final int maxLines;
+  final String hintText;
+  final bool autofocus;
+  final int maxLength;
+  final FocusNode? focusNode;
+  final Widget? prefixIcon;
+  final List<TextInputFormatter> inputFormatters;
+  final TextEditingController textEditingController;
+  const TextFieldWidget({
     Key? key,
     required this.textInputType,
     required this.hintText,

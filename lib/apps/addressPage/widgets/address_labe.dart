@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddressLabel extends GetView<AddressPageController> {
-  String title;
-  VoidCallback onTap;
-  Color? backgroundColor;
-  Color? borderColor;
-  Color? textColor;
-  AddressLabel({
+  final String title;
+  final VoidCallback onTap;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? textColor;
+  const AddressLabel({
     Key? key,
     required this.title,
     this.borderColor,

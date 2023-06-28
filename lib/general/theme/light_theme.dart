@@ -6,34 +6,34 @@ ThemeData customLightTheme() {
   TextTheme _customLightThemesTextTheme(TextTheme base) {
     return base.copyWith(
       //use
-      headline1: base.headline1!.copyWith(
+      displayLarge: base.displayLarge!.copyWith(
         fontFamily: 'Roboto',
         color: ColorResources.COLOR_BLACK,
       ),
-      headline2: base.headline2!.copyWith(
+      displayMedium: base.displayMedium!.copyWith(
           fontFamily: 'Roboto',
           color: ColorResources.PRIMARY_COLOR,
           decoration: TextDecoration.underline),
-      headline3: base.headline3!.copyWith(
+      displaySmall: base.displaySmall!.copyWith(
         fontFamily: 'Roboto',
         color: ColorResources.COLOR_BLACK,
       ),
-      headline4: base.headline4!.copyWith(
+      headlineMedium: base.headlineMedium!.copyWith(
           fontFamily: 'Roboto',
           color: ColorResources.PRIMARY_COLOR,
           fontWeight: FontWeight.w700),
-      headline5: base.headline5!.copyWith(
+      headlineSmall: base.headlineSmall!.copyWith(
           fontFamily: 'Roboto',
           color: ColorResources.COLOR_BLACK,
           fontWeight: FontWeight.w700),
-      headline6: base.headline6!.copyWith(fontSize: 15.0, color: Colors.orange),
-      caption: base.caption!.copyWith(
+      titleLarge: base.titleLarge!.copyWith(fontSize: 15.0, color: Colors.orange),
+      bodySmall: base.bodySmall!.copyWith(
         color: const Color(0xFFCCC5AF),
       ),
-      bodyText2: base.bodyText2!.copyWith(
+      bodyMedium: base.bodyMedium!.copyWith(
         color: const Color(0xFF807A6B),
       ),
-      bodyText1: base.bodyText1!.copyWith(color: Colors.brown),
+      bodyLarge: base.bodyLarge!.copyWith(color: Colors.brown),
     );
   }
 
@@ -63,20 +63,6 @@ ThemeData customLightTheme() {
       ),
       hintStyle: const TextStyle(color: ColorResources.COLOR_BLACK),
     ),
-    colorScheme: const ColorScheme(
-      onPrimaryContainer: ColorResources.COLOR_WHITE,
-      brightness: Brightness.dark,
-      primary: ColorResources.PRIMARY_COLOR,
-      onPrimary: ColorResources.ON_PRIMARY,
-      secondary: ColorResources.SECONDARY_COLOR,
-      onSecondary: ColorResources.ON_SECONDARY,
-      error: ColorResources.ERROR,
-      onError: ColorResources.COLOR_WHITE,
-      background: ColorResources.BACKGROUND_COLOR,
-      onBackground: ColorResources.COLOR_BLACK,
-      surface: ColorResources.SURFACE,
-      onSurface: ColorResources.PRIMARY_COLOR,
-    ),
     indicatorColor: ColorResources.COLOR_RED,
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
@@ -98,12 +84,23 @@ ThemeData customLightTheme() {
     iconTheme: lightTheme.iconTheme.copyWith(
       color: ColorResources.PRIMARY_COLOR,
     ),
-    backgroundColor: ColorResources.SCAFFOLD,
     tabBarTheme: lightTheme.tabBarTheme.copyWith(
       labelColor: const Color(0xffce107c),
       unselectedLabelColor: Colors.grey,
     ),
-    errorColor: Colors.red,
-    buttonTheme: const ButtonThemeData(buttonColor: ColorResources.COLOR_WHITE),
+    buttonTheme: const ButtonThemeData(buttonColor: ColorResources.COLOR_WHITE), colorScheme: const ColorScheme(
+      onPrimaryContainer: ColorResources.COLOR_WHITE,
+      brightness: Brightness.dark,
+      primary: ColorResources.PRIMARY_COLOR,
+      onPrimary: ColorResources.ON_PRIMARY,
+      secondary: ColorResources.SECONDARY_COLOR,
+      onSecondary: ColorResources.ON_SECONDARY,
+      error: ColorResources.ERROR,
+      onError: ColorResources.COLOR_WHITE,
+      background: ColorResources.BACKGROUND_COLOR,
+      onBackground: ColorResources.COLOR_BLACK,
+      surface: ColorResources.SURFACE,
+      onSurface: ColorResources.PRIMARY_COLOR,
+    ).copyWith(background: ColorResources.SCAFFOLD).copyWith(error: Colors.red),
   );
 }

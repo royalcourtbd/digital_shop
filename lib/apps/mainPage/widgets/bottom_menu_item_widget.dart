@@ -7,12 +7,12 @@ import '../../../general/utils/config.dart';
 import '../controller/main_page_controller.dart';
 
 class BottomMenuItemWidget extends GetView<MainPageController> {
-  String svgIcon;
-  String buttonName;
-  VoidCallback onPressed;
-  double fontSize;
-  int color;
-  BottomMenuItemWidget({
+  final String svgIcon;
+  final String buttonName;
+  final VoidCallback onPressed;
+  final double fontSize;
+  final int color;
+  const BottomMenuItemWidget({
     Key? key,
     required this.svgIcon,
     required this.onPressed,

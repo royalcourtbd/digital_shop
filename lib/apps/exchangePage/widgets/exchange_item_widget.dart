@@ -7,11 +7,11 @@ import '../../../general/utils/config.dart';
 import '../controller/exchange_page_controller.dart';
 
 class ExchangeItemWidget extends GetView<ExchangePageController> {
-  String svgIcon;
-  String itemName;
-  VoidCallback onTap;
-  Color color;
-  ExchangeItemWidget({
+  final String svgIcon;
+  final String itemName;
+  final VoidCallback onTap;
+  final Color color;
+  const ExchangeItemWidget({
     Key? key,
     required this.svgIcon,
     required this.itemName,
@@ -31,7 +31,7 @@ class ExchangeItemWidget extends GetView<ExchangePageController> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         alignment: Alignment.center,
         height: Config.screenHeight! * .17,
         width: Config.screenWidth! * .9,
